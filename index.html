@@ -42,7 +42,7 @@
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(6px);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-            border-radius: 12px; /* opcional, para suavizar */
+            border-radius: 12px;
         }
 
         /* Nuevas ubicaciones y tamaños más armónicos */
@@ -172,12 +172,12 @@
             50% { box-shadow: 0 0 30px rgba(200, 80, 255, 0.8), 0 0 60px rgba(200, 80, 255, 0.4), 0 0 100px rgba(200, 80, 255, 0.2); }
         }
 
-        /* === CONTENEDOR CENTRAL (más destacado) === */
+        /* === CONTENEDOR CENTRAL (más destacado y clickeable) === */
         .main-content {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* menos separación */
+            gap: 15px;
             flex-wrap: wrap;
             max-width: 1000px;
             padding: 35px 55px;
@@ -189,12 +189,23 @@
             text-align: center;
             z-index: 10;
             position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .main-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(30, 144, 255, 0.4), inset 0 0 40px rgba(30, 144, 255, 0.15);
+        }
+
+        .main-content:active {
+            transform: scale(0.98);
         }
 
         .main-content h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 3.4rem; /* reducido */
+            font-size: 3.4rem;
             color: #0a2f5a;
             letter-spacing: 2px;
             text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
@@ -204,12 +215,12 @@
         .main-content h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 1.8rem; /* reducido */
+            font-size: 1.8rem;
             color: #0a2f5a;
             letter-spacing: 1px;
             opacity: 0.9;
             white-space: nowrap;
-            margin-top: 0; /* elimina margen extra */
+            margin-top: 0;
         }
 
         /* === MODAL INFERIOR DERECHO === */
@@ -339,8 +350,8 @@
         <div class="square s10 glow-gold"></div>
     </div>
 
-    <!-- Contenedor central (destacado) -->
-    <div class="main-content">
+    <!-- Contenedor central (destacado y clickeable) -->
+    <div class="main-content" id="mainContent">
         <h1>Defensoría Oficial 6</h1>
         <h2>Ministerio Público de Misiones</h2>
     </div>
@@ -350,10 +361,19 @@
 
     <script>
         window.addEventListener('load', function() {
+            // Oculta el modal después de 3 segundos
             setTimeout(function() {
                 const modal = document.getElementById('modalCredit');
                 if (modal) modal.classList.add('hidden');
             }, 3000);
+
+            // Redirige al hacer clic en el contenedor central
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.addEventListener('click', function() {
+                    window.location.href = 'https://defensoria6.github.io/web/1';
+                });
+            }
         });
     </script>
 </body>
