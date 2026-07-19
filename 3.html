@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Defensoría Oficial 6</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #eef2f7;
+      color: #1e1e2f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 80px; /* espacio para el panel lateral fijo */
+      position: relative;
+    }
+
+    /* ===== PANEL LATERAL IZQUIERDO FIJO ===== */
+    .sidebar-panel {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 70px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-right: 1px solid rgba(59, 130, 246, 0.25);
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: width 0.2s ease;
+    }
+
+    .sidebar-panel .rotated-text {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #0b2b5c;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      user-select: none;
+      opacity: 0.75;
+      font-size: 1rem;
+    }
+
+    @media (min-width: 900px) {
+      .sidebar-panel .rotated-text {
+        font-size: clamp(1rem, 1.6vw, 2rem);
+      }
+    }
+
+    /* ===== CUADRADOS DECORATIVOS (solo escritorio) ===== */
+    .deco-squares {
+      position: fixed;
+      left: 74px;
+      top: 0;
+      width: 60px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .deco-squares {
+        display: block;
+      }
+    }
+
+    .deco-squares .sq {
+      position: absolute;
+      border-style: solid;
+      border-width: 3px;
+      background: transparent;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .deco-squares .sq-1 {
+      width: 44px;
+      height: 44px;
+      border-color: rgba(30, 144, 255, 0.9);
+      top: 2%;
+      left: 6px;
+      animation: glowBlue 2.8s ease-in-out infinite;
+    }
+    .deco-squares .sq-2 {
+      width: 22px;
+      height: 22px;
+      border-color: rgba(255, 80, 120, 0.9);
+      top: 12%;
+      left: 20px;
+      animation: glowPink 3.2s ease-in-out infinite;
+    }
+    .deco-squares .sq-3 {
+      width: 56px;
+      height: 56px;
+      border-color: rgba(255, 180, 50, 0.9);
+      top: 21%;
+      left: 0px;
+      animation: glowGold 2.4s ease-in-out infinite;
+    }
+    .deco-squares .sq-4 {
+      width: 28px;
+      height: 28px;
+      border-color: rgba(50, 220, 130, 0.9);
+      top: 33%;
+      left: 14px;
+      animation: glowGreen 3.0s ease-in-out infinite;
+    }
+    .deco-squares .sq-5 {
+      width: 50px;
+      height: 50px;
+      border-color: rgba(200, 80, 255, 0.9);
+      top: 43%;
+      left: 4px;
+      animation: glowPurple 3.6s ease-in-out infinite;
+    }
+    .deco-squares .sq-6 {
+      width: 20px;
+      height: 20px;
+      border-color: rgba(0, 210, 210, 0.9);
+      top: 56%;
+      left: 24px;
+      animation: glowCyan 2.2s ease-in-out infinite;
+    }
+    .deco-squares .sq-7 {
+      width: 60px;
+      height: 60px;
+      border-color: rgba(255, 130, 200, 0.9);
+      top: 65%;
+      left: -2px;
+      animation: glowPink 2.6s ease-in-out infinite;
+    }
+    .deco-squares .sq-8 {
+      width: 24px;
+      height: 24px;
+      border-color: rgba(30, 144, 255, 0.9);
+      top: 78%;
+      left: 16px;
+      animation: glowBlue 3.4s ease-in-out infinite;
+    }
+    .deco-squares .sq-9 {
+      width: 48px;
+      height: 48px;
+      border-color: rgba(255, 180, 50, 0.9);
+      top: 87%;
+      left: 4px;
+      animation: glowGold 2.0s ease-in-out infinite;
+    }
+    .deco-squares .sq-10 {
+      width: 18px;
+      height: 18px;
+      border-color: rgba(200, 80, 255, 0.9);
+      top: 96%;
+      left: 22px;
+      animation: glowPurple 3.8s ease-in-out infinite;
+    }
+
+    /* Animaciones de brillo (glow) */
+    @keyframes glowBlue {
+      0%, 100% { box-shadow: 0 0 8px rgba(30, 144, 255, 0.2), 0 0 16px rgba(30, 144, 255, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(30, 144, 255, 0.7), 0 0 40px rgba(30, 144, 255, 0.3), 0 0 70px rgba(30, 144, 255, 0.15); }
+    }
+    @keyframes glowPink {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 80, 120, 0.2), 0 0 16px rgba(255, 80, 120, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(255, 80, 120, 0.7), 0 0 40px rgba(255, 80, 120, 0.3), 0 0 70px rgba(255, 80, 120, 0.15); }
+    }
+    @keyframes glowGold {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 180, 50, 0.2), 0 0 16px rgba(255, 180, 50, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(255, 180, 50, 0.7), 0 0 40px rgba(255, 180, 50, 0.3), 0 0 70px rgba(255, 180, 50, 0.15); }
+    }
+    @keyframes glowGreen {
+      0%, 100% { box-shadow: 0 0 8px rgba(50, 220, 130, 0.2), 0 0 16px rgba(50, 220, 130, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(50, 220, 130, 0.7), 0 0 40px rgba(50, 220, 130, 0.3), 0 0 70px rgba(50, 220, 130, 0.15); }
+    }
+    @keyframes glowPurple {
+      0%, 100% { box-shadow: 0 0 8px rgba(200, 80, 255, 0.2), 0 0 16px rgba(200, 80, 255, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(200, 80, 255, 0.7), 0 0 40px rgba(200, 80, 255, 0.3), 0 0 70px rgba(200, 80, 255, 0.15); }
+    }
+    @keyframes glowCyan {
+      0%, 100% { box-shadow: 0 0 8px rgba(0, 210, 210, 0.2), 0 0 16px rgba(0, 210, 210, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(0, 210, 210, 0.7), 0 0 40px rgba(0, 210, 210, 0.3), 0 0 70px rgba(0, 210, 210, 0.15); }
+    }
+
+    /* ===== CONTENEDOR PRINCIPAL ===== */
+    .app {
+      max-width: 1280px;
+      width: 100%;
+      height: 100vh;
+      padding: 0 2rem;
+      padding-left: calc(2rem + 10px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HEADER ===== */
+    .header-glass {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+      padding: 0.8rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .header-glass h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0b2b5c;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .header-glass h1 .highlight {
+      background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 2px solid rgba(59, 130, 246, 0.7);
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3), 0 0 24px rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+      font-size: 1.3rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: #3b82f6;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
+      transform: scale(1.05);
+      color: #1d4ed8;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      flex: 1;
+      padding: 0.5rem 0 0.8rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-container {
+      display: flex;
+      gap: 1.2rem;
+      height: 100%;
+      min-height: 0;
+    }
+
+    /* --- Content Panel (ahora ocupa todo el ancho) --- */
+    .content-panel {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      border-radius: 28px;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Menú de temas (horizontal) */
+    .tema-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+      margin-bottom: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .tema-menu .tema-item {
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #1e1e2f;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(59, 130, 246, 0.15);
+      white-space: nowrap;
+    }
+
+    .tema-menu .tema-item:hover {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .tema-menu .tema-item.active {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.5);
+      color: #1a4c8a;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Contenido dinámico */
+    #dynamicContent {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .content-panel .tema-titulo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0b2b5c;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .indice {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .indice-titulo {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0b2b5c;
+      margin-bottom: 0.2rem;
+    }
+
+    .indice-item {
+      padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+      font-size: 0.95rem;
+      color: #1e1e2f;
+      border-bottom: 1px dashed rgba(59, 130, 246, 0.1);
+    }
+
+    .indice-item::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #2563eb;
+    }
+
+    .indice-item:last-child {
+      border-bottom: none;
+    }
+
+    .examen {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 18px;
+      padding: 1rem 1.2rem 1.5rem;
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .examen-titulo {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0b2b5c;
+      margin-bottom: 0.2rem;
+    }
+
+    .pregunta {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .pregunta-texto {
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+      color: #0b1a33;
+    }
+
+    .pregunta-opciones {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding-left: 0.5rem;
+    }
+
+    .pregunta-opciones label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #1e1e2f;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .pregunta-opciones label:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .pregunta-opciones input[type="radio"] {
+      accent-color: #2563eb;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .pregunta-respuesta {
+      margin-top: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .pregunta-respuesta.correcta {
+      color: #0f7b3a;
+      background: rgba(15, 123, 58, 0.1);
+    }
+
+    .pregunta-respuesta.incorrecta {
+      color: #b91c1c;
+      background: rgba(185, 28, 28, 0.1);
+    }
+
+    .btn-comprobar {
+      align-self: flex-start;
+      padding: 0.5rem 1.8rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      margin-top: 0.3rem;
+    }
+
+    .btn-comprobar:hover {
+      background: #1d4ed8;
+      transform: scale(1.02);
+    }
+
+    .btn-comprobar:active {
+      transform: scale(0.98);
+    }
+
+    /* ===== MODAL (se mantiene, aunque ya no se usa) ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 2rem 2.5rem 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content .modal-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+      border: 4px solid rgba(59, 130, 246, 0.5);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .modal-content .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-content .modal-nombre {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0b1a33;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-content .modal-cargo {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2563eb;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 1.2rem;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #0b1a33;
+      cursor: pointer;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      transform: rotate(90deg);
+      color: #2563eb;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .content-panel { padding: 1.2rem 1.5rem; }
+      .content-panel .tema-titulo { font-size: 1.5rem; }
+      .tema-menu .tema-item { font-size: 0.8rem; padding: 0.3rem 0.8rem; }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-left: 50px;
+      }
+      .sidebar-panel {
+        width: 44px;
+        background: rgba(255, 255, 255, 0.75);
+      }
+      .sidebar-panel .rotated-text {
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+      }
+      .deco-squares {
+        display: none !important;
+      }
+      .app {
+        padding: 0 1rem;
+        padding-left: calc(1rem + 8px);
+      }
+      .header-glass { padding: 0.5rem 1rem; }
+      .header-glass h1 { font-size: 1.5rem; }
+      .btn-arrow { width: 36px; height: 36px; font-size: 1rem; }
+
+      .panel-container {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .content-panel {
+        padding: 1rem 1.2rem;
+        gap: 1rem;
+      }
+
+      .content-panel .tema-titulo {
+        font-size: 1.3rem;
+      }
+
+      .tema-menu {
+        gap: 0.3rem 0.5rem;
+        padding-bottom: 0.4rem;
+      }
+      .tema-menu .tema-item {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+      }
+
+      .indice-item {
+        font-size: 0.85rem;
+      }
+
+      .pregunta-texto {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding-left: 0;
+      }
+      .sidebar-panel {
+        width: 36px;
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .sidebar-panel .rotated-text {
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+      }
+      .app {
+        padding: 0 0.8rem;
+        padding-left: 2.8rem;
+      }
+      .header-glass h1 { font-size: 1.2rem; }
+      .btn-arrow { width: 32px; height: 32px; font-size: 0.8rem; }
+
+      .content-panel { padding: 0.8rem 1rem; }
+      .content-panel .tema-titulo { font-size: 1.1rem; }
+      .tema-menu .tema-item { font-size: 0.7rem; padding: 0.15rem 0.5rem; }
+      .indice { padding: 0.6rem 0.8rem; }
+      .indice-item { font-size: 0.8rem; padding-left: 1rem; }
+      .examen { padding: 0.6rem 0.8rem; }
+      .pregunta { padding: 0.5rem 0.7rem; }
+      .pregunta-texto { font-size: 0.8rem; }
+      .pregunta-opciones label { font-size: 0.8rem; }
+      .btn-comprobar { font-size: 0.8rem; padding: 0.3rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Panel lateral izquierdo con texto rotado -->
+  <aside class="sidebar-panel">
+    <span class="rotated-text">Capacitación</span>
+  </aside>
+
+  <!-- Cuadrados decorativos (solo escritorio) -->
+  <div class="deco-squares">
+    <div class="sq sq-1"></div>
+    <div class="sq sq-2"></div>
+    <div class="sq sq-3"></div>
+    <div class="sq sq-4"></div>
+    <div class="sq sq-5"></div>
+    <div class="sq sq-6"></div>
+    <div class="sq sq-7"></div>
+    <div class="sq sq-8"></div>
+    <div class="sq sq-9"></div>
+    <div class="sq sq-10"></div>
+  </div>
+
+  <div class="app">
+    <!-- HEADER -->
+    <header class="header-glass">
+      <h1><span class="highlight">Hola Defensoría Oficial 6</span></h1>
+      <div class="header-buttons">
+        <a href="#" class="btn-arrow" aria-label="Flecha izquierda">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="#" class="btn-arrow" aria-label="Flecha siguiente">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <div class="panel-container">
+        <!-- Panel de contenido (con menú de temas y contenido dinámico) -->
+        <section class="content-panel">
+          <!-- Menú de temas (estático) -->
+          <div class="tema-menu" id="temaMenu">
+            <span class="tema-item active" data-tema="administrativo">1. Administrativo</span>
+            <span class="tema-item" data-tema="civil">2. Civil</span>
+            <span class="tema-item" data-tema="familia">3. Familia</span>
+            <span class="tema-item" data-tema="laboral">4. Laboral</span>
+            <span class="tema-item" data-tema="penal">5. Penal</span>
+            <span class="tema-item" data-tema="violencia-familiar">6. Violencia Familiar</span>
+            <span class="tema-item" data-tema="paz">7. Paz</span>
+            <span class="tema-item" data-tema="procesos-especiales">8. Procesos especiales</span>
+          </div>
+
+          <!-- Contenido dinámico (se actualiza con JS) -->
+          <div id="dynamicContent">
+            <!-- Se llena con JavaScript -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL (se mantiene aunque ya no se use) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-img" id="modalImg">
+        <img src="" alt="Foto" />
+      </div>
+      <div class="modal-nombre" id="modalNombre"></div>
+      <div class="modal-cargo" id="modalCargo"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ===== DATOS DE LOS TEMAS =====
+      const temasData = {
+        administrativo: {
+          titulo: "Administrativo",
+          indice: [
+            "Introducción al Derecho Administrativo",
+            "Principios generales",
+            "Procedimiento administrativo",
+            "Recursos administrativos",
+            "Control judicial de la administración"
+          ],
+          examen: [
+            {
+              pregunta: "¿Cuál es el principio que exige que la administración actúe dentro del marco legal?",
+              opciones: ["Legalidad", "Jerarquía", "División de poderes", "Autonomía"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué recurso procede contra un acto administrativo definitivo?",
+              opciones: ["Recurso de alzada", "Recurso de reposición", "Recurso extraordinario", "Recurso de amparo"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Quién ejerce el control judicial de la administración en Argentina?",
+              opciones: ["El Poder Judicial", "El Poder Ejecutivo", "El Ministerio Público", "El Tribunal de Cuentas"],
+              correcta: 0
+            }
+          ]
+        },
+        civil: {
+          titulo: "Civil",
+          indice: [
+            "Personas y capacidad",
+            "Obligaciones y contratos",
+            "Derechos reales",
+            "Responsabilidad civil",
+            "Prescripción y caducidad"
+          ],
+          examen: [
+            {
+              pregunta: "¿A partir de qué edad se adquiere la plena capacidad de obrar?",
+              opciones: ["18 años", "21 años", "16 años", "14 años"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Cuál es el plazo de prescripción general para las acciones personales?",
+              opciones: ["5 años", "10 años", "3 años", "2 años"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué tipo de responsabilidad surge por el incumplimiento de una obligación?",
+              opciones: ["Responsabilidad contractual", "Responsabilidad extracontractual", "Responsabilidad objetiva", "Responsabilidad civil"],
+              correcta: 0
+            }
+          ]
+        },
+        familia: {
+          titulo: "Familia",
+          indice: [
+            "Matrimonio y uniones convivenciales",
+            "Filiación y adopción",
+            "Régimen patrimonial del matrimonio",
+            "Divorcio y disolución",
+            "Alimentos y cuidado personal"
+          ],
+          examen: [
+            {
+              pregunta: "¿Cuál es la edad mínima para contraer matrimonio en Argentina?",
+              opciones: ["18 años", "16 años con autorización", "21 años", "14 años"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué tipo de adopción otorga los mismos derechos que la filiación por naturaleza?",
+              opciones: ["Adopción simple", "Adopción plena", "Adopción internacional", "Adopción de menores"],
+              correcta: 1
+            },
+            {
+              pregunta: "¿Qué régimen establece la comunidad de bienes gananciales?",
+              opciones: ["Separación de bienes", "Comunidad de ganancias", "Participación diferida", "Régimen mixto"],
+              correcta: 1
+            }
+          ]
+        },
+        laboral: {
+          titulo: "Laboral",
+          indice: [
+            "Contrato de trabajo",
+            "Jornada y descansos",
+            "Remuneración y salario",
+            "Extinción del contrato",
+            "Seguridad social"
+          ],
+          examen: [
+            {
+              pregunta: "¿Cuál es la jornada máxima legal de trabajo?",
+              opciones: ["8 horas diarias", "9 horas diarias", "6 horas diarias", "12 horas diarias"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué indemnización corresponde por despido sin justa causa?",
+              opciones: ["Indemnización por antigüedad", "Indemnización por daños", "Indemnización sustitutiva", "No corresponde"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Quién financia la seguridad social en el trabajo?",
+              opciones: ["El empleador", "El trabajador", "Ambos", "El Estado"],
+              correcta: 2
+            }
+          ]
+        },
+        penal: {
+          titulo: "Penal",
+          indice: [
+            "Teoría del delito",
+            "Clasificación de los delitos",
+            "Penalidades y medidas de seguridad",
+            "Proceso penal",
+            "Derechos del imputado"
+          ],
+          examen: [
+            {
+              pregunta: "¿Cuál es el principio que establece que no hay delito ni pena sin ley previa?",
+              opciones: ["Legalidad penal", "Irretroactividad", "Proporcionalidad", "Presunción de inocencia"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué tipo de delito se castiga con prisión?",
+              opciones: ["Delito doloso", "Delito culposo", "Delito de omisión", "Todos los delitos"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Quién tiene la carga de la prueba en el proceso penal?",
+              opciones: ["El imputado", "La acusación", "El juez", "La defensa"],
+              correcta: 1
+            }
+          ]
+        },
+        "violencia-familiar": {
+          titulo: "Violencia Familiar",
+          indice: [
+            "Concepto y tipos de violencia",
+            "Marco legal (Ley 26.485)",
+            "Medidas de protección",
+            "Denuncia y procedimiento",
+            "Recursos para las víctimas"
+          ],
+          examen: [
+            {
+              pregunta: "¿Qué ley protege contra la violencia familiar en Argentina?",
+              opciones: ["Ley 26.485", "Ley 24.417", "Ley 25.087", "Ley 27.499"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Cuáles son los tipos de violencia reconocidos?",
+              opciones: ["Física, psicológica y sexual", "Física, psicológica, sexual y simbólica", "Solo física", "Solo psicológica"],
+              correcta: 1
+            },
+            {
+              pregunta: "¿Qué medida de protección puede dictar el juez?",
+              opciones: ["Exclusión del agresor", "Prohibición de acercamiento", "Ambas", "Ninguna"],
+              correcta: 2
+            }
+          ]
+        },
+        paz: {
+          titulo: "Paz",
+          indice: [
+            "Conciliación y mediación",
+            "Acuerdos de paz",
+            "Justicia restaurativa",
+            "Mecanismos alternativos de resolución de conflictos",
+            "Cultura de paz"
+          ],
+          examen: [
+            {
+              pregunta: "¿Qué método de resolución de conflictos es voluntario y confidencial?",
+              opciones: ["Mediación", "Arbitraje", "Juicio", "Negociación directa"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué busca la justicia restaurativa?",
+              opciones: ["Reparación del daño", "Castigo del ofensor", "Juicio público", "Multa"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Cuál es el objetivo de la cultura de paz?",
+              opciones: ["Prevenir conflictos", "Resolver conflictos por la fuerza", "Imponer la ley", "Aislar a los agresores"],
+              correcta: 0
+            }
+          ]
+        },
+        "procesos-especiales": {
+          titulo: "Procesos Especiales",
+          indice: [
+            "Procesos de familia",
+            "Procesos laborales",
+            "Procesos de amparo",
+            "Procesos sucesorios",
+            "Procesos de ejecución"
+          ],
+          examen: [
+            {
+              pregunta: "¿Qué proceso se utiliza para proteger derechos fundamentales?",
+              opciones: ["Amparo", "Ejecución", "Sucesorio", "Laboral"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué tipo de proceso tiene plazos reducidos?",
+              opciones: ["Proceso de amparo", "Proceso ordinario", "Proceso de conocimiento", "Proceso voluntario"],
+              correcta: 0
+            },
+            {
+              pregunta: "¿Qué proceso regula la transmisión de bienes por causa de muerte?",
+              opciones: ["Sucesorio", "Ejecutivo", "Laboral", "Civil"],
+              correcta: 0
+            }
+          ]
+        }
+      };
+
+      // ===== REFERENCIAS =====
+      const dynamicContent = document.getElementById('dynamicContent');
+      const temaItems = document.querySelectorAll('.tema-item');
+
+      // ===== FUNCIÓN PARA RENDERIZAR CONTENIDO =====
+      function renderTema(temaKey) {
+        const data = temasData[temaKey];
+        if (!data) return;
+
+        // Actualizar clase activa en el menú
+        temaItems.forEach(item => {
+          item.classList.toggle('active', item.dataset.tema === temaKey);
+        });
+
+        // Construir HTML
+        let html = `<div class="tema-titulo">${data.titulo}</div>`;
+
+        // Índice
+        html += `<div class="indice">
+          <div class="indice-titulo">Índice</div>`;
+        data.indice.forEach(item => {
+          html += `<div class="indice-item">${item}</div>`;
+        });
+        html += `</div>`;
+
+        // Examen
+        html += `<div class="examen">
+          <div class="examen-titulo">Examen de conceptos fundamentales</div>`;
+        data.examen.forEach((pregunta, idx) => {
+          html += `<div class="pregunta" data-pregunta="${idx}">
+            <div class="pregunta-texto">${idx+1}. ${pregunta.pregunta}</div>
+            <div class="pregunta-opciones">`;
+          pregunta.opciones.forEach((opcion, optIdx) => {
+            html += `<label>
+              <input type="radio" name="pregunta_${idx}" value="${optIdx}" />
+              ${opcion}
+            </label>`;
+          });
+          html += `</div>
+            <div class="pregunta-respuesta" id="respuesta_${idx}"></div>
+          </div>`;
+        });
+        html += `<button class="btn-comprobar" id="btnComprobar">Comprobar respuestas</button>`;
+        html += `</div>`;
+
+        dynamicContent.innerHTML = html;
+
+        // Asignar evento al botón comprobar
+        const btn = document.getElementById('btnComprobar');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            const preguntas = data.examen;
+            let allCorrect = true;
+            preguntas.forEach((p, idx) => {
+              const selected = document.querySelector(`input[name="pregunta_${idx}"]:checked`);
+              const respDiv = document.getElementById(`respuesta_${idx}`);
+              if (selected) {
+                const userAnswer = parseInt(selected.value, 10);
+                const isCorrect = userAnswer === p.correcta;
+                respDiv.textContent = isCorrect ? '✅ Correcto' : '❌ Incorrecto. La respuesta correcta es: ' + p.opciones[p.correcta];
+                respDiv.className = 'pregunta-respuesta ' + (isCorrect ? 'correcta' : 'incorrecta');
+                if (!isCorrect) allCorrect = false;
+              } else {
+                respDiv.textContent = '⚠️ Debes seleccionar una opción.';
+                respDiv.className = 'pregunta-respuesta';
+                allCorrect = false;
+              }
+            });
+          });
+        }
+      }
+
+      // ===== EVENTOS DE CLIC EN EL MENÚ =====
+      temaItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const tema = this.dataset.tema;
+          if (tema && temasData[tema]) {
+            renderTema(tema);
+          }
+        });
+      });
+
+      // ===== RENDERIZAR POR DEFECTO (Administrativo) =====
+      renderTema('administrativo');
+
+      // ===== MODAL (se mantiene, ya no se usa) =====
+      const items = document.querySelectorAll('.persona-item');
+      const overlay = document.getElementById('modalOverlay');
+      const modalImg = document.querySelector('#modalImg img');
+      const modalNombre = document.getElementById('modalNombre');
+      const modalCargo = document.getElementById('modalCargo');
+      const closeBtn = document.getElementById('modalClose');
+
+      items.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          items.forEach(other => {
+            if (other !== this) {
+              other.classList.add('gris');
+            }
+          });
+        });
+        item.addEventListener('mouseleave', function() {
+          items.forEach(other => {
+            other.classList.remove('gris');
+          });
+        });
+      });
+
+      items.forEach(item => {
+        item.addEventListener('click', function(e) {
+          const imgElement = this.querySelector('img');
+          if (!imgElement) return;
+          const imgSrc = imgElement.getAttribute('src');
+          const imgAlt = imgElement.getAttribute('alt') || '';
+          let nombre = this.dataset.nombre || imgAlt;
+          let cargo = this.dataset.cargo || '';
+          if (!nombre || nombre === '') {
+            const nombreSpan = this.querySelector('.nombre');
+            if (nombreSpan) nombre = nombreSpan.textContent.trim();
+          }
+          if (!cargo || cargo === '') {
+            const cargoSpan = this.querySelector('.cargo');
+            if (cargoSpan) cargo = cargoSpan.textContent.trim();
+          }
+          modalImg.src = imgSrc;
+          modalImg.alt = imgAlt;
+          modalNombre.textContent = nombre;
+          modalCargo.textContent = cargo;
+          overlay.classList.add('active');
+        });
+      });
+
+      function closeModal() {
+        overlay.classList.remove('active');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+    })();
+  </script>
+</body>
+</html>

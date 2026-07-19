@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defensoría Oficial 6 · Aplicativos Digitales</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f9ff;
+            color: #1e1e2f;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 70px;
+        }
+
+        /* ===== PANEL LATERAL IZQUIERDO ===== */
+        .sidebar-panel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            border-right: 1px solid rgba(79, 125, 243, 0.3);
+            box-shadow: 2px 0 24px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: width 0.2s ease;
+        }
+
+        .sidebar-panel .rotated-text {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #0b2b5c;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transform: rotate(-90deg);
+            transform-origin: center center;
+            user-select: none;
+            opacity: 0.9;
+            background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== CUADRADOS DECORATIVOS (solo escritorio) ===== */
+        .deco-squares {
+            position: fixed;
+            left: 64px;
+            top: 0;
+            width: 60px;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+        }
+
+        @media (min-width: 900px) {
+            .deco-squares {
+                display: block;
+            }
+        }
+
+        .deco-squares .sq {
+            position: absolute;
+            border-style: solid;
+            border-width: 3px;
+            background: transparent;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .deco-squares .sq-1 {
+            width: 44px;
+            height: 44px;
+            border-color: rgba(79, 125, 243, 0.9);
+            top: 2%;
+            left: 6px;
+            animation: glowBlue 2.8s ease-in-out infinite;
+        }
+        .deco-squares .sq-2 {
+            width: 22px;
+            height: 22px;
+            border-color: rgba(247, 127, 107, 0.9);
+            top: 12%;
+            left: 20px;
+            animation: glowPink 3.2s ease-in-out infinite;
+        }
+        .deco-squares .sq-3 {
+            width: 56px;
+            height: 56px;
+            border-color: rgba(255, 180, 50, 0.9);
+            top: 21%;
+            left: 0px;
+            animation: glowGold 2.4s ease-in-out infinite;
+        }
+        .deco-squares .sq-4 {
+            width: 28px;
+            height: 28px;
+            border-color: rgba(67, 181, 129, 0.9);
+            top: 33%;
+            left: 14px;
+            animation: glowGreen 3.0s ease-in-out infinite;
+        }
+        .deco-squares .sq-5 {
+            width: 50px;
+            height: 50px;
+            border-color: rgba(192, 132, 252, 0.9);
+            top: 43%;
+            left: 4px;
+            animation: glowPurple 3.6s ease-in-out infinite;
+        }
+        .deco-squares .sq-6 {
+            width: 20px;
+            height: 20px;
+            border-color: rgba(0, 210, 210, 0.9);
+            top: 56%;
+            left: 24px;
+            animation: glowCyan 2.2s ease-in-out infinite;
+        }
+        .deco-squares .sq-7 {
+            width: 60px;
+            height: 60px;
+            border-color: rgba(255, 130, 200, 0.9);
+            top: 65%;
+            left: -2px;
+            animation: glowPink 2.6s ease-in-out infinite;
+        }
+        .deco-squares .sq-8 {
+            width: 24px;
+            height: 24px;
+            border-color: rgba(79, 125, 243, 0.9);
+            top: 78%;
+            left: 16px;
+            animation: glowBlue 3.4s ease-in-out infinite;
+        }
+        .deco-squares .sq-9 {
+            width: 48px;
+            height: 48px;
+            border-color: rgba(255, 180, 50, 0.9);
+            top: 87%;
+            left: 4px;
+            animation: glowGold 2.0s ease-in-out infinite;
+        }
+        .deco-squares .sq-10 {
+            width: 18px;
+            height: 18px;
+            border-color: rgba(192, 132, 252, 0.9);
+            top: 96%;
+            left: 22px;
+            animation: glowPurple 3.8s ease-in-out infinite;
+        }
+
+        /* ===== ANIMACIONES GLOW ===== */
+        @keyframes glowBlue {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(79, 125, 243, 0.2), 0 0 16px rgba(79, 125, 243, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(79, 125, 243, 0.7), 0 0 40px rgba(79, 125, 243, 0.3), 0 0 70px rgba(79, 125, 243, 0.15);
+            }
+        }
+        @keyframes glowPink {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(247, 127, 107, 0.2), 0 0 16px rgba(247, 127, 107, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(247, 127, 107, 0.7), 0 0 40px rgba(247, 127, 107, 0.3), 0 0 70px rgba(247, 127, 107, 0.15);
+            }
+        }
+        @keyframes glowGold {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(255, 180, 50, 0.2), 0 0 16px rgba(255, 180, 50, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 180, 50, 0.7), 0 0 40px rgba(255, 180, 50, 0.3), 0 0 70px rgba(255, 180, 50, 0.15);
+            }
+        }
+        @keyframes glowGreen {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(67, 181, 129, 0.2), 0 0 16px rgba(67, 181, 129, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(67, 181, 129, 0.7), 0 0 40px rgba(67, 181, 129, 0.3), 0 0 70px rgba(67, 181, 129, 0.15);
+            }
+        }
+        @keyframes glowPurple {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(192, 132, 252, 0.2), 0 0 16px rgba(192, 132, 252, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(192, 132, 252, 0.7), 0 0 40px rgba(192, 132, 252, 0.3), 0 0 70px rgba(192, 132, 252, 0.15);
+            }
+        }
+        @keyframes glowCyan {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(0, 210, 210, 0.2), 0 0 16px rgba(0, 210, 210, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 210, 210, 0.7), 0 0 40px rgba(0, 210, 210, 0.3), 0 0 70px rgba(0, 210, 210, 0.15);
+            }
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .app {
+            max-width: 1280px;
+            width: 100%;
+            padding: 0 2rem;
+            padding-left: calc(2rem + 10px);
+        }
+
+        /* ===== HEADER GLASS ===== */
+        .header-glass {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+            border-radius: 0;
+            padding: 1.8rem 2.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .header-glass h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #0b2b5c;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-glass h1 .highlight {
+            background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== BOTONES DEL HEADER ===== */
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .btn-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 2px solid rgba(79, 125, 243, 0.7);
+            box-shadow: 0 0 12px rgba(79, 125, 243, 0.3), 0 0 24px rgba(79, 125, 243, 0.1);
+            color: #2563eb;
+            font-size: 1.4rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .btn-arrow:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(79, 125, 243, 0.5), 0 0 40px rgba(79, 125, 243, 0.2);
+            transform: scale(1.05);
+            color: #1d4ed8;
+        }
+
+        .btn-arrow i {
+            line-height: 1;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            padding: 3.5rem 0 4.5rem;
+            width: 100%;
+        }
+
+        .modulos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .modulo-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border-radius: 32px;
+            padding: 2.5rem 2.2rem 2.8rem;
+            min-height: 230px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.75rem;
+            border: 1px solid rgba(79, 125, 243, 0.3);
+            box-shadow: 0 12px 40px rgba(79, 125, 243, 0.06), 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 60px rgba(79, 125, 243, 0.12), 0 8px 28px rgba(0, 0, 0, 0.04);
+            border-color: rgba(79, 125, 243, 0.6);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .modulo-card .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(145deg, #4f7df3, #3b5fbf);
+            box-shadow: 0 8px 16px rgba(79, 125, 243, 0.25);
+        }
+
+        .modulo-card:nth-child(1) .icon-wrapper {
+            background: linear-gradient(145deg, #4f7df3, #3b5fbf);
+        }
+        .modulo-card:nth-child(2) .icon-wrapper {
+            background: linear-gradient(145deg, #f77f6b, #d9574a);
+        }
+        .modulo-card:nth-child(3) .icon-wrapper {
+            background: linear-gradient(145deg, #43b581, #2d8f5e);
+        }
+        .modulo-card:nth-child(4) .icon-wrapper {
+            background: linear-gradient(145deg, #c084fc, #9b6bdf);
+        }
+
+        .modulo-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0b1a33;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .modulo-card p {
+            font-size: 1.05rem;
+            color: #3d5068;
+            line-height: 1.6;
+            margin: 0.25rem 0 0;
+            font-weight: 400;
+            max-width: 95%;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .modulos-grid {
+                gap: 1.8rem;
+            }
+            .modulo-card {
+                min-height: 190px;
+                padding: 2rem 1.8rem 2.2rem;
+            }
+            .modulo-card h3 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+            }
+
+            .sidebar-panel {
+                width: 44px;
+                background: rgba(255, 255, 255, 0.7);
+            }
+
+            .sidebar-panel .rotated-text {
+                font-size: 0.85rem;
+                letter-spacing: 0.06em;
+            }
+
+            .app {
+                padding: 0 1.2rem;
+                padding-left: 1.2rem;
+            }
+
+            .header-glass {
+                padding: 1.2rem 1.2rem;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+
+            .header-glass h1 {
+                font-size: 1.6rem;
+                gap: 0.4rem;
+                flex-wrap: wrap;
+            }
+
+            .header-buttons {
+                gap: 0.4rem;
+            }
+
+            .btn-arrow {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+            }
+
+            .modulos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+
+            .modulo-card {
+                min-height: 170px;
+                padding: 1.8rem 1.5rem 2rem;
+            }
+
+            .modulo-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .modulo-card p {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar-panel {
+                width: 36px;
+            }
+            .sidebar-panel .rotated-text {
+                font-size: 0.7rem;
+            }
+            .header-glass h1 {
+                font-size: 1.3rem;
+            }
+            .btn-arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .modulo-card .icon-wrapper {
+                width: 52px;
+                height: 52px;
+                font-size: 1.7rem;
+            }
+            .modulo-card h3 {
+                font-size: 1.3rem;
+            }
+            .modulo-card p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PANEL LATERAL IZQUIERDO ===== -->
+    <aside class="sidebar-panel">
+        <span class="rotated-text">Aplicativos Digitales</span>
+    </aside>
+
+    <!-- ===== CUADRADOS DECORATIVOS ===== -->
+    <div class="deco-squares">
+        <div class="sq sq-1"></div>
+        <div class="sq sq-2"></div>
+        <div class="sq sq-3"></div>
+        <div class="sq sq-4"></div>
+        <div class="sq sq-5"></div>
+        <div class="sq sq-6"></div>
+        <div class="sq sq-7"></div>
+        <div class="sq sq-8"></div>
+        <div class="sq sq-9"></div>
+        <div class="sq sq-10"></div>
+    </div>
+
+    <div class="app">
+
+        <!-- ===== HEADER (igual al de 2.html) ===== -->
+        <header class="header-glass">
+            <h1>
+                <span class="highlight">Hola Defensoria Oficial 6</span>
+            </h1>
+            <div class="header-buttons">
+                <a href="#" class="btn-arrow" aria-label="Flecha izquierda">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="#" class="btn-arrow" aria-label="Flecha siguiente">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- ===== MÓDULOS ===== -->
+        <main class="main-content">
+            <div class="modulos-grid">
+
+                <!-- 1. Sistema Digital -->
+                <div class="modulo-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Sistema Digital</h3>
+                    <p>Aplicación de registro, control y seguimiento de todos los expedientes donde interviene la Defensoría Oficial.</p>
+                </div>
+
+                <!-- 2. Sistema de Pase -->
+                <div class="modulo-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Sistema de Pase</h3>
+                    <p>Aplicación para administrar los pases de causas, control, auditoría y calificación de trabajo.</p>
+                </div>
+
+                <!-- 3. Sistema Secretarios -->
+                <div class="modulo-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Sistema Secretarios</h3>
+                    <p>Aplicación para el control y seguimiento de tarea para los Secretarios.</p>
+                </div>
+
+                <!-- 4. Protocolo de Actuación -->
+                <div class="modulo-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Protocolo de Actuación</h3>
+                    <p>Manual interactivo para conocer las pautas de trabajo en la Defensoría Oficial.</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+    <!-- fin .app -->
+
+</body>
+</html>

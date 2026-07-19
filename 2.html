@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Defensoría Oficial 6</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #eef2f7;
+      color: #1e1e2f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 80px;
+      position: relative;
+    }
+
+    /* ===== PANEL LATERAL IZQUIERDO ===== */
+    .sidebar-panel {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 70px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-right: 1px solid rgba(59, 130, 246, 0.25);
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: width 0.2s ease;
+    }
+
+    .sidebar-panel .rotated-text {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #0b2b5c;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      user-select: none;
+      opacity: 0.75;
+      font-size: 1rem;
+    }
+
+    @media (min-width: 900px) {
+      .sidebar-panel .rotated-text {
+        font-size: clamp(1rem, 1.6vw, 2rem);
+      }
+    }
+
+    /* ===== CUADRADOS DECORATIVOS (solo escritorio) ===== */
+    .deco-squares {
+      position: fixed;
+      left: 74px;
+      top: 0;
+      width: 60px; /* más ancho para cuadros grandes */
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .deco-squares {
+        display: block;
+      }
+    }
+
+    .deco-squares .sq {
+      position: absolute;
+      border-style: solid;
+      border-width: 3px;
+      background: transparent;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    /* Tamaños y colores variados, intercalados, ocupando toda la altura */
+    .deco-squares .sq-1 {
+      width: 44px;
+      height: 44px;
+      border-color: rgba(30, 144, 255, 0.9);
+      top: 2%;
+      left: 6px;
+      animation: glowBlue 2.8s ease-in-out infinite;
+    }
+    .deco-squares .sq-2 {
+      width: 22px;
+      height: 22px;
+      border-color: rgba(255, 80, 120, 0.9);
+      top: 12%;
+      left: 20px;
+      animation: glowPink 3.2s ease-in-out infinite;
+    }
+    .deco-squares .sq-3 {
+      width: 56px;
+      height: 56px;
+      border-color: rgba(255, 180, 50, 0.9);
+      top: 21%;
+      left: 0px;
+      animation: glowGold 2.4s ease-in-out infinite;
+    }
+    .deco-squares .sq-4 {
+      width: 28px;
+      height: 28px;
+      border-color: rgba(50, 220, 130, 0.9);
+      top: 33%;
+      left: 14px;
+      animation: glowGreen 3.0s ease-in-out infinite;
+    }
+    .deco-squares .sq-5 {
+      width: 50px;
+      height: 50px;
+      border-color: rgba(200, 80, 255, 0.9);
+      top: 43%;
+      left: 4px;
+      animation: glowPurple 3.6s ease-in-out infinite;
+    }
+    .deco-squares .sq-6 {
+      width: 20px;
+      height: 20px;
+      border-color: rgba(0, 210, 210, 0.9);
+      top: 56%;
+      left: 24px;
+      animation: glowCyan 2.2s ease-in-out infinite;
+    }
+    .deco-squares .sq-7 {
+      width: 60px;
+      height: 60px;
+      border-color: rgba(255, 130, 200, 0.9);
+      top: 65%;
+      left: -2px;
+      animation: glowPink 2.6s ease-in-out infinite;
+    }
+    .deco-squares .sq-8 {
+      width: 24px;
+      height: 24px;
+      border-color: rgba(30, 144, 255, 0.9);
+      top: 78%;
+      left: 16px;
+      animation: glowBlue 3.4s ease-in-out infinite;
+    }
+    .deco-squares .sq-9 {
+      width: 48px;
+      height: 48px;
+      border-color: rgba(255, 180, 50, 0.9);
+      top: 87%;
+      left: 4px;
+      animation: glowGold 2.0s ease-in-out infinite;
+    }
+    .deco-squares .sq-10 {
+      width: 18px;
+      height: 18px;
+      border-color: rgba(200, 80, 255, 0.9);
+      top: 96%;
+      left: 22px;
+      animation: glowPurple 3.8s ease-in-out infinite;
+    }
+
+    /* Animaciones de brillo (glow) */
+    @keyframes glowBlue {
+      0%, 100% { box-shadow: 0 0 8px rgba(30, 144, 255, 0.2), 0 0 16px rgba(30, 144, 255, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(30, 144, 255, 0.7), 0 0 40px rgba(30, 144, 255, 0.3), 0 0 70px rgba(30, 144, 255, 0.15); }
+    }
+    @keyframes glowPink {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 80, 120, 0.2), 0 0 16px rgba(255, 80, 120, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(255, 80, 120, 0.7), 0 0 40px rgba(255, 80, 120, 0.3), 0 0 70px rgba(255, 80, 120, 0.15); }
+    }
+    @keyframes glowGold {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 180, 50, 0.2), 0 0 16px rgba(255, 180, 50, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(255, 180, 50, 0.7), 0 0 40px rgba(255, 180, 50, 0.3), 0 0 70px rgba(255, 180, 50, 0.15); }
+    }
+    @keyframes glowGreen {
+      0%, 100% { box-shadow: 0 0 8px rgba(50, 220, 130, 0.2), 0 0 16px rgba(50, 220, 130, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(50, 220, 130, 0.7), 0 0 40px rgba(50, 220, 130, 0.3), 0 0 70px rgba(50, 220, 130, 0.15); }
+    }
+    @keyframes glowPurple {
+      0%, 100% { box-shadow: 0 0 8px rgba(200, 80, 255, 0.2), 0 0 16px rgba(200, 80, 255, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(200, 80, 255, 0.7), 0 0 40px rgba(200, 80, 255, 0.3), 0 0 70px rgba(200, 80, 255, 0.15); }
+    }
+    @keyframes glowCyan {
+      0%, 100% { box-shadow: 0 0 8px rgba(0, 210, 210, 0.2), 0 0 16px rgba(0, 210, 210, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(0, 210, 210, 0.7), 0 0 40px rgba(0, 210, 210, 0.3), 0 0 70px rgba(0, 210, 210, 0.15); }
+    }
+
+    /* ===== CONTENEDOR PRINCIPAL ===== */
+    .app {
+      max-width: 1280px;
+      width: 100%;
+      height: 100vh;
+      padding: 0 2rem;
+      padding-left: calc(2rem + 10px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HEADER ===== */
+    .header-glass {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+      padding: 0.8rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .header-glass h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0b2b5c;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .header-glass h1 .highlight {
+      background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 2px solid rgba(59, 130, 246, 0.7);
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3), 0 0 24px rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+      font-size: 1.3rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: #3b82f6;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
+      transform: scale(1.05);
+      color: #1d4ed8;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      flex: 1;
+      padding: 0.5rem 0 0.8rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: #0b2b5c;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
+    }
+
+    /* ---- Defensor ---- */
+    .defensor-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      border-radius: 28px;
+      padding: 0.8rem 1.5rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-shrink: 0;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .defensor-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(59, 130, 246, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+      border-color: rgba(59, 130, 246, 0.6);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .defensor-foto {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(59, 130, 246, 0.5);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+      flex-shrink: 0;
+    }
+
+    .defensor-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .defensor-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .defensor-info .cargo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .defensor-info .nombre {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0b1a33;
+    }
+
+    /* ---- Secretarios ---- */
+    .secretarios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .modulo-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      border-radius: 24px;
+      padding: 0.8rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .modulo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(59, 130, 246, 0.1), 0 4px 8px rgba(0, 0, 0, 0.02);
+      border-color: rgba(59, 130, 246, 0.6);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .modulo-card .foto {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(59, 130, 246, 0.4);
+      margin-bottom: 0.3rem;
+    }
+
+    .modulo-card .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modulo-card .cargo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .modulo-card .nombre {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #0b1a33;
+    }
+
+    /* ---- Empleados ---- */
+    .empleados-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      border-radius: 28px;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .empleados-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(59, 130, 246, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+      border-color: rgba(59, 130, 246, 0.6);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .empleados-container h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0b1a33;
+      margin-bottom: 0.4rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .grid-personal {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      flex: 1;
+      align-content: stretch;
+    }
+
+    .foto-con-nombre {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 16px;
+      padding: 0.3rem 0.2rem;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .foto-con-nombre:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .foto-con-nombre .foto {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      margin-bottom: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .foto-con-nombre .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .foto-con-nombre .nombre {
+      font-weight: 500;
+      font-size: 0.65rem;
+      color: #0b1a33;
+      line-height: 1.2;
+    }
+
+    /* ===== EFECTO GRIS AL HOVER ===== */
+    .persona-item {
+      transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    .persona-item.gris {
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 2rem 2.5rem 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content .modal-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+      border: 4px solid rgba(59, 130, 246, 0.5);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .modal-content .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-content .modal-nombre {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0b1a33;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-content .modal-cargo {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2563eb;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 1.2rem;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #0b1a33;
+      cursor: pointer;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      transform: rotate(90deg);
+      color: #2563eb;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .slogan { font-size: 1.5rem; }
+      .defensor-info .cargo { font-size: 1rem; }
+      .defensor-info .nombre { font-size: 1.1rem; }
+      .modulo-card .foto { width: 48px; height: 48px; }
+      .modulo-card .cargo { font-size: 0.9rem; }
+      .modulo-card .nombre { font-size: 0.8rem; }
+      .foto-con-nombre .foto { width: 42px; height: 42px; }
+      .foto-con-nombre .nombre { font-size: 0.6rem; }
+      .modal-content { padding: 1.8rem 1.8rem 2rem; }
+      .modal-content .modal-img { width: 130px; height: 130px; }
+      .modal-content .modal-nombre { font-size: 1.4rem; }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-left: 50px;
+      }
+      .sidebar-panel {
+        width: 44px;
+        background: rgba(255, 255, 255, 0.75);
+      }
+      .sidebar-panel .rotated-text {
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+      }
+      .app {
+        padding: 0 1rem;
+        padding-left: calc(1rem + 10px);
+      }
+      .header-glass { padding: 0.5rem 1rem; }
+      .header-glass h1 { font-size: 1.5rem; }
+      .btn-arrow { width: 36px; height: 36px; font-size: 1rem; }
+      .slogan { font-size: 1.2rem; margin-bottom: 0.4rem; }
+      .defensor-container { padding: 0.6rem 1rem; gap: 0.8rem; }
+      .defensor-foto { width: 50px; height: 50px; }
+      .defensor-info .cargo { font-size: 0.9rem; }
+      .defensor-info .nombre { font-size: 1rem; }
+      .secretarios-grid { gap: 0.6rem; margin-bottom: 0.6rem; }
+      .modulo-card { padding: 0.5rem 0.3rem; }
+      .modulo-card .foto { width: 40px; height: 40px; }
+      .modulo-card .cargo { font-size: 0.8rem; }
+      .modulo-card .nombre { font-size: 0.7rem; }
+      .empleados-container { padding: 0.5rem 0.6rem; }
+      .empleados-container h3 { font-size: 0.9rem; margin-bottom: 0.3rem; }
+      .grid-personal { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+      .foto-con-nombre .foto { width: 36px; height: 36px; }
+      .foto-con-nombre .nombre { font-size: 0.55rem; }
+      .modal-content { max-width: 320px; padding: 1.5rem; }
+      .modal-content .modal-img { width: 110px; height: 110px; }
+      .modal-content .modal-nombre { font-size: 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding-left: 0;
+      }
+      .sidebar-panel {
+        width: 36px;
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .sidebar-panel .rotated-text {
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+      }
+      .app {
+        padding: 0 0.8rem;
+        padding-left: 2.8rem;
+      }
+      .header-glass h1 {
+        font-size: 1.1rem;
+        white-space: nowrap;
+      }
+      .btn-arrow { width: 32px; height: 32px; font-size: 0.8rem; }
+      .slogan { font-size: 1rem; }
+      .defensor-foto { width: 40px; height: 40px; }
+      .defensor-info .cargo { font-size: 0.75rem; }
+      .defensor-info .nombre { font-size: 0.85rem; }
+
+      .secretarios-grid {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        justify-items: center;
+      }
+      .modulo-card {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0.6rem 0.5rem;
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto;
+      }
+      .modulo-card .foto {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.2rem;
+      }
+      .modulo-card .cargo {
+        font-size: 0.8rem;
+      }
+      .modulo-card .nombre {
+        font-size: 0.75rem;
+      }
+
+      .grid-personal { grid-template-columns: repeat(2, 1fr); gap: 0.3rem; }
+      .foto-con-nombre .foto { width: 32px; height: 32px; }
+      .foto-con-nombre .nombre { font-size: 0.5rem; }
+      .empleados-container h3 { font-size: 0.8rem; }
+      .modal-content { max-width: 280px; padding: 1.2rem; }
+      .modal-content .modal-img { width: 90px; height: 90px; }
+      .modal-content .modal-nombre { font-size: 1rem; }
+      .modal-content .modal-cargo { font-size: 0.9rem; }
+      .modal-close { font-size: 1.5rem; top: 0.4rem; right: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Panel lateral izquierdo con texto rotado -->
+  <aside class="sidebar-panel">
+    <span class="rotated-text">Nuestro equipo de trabajo</span>
+  </aside>
+
+  <!-- Cuadrados decorativos (solo escritorio) -->
+  <div class="deco-squares">
+    <div class="sq sq-1"></div>
+    <div class="sq sq-2"></div>
+    <div class="sq sq-3"></div>
+    <div class="sq sq-4"></div>
+    <div class="sq sq-5"></div>
+    <div class="sq sq-6"></div>
+    <div class="sq sq-7"></div>
+    <div class="sq sq-8"></div>
+    <div class="sq sq-9"></div>
+    <div class="sq sq-10"></div>
+  </div>
+
+  <div class="app">
+    <!-- HEADER -->
+    <header class="header-glass">
+      <h1><span class="highlight">Hola Defensoria Oficial 6</span></h1>
+      <div class="header-buttons">
+        <a href="#" class="btn-arrow" aria-label="Flecha izquierda">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="#" class="btn-arrow" aria-label="Flecha siguiente">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <p class="slogan">Defendemos derechos, transformamos vidas.</p>
+
+      <!-- Defensor -->
+      <div class="defensor-container persona-item" data-nombre="Dr. Marcelo Gustavo Ramos" data-cargo="Defensor Oficial">
+        <div class="defensor-foto">
+          <img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ramos.png?raw=true" alt="Dr. Marcelo Gustavo Ramos" />
+        </div>
+        <div class="defensor-info">
+          <span class="cargo">Defensor Oficial</span>
+          <span class="nombre">Dr. Marcelo Gustavo Ramos</span>
+        </div>
+      </div>
+
+      <!-- Secretarios -->
+      <div class="secretarios-grid">
+        <div class="modulo-card persona-item" data-nombre="Dra. Alicia Mariela Corrales" data-cargo="Secretaria">
+          <div class="foto">
+            <img src="https://github.com/sistema-secretarios/Fotos/blob/main/corrales.png?raw=true" alt="Dra. Alicia Mariela Corrales" />
+          </div>
+          <div class="cargo">Secretaria</div>
+          <div class="nombre">Dra. Alicia Mariela Corrales</div>
+        </div>
+        <div class="modulo-card persona-item" data-nombre="Dra. Patricia Soledad Riveros" data-cargo="Secretaria">
+          <div class="foto">
+            <img src="https://github.com/sistema-secretarios/Fotos/blob/main/Riveros.png?raw=true" alt="Dra. Patricia Soledad Riveros" />
+          </div>
+          <div class="cargo">Secretaria</div>
+          <div class="nombre">Dra. Patricia Soledad Riveros</div>
+        </div>
+        <div class="modulo-card persona-item" data-nombre="Dr. Enzo Luciano Magnani" data-cargo="Secretario">
+          <div class="foto">
+            <img src="https://github.com/sistema-secretarios/Fotos/blob/main/Magnani.png?raw=true" alt="Dr. Enzo Luciano Magnani" />
+          </div>
+          <div class="cargo">Secretario</div>
+          <div class="nombre">Dr. Enzo Luciano Magnani</div>
+        </div>
+      </div>
+
+      <!-- Empleados -->
+      <div class="empleados-container">
+        <h3>Personal de la Defensoría</h3>
+        <div class="grid-personal">
+          <div class="foto-con-nombre persona-item" data-nombre="Nadia Romina Bazante" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Bazante.png?raw=true" alt="Nadia Romina Bazante" /></div>
+            <span class="nombre">Nadia Romina Bazante</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Cesar Enrique Boillat" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Boillat.png?raw=true" alt="Cesar Enrique Boillat" /></div>
+            <span class="nombre">Cesar Enrique Boillat</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Maria Raquel Cardozo" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cardozo.png?raw=true" alt="Maria Raquel Cardozo" /></div>
+            <span class="nombre">Maria Raquel Cardozo</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Noelia Aurora Cedron" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cedron.png?raw=true" alt="Noelia Aurora Cedron" /></div>
+            <span class="nombre">Noelia Aurora Cedron</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Monica Graciela Escobar" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Escobar.png?raw=true" alt="Monica Graciela Escobar" /></div>
+            <span class="nombre">Monica Graciela Escobar</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Rómulo Fioravante" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Fioravante.png?raw=true" alt="Rómulo Fioravante" /></div>
+            <span class="nombre">Rómulo Fioravante</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Alberto Misael Gonzalez" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/AMisaelG.png?raw=true" alt="Alberto Misael Gonzalez" /></div>
+            <span class="nombre">Alberto Misael Gonzalez</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Juan Jose Gonzalez" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/JuanJoseG.png?raw=true" alt="Juan Jose Gonzalez" /></div>
+            <span class="nombre">Juan Jose Gonzalez</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Natalia Esther Gudiño" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/gudino.png?raw=true" alt="Natalia Esther Gudiño" /></div>
+            <span class="nombre">Natalia Esther Gudiño</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Lucia Noemi Ortega" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ortega.png?raw=true" alt="Lucia Noemi Ortega" /></div>
+            <span class="nombre">Lucia Noemi Ortega</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Patricia Tamara Pablos" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Pablos.png?raw=true" alt="Patricia Tamara Pablos" /></div>
+            <span class="nombre">Patricia Tamara Pablos</span>
+          </div>
+          <div class="foto-con-nombre persona-item" data-nombre="Ana Gabriela Palacios" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true" alt="Ana Gabriela Palacios" /></div>
+            <span class="nombre">Ana Gabriela Palacios</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-img" id="modalImg">
+        <img src="" alt="Foto" />
+      </div>
+      <div class="modal-nombre" id="modalNombre"></div>
+      <div class="modal-cargo" id="modalCargo"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const items = document.querySelectorAll('.persona-item');
+      const overlay = document.getElementById('modalOverlay');
+      const modalImg = document.querySelector('#modalImg img');
+      const modalNombre = document.getElementById('modalNombre');
+      const modalCargo = document.getElementById('modalCargo');
+      const closeBtn = document.getElementById('modalClose');
+
+      items.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          items.forEach(other => {
+            if (other !== this) {
+              other.classList.add('gris');
+            }
+          });
+        });
+        item.addEventListener('mouseleave', function() {
+          items.forEach(other => {
+            other.classList.remove('gris');
+          });
+        });
+      });
+
+      items.forEach(item => {
+        item.addEventListener('click', function(e) {
+          const imgElement = this.querySelector('img');
+          if (!imgElement) return;
+          const imgSrc = imgElement.getAttribute('src');
+          const imgAlt = imgElement.getAttribute('alt') || '';
+
+          let nombre = this.dataset.nombre || imgAlt;
+          let cargo = this.dataset.cargo || '';
+
+          if (!nombre || nombre === '') {
+            const nombreSpan = this.querySelector('.nombre');
+            if (nombreSpan) nombre = nombreSpan.textContent.trim();
+          }
+          if (!cargo || cargo === '') {
+            const cargoSpan = this.querySelector('.cargo');
+            if (cargoSpan) cargo = cargoSpan.textContent.trim();
+          }
+
+          modalImg.src = imgSrc;
+          modalImg.alt = imgAlt;
+          modalNombre.textContent = nombre;
+          modalCargo.textContent = cargo;
+
+          overlay.classList.add('active');
+        });
+      });
+
+      function closeModal() {
+        overlay.classList.remove('active');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
+</body>
+</html>

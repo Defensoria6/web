@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defensoría Oficial 6 - Fotos y Eventos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2f7;
+            color: #1e1e2f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 80px;
+            position: relative;
+        }
+        /* Panel lateral */
+        .sidebar-panel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border-right: 1px solid rgba(59, 130, 246, 0.25);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .sidebar-panel .rotated-text {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: #0b2b5c;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transform: rotate(-90deg);
+            user-select: none;
+            opacity: 0.75;
+            font-size: 1rem;
+        }
+        @media (min-width: 900px) {
+            .sidebar-panel .rotated-text {
+                font-size: clamp(1rem, 1.6vw, 2rem);
+            }
+        }
+        /* Cuadrados decorativos */
+        .deco-squares {
+            position: fixed;
+            left: 74px;
+            top: 0;
+            width: 60px;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+        }
+        @media (min-width: 900px) {
+            .deco-squares {
+                display: block;
+            }
+        }
+        .deco-squares .sq {
+            position: absolute;
+            border-style: solid;
+            border-width: 3px;
+            background: transparent;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+        .deco-squares .sq-1 {
+            width: 44px;
+            height: 44px;
+            border-color: rgba(30, 144, 255, 0.9);
+            top: 2%;
+            left: 6px;
+            animation: glowBlue 2.8s ease-in-out infinite;
+        }
+        .deco-squares .sq-2 {
+            width: 22px;
+            height: 22px;
+            border-color: rgba(255, 80, 120, 0.9);
+            top: 12%;
+            left: 20px;
+            animation: glowPink 3.2s ease-in-out infinite;
+        }
+        .deco-squares .sq-3 {
+            width: 56px;
+            height: 56px;
+            border-color: rgba(255, 180, 50, 0.9);
+            top: 21%;
+            left: 0px;
+            animation: glowGold 2.4s ease-in-out infinite;
+        }
+        .deco-squares .sq-4 {
+            width: 28px;
+            height: 28px;
+            border-color: rgba(50, 220, 130, 0.9);
+            top: 33%;
+            left: 14px;
+            animation: glowGreen 3.0s ease-in-out infinite;
+        }
+        .deco-squares .sq-5 {
+            width: 50px;
+            height: 50px;
+            border-color: rgba(200, 80, 255, 0.9);
+            top: 43%;
+            left: 4px;
+            animation: glowPurple 3.6s ease-in-out infinite;
+        }
+        .deco-squares .sq-6 {
+            width: 20px;
+            height: 20px;
+            border-color: rgba(0, 210, 210, 0.9);
+            top: 56%;
+            left: 24px;
+            animation: glowCyan 2.2s ease-in-out infinite;
+        }
+        .deco-squares .sq-7 {
+            width: 60px;
+            height: 60px;
+            border-color: rgba(255, 130, 200, 0.9);
+            top: 65%;
+            left: -2px;
+            animation: glowPink 2.6s ease-in-out infinite;
+        }
+        .deco-squares .sq-8 {
+            width: 24px;
+            height: 24px;
+            border-color: rgba(30, 144, 255, 0.9);
+            top: 78%;
+            left: 16px;
+            animation: glowBlue 3.4s ease-in-out infinite;
+        }
+        .deco-squares .sq-9 {
+            width: 48px;
+            height: 48px;
+            border-color: rgba(255, 180, 50, 0.9);
+            top: 87%;
+            left: 4px;
+            animation: glowGold 2.0s ease-in-out infinite;
+        }
+        .deco-squares .sq-10 {
+            width: 18px;
+            height: 18px;
+            border-color: rgba(200, 80, 255, 0.9);
+            top: 96%;
+            left: 22px;
+            animation: glowPurple 3.8s ease-in-out infinite;
+        }
+        @keyframes glowBlue {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(30, 144, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(30, 144, 255, 0.7);
+            }
+        }
+        @keyframes glowPink {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(255, 80, 120, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 80, 120, 0.7);
+            }
+        }
+        @keyframes glowGold {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(255, 180, 50, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 180, 50, 0.7);
+            }
+        }
+        @keyframes glowGreen {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(50, 220, 130, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(50, 220, 130, 0.7);
+            }
+        }
+        @keyframes glowPurple {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(200, 80, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(200, 80, 255, 0.7);
+            }
+        }
+        @keyframes glowCyan {
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(0, 210, 210, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 210, 210, 0.7);
+            }
+        }
+
+        /* App */
+        .app {
+            max-width: 1400px;
+            width: 100%;
+            height: 100vh;
+            padding: 0 2rem;
+            padding-left: calc(2rem + 10px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        /* Header */
+        .header-glass {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+            padding: 0.6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            border-radius: 0 0 20px 20px;
+        }
+        .header-glass h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #0b2b5c;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        .header-glass h1 .highlight {
+            background: linear-gradient(145deg, #1a4c8a, #0d2f5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+        .btn-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(59, 130, 246, 0.7);
+            color: #2563eb;
+            font-size: 1.2rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-arrow:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Main */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            min-height: 0;
+            padding-bottom: 0.5rem;
+        }
+        .left-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-height: 0;
+        }
+        .foto-principal {
+            flex: 1;
+            width: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #e0eaf5;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .foto-principal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 28px;
+        }
+
+        /* COLLAGE */
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 6px;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+        }
+        .collage-grid .collage-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: #d1d9e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .collage-grid .collage-item:hover {
+            transform: scale(1.02);
+        }
+        .collage-grid .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #eef2f7;
+        }
+        .collage-item.span-2col {
+            grid-column: span 2;
+        }
+        .collage-item.span-2row {
+            grid-row: span 2;
+        }
+        .hidden {
+            display: none !important;
+        }
+
+        /* Panel vertical SIN SCROLL en escritorio */
+        .right-area {
+            width: 120px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            padding: 0.5rem;
+            gap: 0.4rem;
+            overflow: visible;
+        }
+        .carrusel-container-vertical {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: visible;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.3rem 0;
+            justify-content: space-evenly;
+        }
+        .carrusel-track-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            justify-content: space-evenly;
+            transition: none;
+            transform: none !important;
+        }
+        .miniatura-item-vertical {
+            flex: 0 1 auto;
+            width: 80%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            font-weight: 700;
+            color: #0b2b5c;
+            font-size: 0.8rem;
+            text-align: center;
+            min-width: 0;
+            max-width: 100%;
+        }
+        .miniatura-item-vertical img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
+        }
+        .miniatura-item-vertical.seleccionada {
+            border-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4), 0 8px 20px rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+        }
+        .miniatura-item-vertical.gris {
+            filter: grayscale(0.6) opacity(0.7);
+        }
+        .miniatura-item-vertical:hover:not(.gris) {
+            transform: scale(1.08);
+        }
+        .miniatura-item-vertical .icono-collage {
+            font-size: 2rem;
+            color: #2563eb;
+            line-height: 1;
+        }
+        .miniatura-item-vertical .texto-collage {
+            font-size: 0.5rem;
+            margin-top: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Eliminamos botones de navegación vertical */
+        .carrusel-btn-vertical {
+            display: none;
+        }
+
+        /* Footer cumpleaños */
+        .footer-mensaje {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px 20px 0 0;
+            padding: 0.6rem 1.5rem;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0b2b5c;
+            flex-shrink: 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            min-height: 56px;
+        }
+        .footer-mensaje .emoji {
+            font-size: 1.6rem;
+        }
+        .footer-mensaje .nombre-cumple {
+            color: #b91c1c;
+        }
+        .footer-mensaje .sin-cumple {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        /* Para tablet y móvil, el panel se convierte en horizontal con SCROLL */
+        @media (max-width: 900px) {
+            .right-area {
+                width: 100px;
+                padding: 0.3rem;
+                gap: 0.2rem;
+            }
+            .carrusel-track-vertical {
+                gap: 0.2rem;
+            }
+            .miniatura-item-vertical {
+                width: 75%;
+            }
+            .footer-mensaje {
+                font-size: 1.1rem;
+                min-height: 48px;
+                padding: 0.4rem 1rem;
+            }
+            .collage-grid {
+                gap: 5px;
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-left: 50px;
+            }
+            .sidebar-panel {
+                width: 44px;
+            }
+            .sidebar-panel .rotated-text {
+                font-size: 0.8rem;
+            }
+            .app {
+                padding: 0 1rem;
+                padding-left: calc(1rem + 10px);
+            }
+            .main-content {
+                flex-direction: column;
+            }
+            .right-area {
+                width: 100%;
+                flex-direction: row;
+                height: 100px;
+                padding: 0.3rem;
+                gap: 0.3rem;
+                border-radius: 20px;
+                overflow: hidden; /* contenedor no scroll, el scroll lo tiene el carrusel */
+            }
+            .carrusel-container-vertical {
+                flex-direction: row;
+                overflow-x: auto;    /* ¡SCROLL HORIZONTAL! */
+                overflow-y: hidden;
+                padding: 0.2rem 0.5rem;
+                justify-content: flex-start;
+                gap: 0.5rem;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                flex: 1;
+                background: transparent;
+                border-radius: 0;
+            }
+            .carrusel-track-vertical {
+                flex-direction: row;
+                gap: 0.5rem;
+                justify-content: flex-start;
+                width: auto;
+                height: 100%;
+                flex: 0 0 auto;
+            }
+            .miniatura-item-vertical {
+                width: 60px;
+                height: 60px;
+                flex: 0 0 auto;
+                aspect-ratio: 1/1;
+            }
+            .footer-mensaje {
+                font-size: 1rem;
+                min-height: 44px;
+            }
+            .collage-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+                gap: 4px;
+                padding: 4px;
+            }
+            .collage-item.span-2col {
+                grid-column: span 1;
+            }
+            .collage-item.span-2row {
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-glass h1 {
+                font-size: 1.2rem;
+            }
+            .header-glass {
+                padding: 0.4rem 1rem;
+            }
+            .miniatura-item-vertical {
+                width: 50px;
+                height: 50px;
+            }
+            .footer-mensaje {
+                font-size: 0.85rem;
+                min-height: 40px;
+                padding: 0.3rem 0.8rem;
+            }
+            .right-area {
+                height: 80px;
+            }
+            .collage-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 3px;
+                padding: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar-panel">
+        <span class="rotated-text">Fotos y Eventos</span>
+    </aside>
+    <div class="deco-squares">
+        <div class="sq sq-1"></div>
+        <div class="sq sq-2"></div>
+        <div class="sq sq-3"></div>
+        <div class="sq sq-4"></div>
+        <div class="sq sq-5"></div>
+        <div class="sq sq-6"></div>
+        <div class="sq sq-7"></div>
+        <div class="sq sq-8"></div>
+        <div class="sq sq-9"></div>
+        <div class="sq sq-10"></div>
+    </div>
+
+    <div class="app">
+        <header class="header-glass">
+            <h1><span class="highlight">Hola Defensoria Oficial 6</span></h1>
+            <div class="header-buttons">
+                <a href="#" class="btn-arrow"><i class="fas fa-arrow-left"></i></a>
+                <a href="#" class="btn-arrow"><i class="fas fa-arrow-right"></i></a>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="left-area">
+                <div class="foto-principal" id="fotoPrincipal">
+                    <div class="collage-grid" id="collageGrid"></div>
+                    <img id="fotoGrande" src="" alt="Foto" class="hidden" />
+                </div>
+            </div>
+
+            <div class="right-area">
+                <div class="carrusel-container-vertical" id="carruselContainer">
+                    <div class="carrusel-track-vertical" id="carruselTrackVertical">
+                        <!-- JS genera miniaturas -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-mensaje" id="footerMensaje">
+            <span class="emoji">🎉</span>
+            <span id="mensajeTexto">Cargando...</span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const imagenes = [
+                { id: 1, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/1-d.jpg?raw=true' },
+                { id: 2, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/2-d.jpg?raw=true' },
+                { id: 3, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true' },
+                { id: 4, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/4-d.jpg?raw=true' },
+                { id: 5, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/5-d.jpg?raw=true' },
+                { id: 6, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/6-d.jpg?raw=true' },
+                { id: 7, url: 'https://github.com/sistema-secretarios/Fotos/blob/main/7-d.jpg?raw=true' }
+            ];
+
+            const cumpleaños = [
+                { nombre: 'Juan Jo', mes: 1, dia: 8 },
+                { nombre: 'Rita', mes: 1, dia: 9 },
+                { nombre: 'Ana', mes: 1, dia: 22 },
+                { nombre: 'Pato', mes: 1, dia: 26 },
+                { nombre: 'Dr Ramos', mes: 2, dia: 3 },
+                { nombre: 'Dra Mariela', mes: 2, dia: 14 },
+                { nombre: 'Romina', mes: 2, dia: 19 },
+                { nombre: 'Enzo', mes: 2, dia: 26 },
+                { nombre: 'Raquel', mes: 4, dia: 9 },
+                { nombre: 'Enrique', mes: 4, dia: 30 },
+                { nombre: 'Misael', mes: 6, dia: 21 },
+                { nombre: 'Natalia', mes: 7, dia: 20 },
+                { nombre: 'Lucia', mes: 7, dia: 27 },
+                { nombre: 'Romulo', mes: 8, dia: 2 },
+                { nombre: 'Monica', mes: 10, dia: 8 },
+                { nombre: 'Dra Patricia', mes: 11, dia: 3 },
+                { nombre: 'Noelia', mes: 12, dia: 29 }
+            ];
+
+            const track = document.getElementById('carruselTrackVertical');
+            const fotoGrande = document.getElementById('fotoGrande');
+            const collageGrid = document.getElementById('collageGrid');
+            const mensajeTexto = document.getElementById('mensajeTexto');
+
+            let indiceSeleccionado = -1;
+
+            function obtenerCumpleañosHoy() {
+                const hoy = new Date();
+                const mes = hoy.getMonth() + 1;
+                const dia = hoy.getDate();
+                for (let c of cumpleaños) {
+                    if (c.mes === mes && c.dia === dia) return c.nombre;
+                }
+                return null;
+            }
+
+            function actualizarMensajeCumple() {
+                const nombre = obtenerCumpleañosHoy();
+                const emoji = document.querySelector('#footerMensaje .emoji');
+                if (nombre) {
+                    mensajeTexto.innerHTML = `Felicidades <span class="nombre-cumple">${nombre}</span> 🎂`;
+                    emoji.textContent = '🎉';
+                } else {
+                    mensajeTexto.innerHTML = `<span class="sin-cumple">Hoy no tenemos cumpleaños</span>`;
+                    emoji.textContent = '📅';
+                }
+            }
+
+            function mostrarCollage() {
+                collageGrid.classList.remove('hidden');
+                fotoGrande.classList.add('hidden');
+                indiceSeleccionado = -1;
+                const items = track.querySelectorAll('.miniatura-item-vertical');
+                items.forEach(item => {
+                    item.classList.remove('seleccionada');
+                    item.classList.add('gris');
+                });
+                const primerItem = track.querySelector('.miniatura-item-vertical[data-especial="collage"]');
+                if (primerItem) {
+                    primerItem.classList.remove('gris');
+                    primerItem.classList.add('seleccionada');
+                }
+            }
+
+            function mostrarImagenGrande(index) {
+                collageGrid.classList.add('hidden');
+                fotoGrande.classList.remove('hidden');
+                fotoGrande.src = imagenes[index].url;
+                fotoGrande.alt = `Imagen ${index+1}`;
+                indiceSeleccionado = index;
+                const items = track.querySelectorAll('.miniatura-item-vertical');
+                items.forEach((item, i) => {
+                    if (i === 0) {
+                        item.classList.remove('seleccionada');
+                        item.classList.add('gris');
+                    } else {
+                        const idx = parseInt(item.dataset.index);
+                        if (idx === index) {
+                            item.classList.add('seleccionada');
+                            item.classList.remove('gris');
+                        } else {
+                            item.classList.remove('seleccionada');
+                            item.classList.add('gris');
+                        }
+                    }
+                });
+            }
+
+            function crearCollage() {
+                collageGrid.innerHTML = '';
+                const layout = [
+                    { index: 0, spanCol: 2, spanRow: 1 },
+                    { index: 1, spanCol: 1, spanRow: 1 },
+                    { index: 2, spanCol: 1, spanRow: 1 },
+                    { index: 3, spanCol: 1, spanRow: 1 },
+                    { index: 6, spanCol: 1, spanRow: 1 },
+                    { index: 4, spanCol: 2, spanRow: 1 },
+                    { index: 5, spanCol: 1, spanRow: 1 }
+                ];
+                layout.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'collage-item';
+                    if (item.spanCol === 2) div.classList.add('span-2col');
+                    if (item.spanRow === 2) div.classList.add('span-2row');
+                    const img = document.createElement('img');
+                    img.src = imagenes[item.index].url;
+                    img.alt = `Imagen ${item.index+1}`;
+                    img.loading = 'lazy';
+                    img.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = item.index;
+                        mostrarImagenGrande(idx);
+                    });
+                    div.appendChild(img);
+                    collageGrid.appendChild(div);
+                });
+            }
+
+            function renderMiniaturas() {
+                track.innerHTML = '';
+
+                // Elemento Collage
+                const collageDiv = document.createElement('div');
+                collageDiv.className = 'miniatura-item-vertical seleccionada';
+                collageDiv.dataset.especial = 'collage';
+                collageDiv.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;">
+                        <span class="icono-collage"><i class="fas fa-th"></i></span>
+                        <span class="texto-collage">Collage</span>
+                    </div>
+                `;
+                collageDiv.addEventListener('click', function() {
+                    mostrarCollage();
+                });
+                track.appendChild(collageDiv);
+
+                // Miniaturas de imágenes
+                imagenes.forEach((img, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'miniatura-item-vertical gris';
+                    div.dataset.index = idx;
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img.url;
+                    imgElement.alt = `Imagen ${idx+1}`;
+                    imgElement.loading = 'lazy';
+                    imgElement.onerror = function() {
+                        this.src =
+                            'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%23e0eaf5"/%3E%3Ctext x="50" y="50" font-family="Arial" font-size="14" fill="%236b7280" text-anchor="middle" dy=".3em"%3E%3C/title%3E%3C/text%3E%3C/svg%3E';
+                    };
+                    div.appendChild(imgElement);
+                    div.addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.index);
+                        mostrarImagenGrande(idx);
+                    });
+                    track.appendChild(div);
+                });
+
+                mostrarCollage();
+            }
+
+            function init() {
+                crearCollage();
+                renderMiniaturas();
+                actualizarMensajeCumple();
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
