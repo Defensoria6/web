@@ -426,7 +426,7 @@
       color: #0b1a33;
     }
 
-    /* ---- Empleados ---- */
+    /* ---- Empleados (ajustado a flex para 4-4-5) ---- */
     .empleados-container {
       width: 100%;
       background: rgba(255, 255, 255, 0.65);
@@ -459,14 +459,16 @@
     }
 
     .grid-personal {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
       flex: 1;
       align-content: stretch;
+      justify-content: flex-start;
     }
 
     .foto-con-nombre {
+      flex: 0 0 calc(25% - 0.5rem); /* 4 por fila */
       background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
@@ -480,6 +482,12 @@
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    /* Los últimos 5 (del 9 al 13) ocupan 20% para que quepan 5 en la tercera fila */
+    .foto-con-nombre:nth-child(n+9) {
+      flex: 0 0 calc(20% - 0.5rem); /* 5 por fila */
     }
 
     .foto-con-nombre:hover {
@@ -628,6 +636,25 @@
     }
 
     @media (max-width: 768px) {
+      /* Permitir scroll vertical y que todo el contenido sea visible */
+      html, body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: auto;
+      }
+      .app {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 1rem;
+      }
+      .main-content {
+        overflow: visible;
+        padding-bottom: 0.5rem;
+      }
+      .empleados-container {
+        flex: 0 0 auto;
+      }
+
       body {
         padding-left: 50px;
       }
@@ -654,7 +681,13 @@
       .modulo-card .nombre { font-size: 0.7rem; }
       .empleados-container { padding: 0.5rem 0.6rem; }
       .empleados-container h3 { font-size: 0.9rem; margin-bottom: 0.3rem; }
-      .grid-personal { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+      .grid-personal { gap: 0.4rem; }
+      .foto-con-nombre {
+        flex: 0 0 calc(33.33% - 0.4rem); /* 3 por fila en tablet */
+      }
+      .foto-con-nombre:nth-child(n+9) {
+        flex: 0 0 calc(33.33% - 0.4rem);
+      }
       .foto-con-nombre .foto { width: 36px; height: 36px; }
       .foto-con-nombre .nombre { font-size: 0.55rem; }
       .modal-content { max-width: 320px; padding: 1.5rem; }
@@ -663,6 +696,22 @@
     }
 
     @media (max-width: 480px) {
+      /* También permitir scroll en móvil muy pequeño */
+      html, body {
+        overflow-y: auto;
+        height: auto;
+      }
+      .app {
+        height: auto;
+        min-height: 100vh;
+      }
+      .main-content {
+        overflow: visible;
+      }
+      .empleados-container {
+        flex: 0 0 auto;
+      }
+
       body {
         padding-left: 0;
       }
@@ -711,7 +760,13 @@
         font-size: 0.75rem;
       }
 
-      .grid-personal { grid-template-columns: repeat(2, 1fr); gap: 0.3rem; }
+      .grid-personal { gap: 0.3rem; }
+      .foto-con-nombre {
+        flex: 0 0 calc(50% - 0.3rem); /* 2 por fila en móvil */
+      }
+      .foto-con-nombre:nth-child(n+9) {
+        flex: 0 0 calc(50% - 0.3rem);
+      }
       .foto-con-nombre .foto { width: 32px; height: 32px; }
       .foto-con-nombre .nombre { font-size: 0.5rem; }
       .empleados-container h3 { font-size: 0.8rem; }
@@ -851,6 +906,11 @@
           <div class="foto-con-nombre persona-item" data-nombre="Ana Gabriela Palacios" data-cargo="Personal">
             <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true" alt="Ana Gabriela Palacios" /></div>
             <span class="nombre">Ana Gabriela Palacios</span>
+          </div>
+          <!-- NUEVO: Rita Cecilia Sosa -->
+          <div class="foto-con-nombre persona-item" data-nombre="Rita Cecilia Sosa" data-cargo="Personal">
+            <div class="foto"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Sosa.png?raw=true" alt="Rita Cecilia Sosa" /></div>
+            <span class="nombre">Rita Cecilia Sosa</span>
           </div>
         </div>
       </div>
