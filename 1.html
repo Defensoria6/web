@@ -533,5 +533,47 @@
       </div>
     </main>
   </div>
+
+  <!-- Script de navegación -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Botón Home (primer botón del header)
+      const homeBtn = document.querySelector('.header-buttons .btn-arrow:first-child');
+      if (homeBtn) {
+        homeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'https://defensoria6.github.io/web/';
+        });
+      }
+
+      // Botón Flecha (segundo botón del header)
+      const arrowBtn = document.querySelector('.header-buttons .btn-arrow:last-child');
+      if (arrowBtn) {
+        arrowBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'https://defensoria6.github.io/web/2';
+        });
+      }
+
+      // Módulos
+      const modulos = document.querySelectorAll('.modulo-card');
+      const urls = [
+        'https://defensoria6.github.io/web/2', // Equipo
+        'https://defensoria6.github.io/web/4', // Aplicativos
+        'https://defensoria6.github.io/web/3', // Capacitación
+        'https://defensoria6.github.io/web/5'  // Fotos
+      ];
+
+      modulos.forEach((modulo, index) => {
+        if (index < urls.length) {
+          modulo.addEventListener('click', function() {
+            window.location.href = urls[index];
+          });
+          // Indicar que es clickeable
+          modulo.style.cursor = 'pointer';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
