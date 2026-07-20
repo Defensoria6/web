@@ -29,7 +29,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-left: 80px; /* espacio para el panel lateral fijo */
+      padding-left: 80px;
       position: relative;
     }
 
@@ -54,23 +54,16 @@
 
     .sidebar-panel .rotated-text {
       display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       color: #0b2b5c;
       text-transform: uppercase;
       white-space: nowrap;
       transform: rotate(-90deg);
       transform-origin: center center;
       user-select: none;
-      opacity: 0.75;
-      font-size: 1rem;
-    }
-
-    @media (min-width: 900px) {
-      .sidebar-panel .rotated-text {
-        font-size: clamp(1rem, 1.6vw, 2rem);
-      }
+      opacity: 0.8;
     }
 
     /* ===== CUADRADOS DECORATIVOS (solo escritorio) ===== */
@@ -622,8 +615,8 @@
         background: rgba(255, 255, 255, 0.75);
       }
       .sidebar-panel .rotated-text {
-        font-size: 0.8rem;
-        letter-spacing: 0.06em;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
       }
       .deco-squares {
         display: none !important;
@@ -677,7 +670,7 @@
         background: rgba(255, 255, 255, 0.8);
       }
       .sidebar-panel .rotated-text {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         letter-spacing: 0.04em;
       }
       .app {
@@ -725,6 +718,9 @@
     <header class="header-glass">
       <h1><span class="highlight">Hola Defensoría Oficial 6</span></h1>
       <div class="header-buttons">
+        <a href="#" class="btn-arrow" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
         <a href="#" class="btn-arrow" aria-label="Flecha izquierda">
           <i class="fas fa-arrow-left"></i>
         </a>
@@ -1136,6 +1132,22 @@
       });
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeModal();
+      });
+
+      // ===== NAVEGACIÓN DE BOTONES =====
+      const botones = document.querySelectorAll('.header-buttons .btn-arrow');
+      const urls = [
+        'https://defensoria6.github.io/web/',   // Home
+        'https://defensoria6.github.io/web/2',  // Flecha izquierda
+        'https://defensoria6.github.io/web/4'   // Flecha derecha
+      ];
+      botones.forEach((btn, index) => {
+        if (index < urls.length) {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = urls[index];
+          });
+        }
       });
 
     })();
