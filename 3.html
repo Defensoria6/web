@@ -770,223 +770,47 @@
 
   <script>
     (function() {
-      // ===== DATOS DE LOS TEMAS =====
+      // ===== DATOS DE LOS TEMAS (con índice y examen reemplazados por mensaje) =====
       const temasData = {
         administrativo: {
           titulo: "Administrativo",
-          indice: [
-            "Introducción al Derecho Administrativo",
-            "Principios generales",
-            "Procedimiento administrativo",
-            "Recursos administrativos",
-            "Control judicial de la administración"
-          ],
-          examen: [
-            {
-              pregunta: "¿Cuál es el principio que exige que la administración actúe dentro del marco legal?",
-              opciones: ["Legalidad", "Jerarquía", "División de poderes", "Autonomía"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué recurso procede contra un acto administrativo definitivo?",
-              opciones: ["Recurso de alzada", "Recurso de reposición", "Recurso extraordinario", "Recurso de amparo"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Quién ejerce el control judicial de la administración en Argentina?",
-              opciones: ["El Poder Judicial", "El Poder Ejecutivo", "El Ministerio Público", "El Tribunal de Cuentas"],
-              correcta: 0
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         civil: {
           titulo: "Civil",
-          indice: [
-            "Personas y capacidad",
-            "Obligaciones y contratos",
-            "Derechos reales",
-            "Responsabilidad civil",
-            "Prescripción y caducidad"
-          ],
-          examen: [
-            {
-              pregunta: "¿A partir de qué edad se adquiere la plena capacidad de obrar?",
-              opciones: ["18 años", "21 años", "16 años", "14 años"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Cuál es el plazo de prescripción general para las acciones personales?",
-              opciones: ["5 años", "10 años", "3 años", "2 años"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué tipo de responsabilidad surge por el incumplimiento de una obligación?",
-              opciones: ["Responsabilidad contractual", "Responsabilidad extracontractual", "Responsabilidad objetiva", "Responsabilidad civil"],
-              correcta: 0
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         familia: {
           titulo: "Familia",
-          indice: [
-            "Matrimonio y uniones convivenciales",
-            "Filiación y adopción",
-            "Régimen patrimonial del matrimonio",
-            "Divorcio y disolución",
-            "Alimentos y cuidado personal"
-          ],
-          examen: [
-            {
-              pregunta: "¿Cuál es la edad mínima para contraer matrimonio en Argentina?",
-              opciones: ["18 años", "16 años con autorización", "21 años", "14 años"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué tipo de adopción otorga los mismos derechos que la filiación por naturaleza?",
-              opciones: ["Adopción simple", "Adopción plena", "Adopción internacional", "Adopción de menores"],
-              correcta: 1
-            },
-            {
-              pregunta: "¿Qué régimen establece la comunidad de bienes gananciales?",
-              opciones: ["Separación de bienes", "Comunidad de ganancias", "Participación diferida", "Régimen mixto"],
-              correcta: 1
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         laboral: {
           titulo: "Laboral",
-          indice: [
-            "Contrato de trabajo",
-            "Jornada y descansos",
-            "Remuneración y salario",
-            "Extinción del contrato",
-            "Seguridad social"
-          ],
-          examen: [
-            {
-              pregunta: "¿Cuál es la jornada máxima legal de trabajo?",
-              opciones: ["8 horas diarias", "9 horas diarias", "6 horas diarias", "12 horas diarias"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué indemnización corresponde por despido sin justa causa?",
-              opciones: ["Indemnización por antigüedad", "Indemnización por daños", "Indemnización sustitutiva", "No corresponde"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Quién financia la seguridad social en el trabajo?",
-              opciones: ["El empleador", "El trabajador", "Ambos", "El Estado"],
-              correcta: 2
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         penal: {
           titulo: "Penal",
-          indice: [
-            "Teoría del delito",
-            "Clasificación de los delitos",
-            "Penalidades y medidas de seguridad",
-            "Proceso penal",
-            "Derechos del imputado"
-          ],
-          examen: [
-            {
-              pregunta: "¿Cuál es el principio que establece que no hay delito ni pena sin ley previa?",
-              opciones: ["Legalidad penal", "Irretroactividad", "Proporcionalidad", "Presunción de inocencia"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué tipo de delito se castiga con prisión?",
-              opciones: ["Delito doloso", "Delito culposo", "Delito de omisión", "Todos los delitos"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Quién tiene la carga de la prueba en el proceso penal?",
-              opciones: ["El imputado", "La acusación", "El juez", "La defensa"],
-              correcta: 1
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         "violencia-familiar": {
           titulo: "Violencia Familiar",
-          indice: [
-            "Concepto y tipos de violencia",
-            "Marco legal (Ley 26.485)",
-            "Medidas de protección",
-            "Denuncia y procedimiento",
-            "Recursos para las víctimas"
-          ],
-          examen: [
-            {
-              pregunta: "¿Qué ley protege contra la violencia familiar en Argentina?",
-              opciones: ["Ley 26.485", "Ley 24.417", "Ley 25.087", "Ley 27.499"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Cuáles son los tipos de violencia reconocidos?",
-              opciones: ["Física, psicológica y sexual", "Física, psicológica, sexual y simbólica", "Solo física", "Solo psicológica"],
-              correcta: 1
-            },
-            {
-              pregunta: "¿Qué medida de protección puede dictar el juez?",
-              opciones: ["Exclusión del agresor", "Prohibición de acercamiento", "Ambas", "Ninguna"],
-              correcta: 2
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         paz: {
           titulo: "Paz",
-          indice: [
-            "Conciliación y mediación",
-            "Acuerdos de paz",
-            "Justicia restaurativa",
-            "Mecanismos alternativos de resolución de conflictos",
-            "Cultura de paz"
-          ],
-          examen: [
-            {
-              pregunta: "¿Qué método de resolución de conflictos es voluntario y confidencial?",
-              opciones: ["Mediación", "Arbitraje", "Juicio", "Negociación directa"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué busca la justicia restaurativa?",
-              opciones: ["Reparación del daño", "Castigo del ofensor", "Juicio público", "Multa"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Cuál es el objetivo de la cultura de paz?",
-              opciones: ["Prevenir conflictos", "Resolver conflictos por la fuerza", "Imponer la ley", "Aislar a los agresores"],
-              correcta: 0
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         },
         "procesos-especiales": {
           titulo: "Procesos Especiales",
-          indice: [
-            "Procesos de familia",
-            "Procesos laborales",
-            "Procesos de amparo",
-            "Procesos sucesorios",
-            "Procesos de ejecución"
-          ],
-          examen: [
-            {
-              pregunta: "¿Qué proceso se utiliza para proteger derechos fundamentales?",
-              opciones: ["Amparo", "Ejecución", "Sucesorio", "Laboral"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué tipo de proceso tiene plazos reducidos?",
-              opciones: ["Proceso de amparo", "Proceso ordinario", "Proceso de conocimiento", "Proceso voluntario"],
-              correcta: 0
-            },
-            {
-              pregunta: "¿Qué proceso regula la transmisión de bienes por causa de muerte?",
-              opciones: ["Sucesorio", "Ejecutivo", "Laboral", "Civil"],
-              correcta: 0
-            }
-          ]
+          indice: "En breve estará disponible",
+          examen: "En breve estará disponible"
         }
       };
 
@@ -1007,59 +831,19 @@
         // Construir HTML
         let html = `<div class="tema-titulo">${data.titulo}</div>`;
 
-        // Índice
+        // Índice (ahora es un string)
         html += `<div class="indice">
-          <div class="indice-titulo">Índice</div>`;
-        data.indice.forEach(item => {
-          html += `<div class="indice-item">${item}</div>`;
-        });
-        html += `</div>`;
+          <div class="indice-titulo">Índice</div>
+          <div class="indice-item" style="padding-left:0; border-bottom:none; list-style:none;">${data.indice}</div>
+        </div>`;
 
-        // Examen
+        // Examen (ahora es un string)
         html += `<div class="examen">
-          <div class="examen-titulo">Examen de conceptos fundamentales</div>`;
-        data.examen.forEach((pregunta, idx) => {
-          html += `<div class="pregunta" data-pregunta="${idx}">
-            <div class="pregunta-texto">${idx+1}. ${pregunta.pregunta}</div>
-            <div class="pregunta-opciones">`;
-          pregunta.opciones.forEach((opcion, optIdx) => {
-            html += `<label>
-              <input type="radio" name="pregunta_${idx}" value="${optIdx}" />
-              ${opcion}
-            </label>`;
-          });
-          html += `</div>
-            <div class="pregunta-respuesta" id="respuesta_${idx}"></div>
-          </div>`;
-        });
-        html += `<button class="btn-comprobar" id="btnComprobar">Comprobar respuestas</button>`;
-        html += `</div>`;
+          <div class="examen-titulo">Examen de conceptos fundamentales</div>
+          <div style="padding: 0.5rem 0; font-size: 0.95rem; color: #1e1e2f;">${data.examen}</div>
+        </div>`;
 
         dynamicContent.innerHTML = html;
-
-        // Asignar evento al botón comprobar
-        const btn = document.getElementById('btnComprobar');
-        if (btn) {
-          btn.addEventListener('click', function() {
-            const preguntas = data.examen;
-            let allCorrect = true;
-            preguntas.forEach((p, idx) => {
-              const selected = document.querySelector(`input[name="pregunta_${idx}"]:checked`);
-              const respDiv = document.getElementById(`respuesta_${idx}`);
-              if (selected) {
-                const userAnswer = parseInt(selected.value, 10);
-                const isCorrect = userAnswer === p.correcta;
-                respDiv.textContent = isCorrect ? '✅ Correcto' : '❌ Incorrecto. La respuesta correcta es: ' + p.opciones[p.correcta];
-                respDiv.className = 'pregunta-respuesta ' + (isCorrect ? 'correcta' : 'incorrecta');
-                if (!isCorrect) allCorrect = false;
-              } else {
-                respDiv.textContent = '⚠️ Debes seleccionar una opción.';
-                respDiv.className = 'pregunta-respuesta';
-                allCorrect = false;
-              }
-            });
-          });
-        }
       }
 
       // ===== EVENTOS DE CLIC EN EL MENÚ =====
