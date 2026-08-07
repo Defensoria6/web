@@ -91,14 +91,27 @@
             50% { box-shadow: 0 0 30px rgba(200, 80, 255, 0.8), 0 0 60px rgba(200, 80, 255, 0.4), 0 0 100px rgba(200, 80, 255, 0.2); }
         }
 
-        /* === CONTENEDOR CENTRAL (más destacado y clickeable) === */
+        /* === NUEVO WRAPPER PARA CENTRAR CONTENIDO Y TEXTO DEBAJO === */
+        .central-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            gap: 20px; /* separación entre el contenedor y el texto */
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        /* === CONTENEDOR CENTRAL (original) === */
         .main-content {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            max-width: 1000px;
+            width: 100%;
             padding: 35px 55px;
             background: rgba(255, 255, 255, 0.30);
             backdrop-filter: blur(16px);
@@ -106,8 +119,6 @@
             border: 3px solid rgba(30, 144, 255, 0.6);
             box-shadow: 0 0 40px rgba(30, 144, 255, 0.25), inset 0 0 30px rgba(30, 144, 255, 0.1);
             text-align: center;
-            z-index: 10;
-            position: relative;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
@@ -124,8 +135,8 @@
         .main-content h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 2.8rem; /* reducido */
-            color: #1a5276; /* celeste oscuro */
+            font-size: 2.8rem;
+            color: #1a5276;
             letter-spacing: 2px;
             text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
             white-space: nowrap;
@@ -134,12 +145,23 @@
         .main-content h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 1.4rem; /* reducido */
-            color: #1a5276; /* celeste oscuro */
+            font-size: 1.4rem;
+            color: #1a5276;
             letter-spacing: 1px;
             opacity: 0.9;
             white-space: nowrap;
             margin-top: 0;
+        }
+
+        /* === TEXTO DE INGRESO (fuera del contenedor) === */
+        .click-msg {
+            font-weight: bold;
+            color: #006400;      /* verde oscuro */
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+            width: 100%;
         }
 
         /* === MODAL INFERIOR DERECHO === */
@@ -171,7 +193,8 @@
         @media (max-width: 1000px) {
             .main-content h1 { font-size: 2.4rem; }
             .main-content h2 { font-size: 1.2rem; }
-            .main-content { padding: 30px 35px; gap: 12px; }
+            .main-content { padding: 30px 35px; }
+            .central-wrapper { gap: 16px; }
         }
 
         @media (max-width: 780px) {
@@ -187,6 +210,9 @@
             .main-content h2 {
                 font-size: 1.0rem;
                 white-space: normal;
+            }
+            .click-msg {
+                font-size: 0.9rem;
             }
             .left-squares { width: 150px; }
             .square { border-width: 3px; }
@@ -211,6 +237,7 @@
         @media (max-width: 480px) {
             .main-content h1 { font-size: 1.6rem; }
             .main-content h2 { font-size: 0.9rem; }
+            .click-msg { font-size: 0.8rem; }
             .left-squares { width: 120px; }
             .modal-footer {
                 font-size: 0.6rem;
@@ -237,10 +264,16 @@
         <div class="square s10 glow-gold"></div>
     </div>
 
-    <!-- Contenedor central (destacado y clickeable) -->
-    <div class="main-content" id="mainContent">
-        <h1>Defensoría Oficial 6</h1>
-        <h2>Ministerio Público de Misiones</h2>
+    <!-- Wrapper que agrupa el contenedor central y el texto debajo -->
+    <div class="central-wrapper">
+        <!-- Contenedor central (destacado y clickeable) -->
+        <div class="main-content" id="mainContent">
+            <h1>Defensoría Oficial 6</h1>
+            <h2>Ministerio Público de Misiones</h2>
+        </div>
+
+        <!-- Texto fuera del contenedor, justo debajo -->
+        <p class="click-msg">Pulsa en el texto para ingresar</p>
     </div>
 
     <!-- Modal inferior derecho -->
