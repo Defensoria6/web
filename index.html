@@ -1,300 +1,757 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Defensoría Oficial 6</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defensoría Oficial 6</title>
+<meta name="description" content="Defendemos derechos, transformamos vidas. Portal de la Defensoría Oficial 6: equipo, aplicativos digitales y fotos y eventos.">
+<meta name="theme-color" content="#4F46E5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%234F46E5'/%3E%3Ctext x='32' y='47' font-size='42' font-weight='800' text-anchor='middle' fill='%23F59E0B' font-family='Arial,sans-serif'%3E6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wdth,wght@75..100,200..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---------- Marca (indigo) ---------- */
+  --marca:#4F46E5;
+  --marca-oscura:#312E81;
+  --marca-clara:#6366F1;
+  --marca-profunda:#1E1B4B;
 
-        body {
-            height: 100vh;
-            background: #d4eaf7; /* celeste suave */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
+  /* ---------- Acento (ámbar) ---------- */
+  --acento:#F59E0B;
+  --acento-claro:#FCD34D;
 
-        /* === CUADRADOS EN EL BORDE IZQUIERDO (se mantienen) === */
-        .left-squares {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: flex-start;
-            padding: 15px 0;
-            pointer-events: none;
-            z-index: 5;
-        }
+  /* ---------- Neutros ---------- */
+  --tinta:#0F172A;
+  --tinta-suave:#1E293B;
+  --apagado:#64748B;
+  --linea:#E2E8F0;
+  --papel:#F8FAFC;
+  --tinte:#EEF2FF;
+  --blanco:#FFFFFF;
 
-        .square {
-            border-style: solid;
-            border-width: 4px;
-            background: transparent;
-            backdrop-filter: blur(3px);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
+  /* ---------- Estructura ---------- */
+  --gutter:clamp(1rem,4vw,2.5rem);
+  --nav-alto:68px;
+  --radio-s:14px;
+  --radio-m:24px;
+  --radio-l:36px;
+  --arco:50% 50% 28px 28px / 40% 40% 28px 28px;
+  --fuente-display:'Bricolage Grotesque','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --fuente-texto:'Inter','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
 
-        .s1 { width: 80px; height: 80px; border-color: rgba(30, 144, 255, 0.9); margin-left: 10px; }
-        .s2 { width: 130px; height: 130px; border-color: rgba(255, 80, 120, 0.9); margin-left: 40px; }
-        .s3 { width: 60px; height: 60px; border-color: rgba(50, 220, 130, 0.9); margin-left: 0px; }
-        .s4 { width: 110px; height: 110px; border-color: rgba(255, 180, 50, 0.9); margin-left: 30px; }
-        .s5 { width: 70px; height: 70px; border-color: rgba(200, 80, 255, 0.9); margin-left: 15px; }
-        .s6 { width: 140px; height: 140px; border-color: rgba(0, 210, 210, 0.9); margin-left: 50px; }
-        .s7 { width: 90px; height: 90px; border-color: rgba(255, 130, 200, 0.9); margin-left: 5px; }
-        .s8 { width: 120px; height: 120px; border-color: rgba(100, 200, 255, 0.9); margin-left: 25px; }
-        .s9 { width: 65px; height: 65px; border-color: rgba(255, 100, 100, 0.9); margin-left: 20px; }
-        .s10 { width: 100px; height: 100px; border-color: rgba(180, 220, 80, 0.9); margin-left: 35px; }
+  /* ---------- Sombras ---------- */
+  --sombra-suave:0 1px 2px rgba(15,23,42,.04),0 4px 12px -6px rgba(15,23,42,.08);
+  --sombra-media:0 2px 4px rgba(15,23,42,.04),0 12px 28px -12px rgba(15,23,42,.16);
+  --sombra-fuerte:0 30px 60px -30px rgba(30,27,75,.75);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--fuente-texto);
+  font-size:1.0625rem;
+  line-height:1.65;
+  color:var(--tinta);
+  background:var(--papel);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"kern" 1,"liga" 1,"calt" 1,"ss01" 1;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--marca);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.saltar{position:absolute;left:1rem;top:-4rem;z-index:100;padding:.7rem 1.1rem;border-radius:999px;background:var(--tinta);color:#fff;font-weight:600;text-decoration:none}
+.saltar:focus{top:.75rem}
+.contenedor{width:min(100% - 2 * var(--gutter),1200px);margin-inline:auto}
 
-        /* === DESTELLOS LUMINOSOS === */
-        .glow-blue {
-            animation: glowPulseBlue 2.5s ease-in-out infinite;
-        }
-        .glow-pink {
-            animation: glowPulsePink 3s ease-in-out infinite;
-        }
-        .glow-gold {
-            animation: glowPulseGold 2s ease-in-out infinite;
-        }
-        .glow-purple {
-            animation: glowPulsePurple 3.5s ease-in-out infinite;
-        }
+/* Tipografía de titulares */
+.display,
+.hero h1,
+.seccion__cab h2,
+.app h3,
+.cumples h3,
+.mes h4,
+.persona--defensor .persona__nombre,
+.persona--sec .persona__nombre,
+.dlg__nombre,
+.personal__titulo{
+  font-family:var(--fuente-display);
+  font-stretch:75%;
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:.98;
+  text-wrap:balance;
+}
+.display{line-height:.96}
 
-        @keyframes glowPulseBlue {
-            0%, 100% { box-shadow: 0 0 15px rgba(30, 144, 255, 0.3), 0 0 30px rgba(30, 144, 255, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(30, 144, 255, 0.8), 0 0 60px rgba(30, 144, 255, 0.4), 0 0 100px rgba(30, 144, 255, 0.2); }
-        }
-        @keyframes glowPulsePink {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 80, 120, 0.3), 0 0 30px rgba(255, 80, 120, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(255, 80, 120, 0.8), 0 0 60px rgba(255, 80, 120, 0.4), 0 0 100px rgba(255, 80, 120, 0.2); }
-        }
-        @keyframes glowPulseGold {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 180, 50, 0.3), 0 0 30px rgba(255, 180, 50, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(255, 180, 50, 0.8), 0 0 60px rgba(255, 180, 50, 0.4), 0 0 100px rgba(255, 180, 50, 0.2); }
-        }
-        @keyframes glowPulsePurple {
-            0%, 100% { box-shadow: 0 0 15px rgba(200, 80, 255, 0.3), 0 0 30px rgba(200, 80, 255, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(200, 80, 255, 0.8), 0 0 60px rgba(200, 80, 255, 0.4), 0 0 100px rgba(200, 80, 255, 0.2); }
-        }
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.9rem 1.35rem;border:2px solid transparent;border-radius:999px;
+  font-family:var(--fuente-texto);
+  font-size:.98rem;font-weight:600;letter-spacing:.005em;line-height:1.2;
+  text-decoration:none;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.btn--acento{
+  background:var(--acento);color:var(--tinta);
+  box-shadow:0 6px 18px -8px rgba(245,158,11,.55);
+}
+.btn--acento:hover{background:var(--acento-claro);transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(245,158,11,.7)}
+.btn--borde{border-color:rgba(255,255,255,.78);color:#fff}
+.btn--borde:hover{background:rgba(255,255,255,.14);border-color:#fff}
+.btn--marca{background:var(--marca);color:#fff;box-shadow:0 6px 18px -8px rgba(79,70,229,.6)}
+.btn--marca:hover{background:var(--marca-oscura);transform:translateY(-1px)}
 
-        /* === NUEVO WRAPPER PARA CENTRAR CONTENIDO Y TEXTO DEBAJO === */
-        .central-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            gap: 20px; /* separación entre el contenedor y el texto */
-            max-width: 1000px;
-            width: 100%;
-            padding: 0 20px;
-        }
+/* ---------- Navegación ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(248,250,252,.85);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:var(--nav-alto)}
+.marca{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--fuente-display);font-stretch:80%;font-weight:700;
+  font-size:1.15rem;letter-spacing:-.02em;
+  text-decoration:none;
+}
+.marca__sello{
+  display:grid;place-items:center;width:38px;height:38px;border-radius:50%;
+  background:var(--marca);color:var(--acento);
+  font-family:var(--fuente-display);font-stretch:75%;font-weight:800;
+  font-size:1.4rem;line-height:1;
+  box-shadow:0 4px 14px -6px rgba(79,70,229,.55);
+}
+.nav__menu{display:flex;gap:.25rem}
+.nav__menu a{
+  padding:.55rem 1rem;border-radius:999px;color:var(--apagado);
+  font-size:.97rem;font-weight:500;letter-spacing:.005em;text-decoration:none;
+  transition:background .15s,color .15s;
+}
+.nav__menu a:hover{background:var(--tinte);color:var(--tinta)}
+.nav__menu a[aria-current="location"]{background:var(--marca);color:#fff;font-weight:600}
+.nav__toggle{display:none;place-items:center;width:44px;height:44px;border:1.5px solid var(--linea);border-radius:50%;background:#fff}
+.nav__toggle svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+@media (max-width:760px){
+  .nav__toggle{display:grid}
+  .nav__menu{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:.25rem;
+    padding:.75rem var(--gutter) 1.25rem;
+    background:var(--papel);border-bottom:1px solid var(--linea);
+    box-shadow:0 20px 30px -22px rgba(15,23,42,.25);
+  }
+  .nav__menu.abierto{display:flex}
+  .nav__menu a{padding:.8rem 1rem;font-size:1.08rem;color:var(--tinta)}
+}
 
-        /* === CONTENEDOR CENTRAL (original) === */
-        .main-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            width: 100%;
-            padding: 35px 55px;
-            background: rgba(255, 255, 255, 0.30);
-            backdrop-filter: blur(16px);
-            border-radius: 40px;
-            border: 3px solid rgba(30, 144, 255, 0.6);
-            box-shadow: 0 0 40px rgba(30, 144, 255, 0.25), inset 0 0 30px rgba(30, 144, 255, 0.1);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  background:
+    radial-gradient(ellipse 90% 70% at 88% 8%, rgba(99,102,241,.9) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 6% 95%, rgba(124,58,237,.55) 0%, transparent 50%),
+    linear-gradient(160deg, #1E1B4B 0%, #312E81 100%);
+  color:#fff;
+  padding-block:clamp(2.75rem,6vw,5.25rem) clamp(3.25rem,7vw,6.25rem);
+  overflow:hidden;
+}
+.hero :focus-visible{outline-color:var(--acento)}
+.hero__grid{display:grid;gap:3rem;align-items:center}
+.hero h1{
+  font-size:clamp(3rem,8vw,6.4rem);
+  line-height:.94;
+  letter-spacing:-.02em;
+}
+.hero__bajada{
+  max-width:32rem;text-wrap:pretty;
+  margin-top:1.75rem;font-size:1.2rem;line-height:1.55;
+  color:rgba(255,255,255,.86);
+}
+.hero__acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.1rem}
+.hero__foto{width:min(100%,440px);justify-self:center}
+.hero__foto img{
+  width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%;
+  border-radius:var(--arco);
+  background:var(--marca-profunda);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.09),
+    0 30px 70px -30px rgba(15,10,60,.85),
+    0 12px 30px -20px rgba(15,10,60,.6);
+}
+@media (min-width:900px){
+  .hero__grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:4rem}
+}
 
-        .main-content:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 60px rgba(30, 144, 255, 0.4), inset 0 0 40px rgba(30, 144, 255, 0.15);
-        }
+/* ---------- Franja de hoy ---------- */
+.hoy{
+  background:linear-gradient(90deg,var(--acento) 0%,var(--acento-claro) 100%);
+  color:var(--tinta);
+}
+.hoy__in{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.5rem 2rem;padding-block:1rem;
+  font-size:1rem;font-weight:500;
+}
+.hoy strong{font-weight:700}
+.hoy__cumple--hoy{
+  padding:.35rem 1rem;border-radius:999px;
+  background:var(--tinta);color:#fff;font-weight:600;
+}
 
-        .main-content:active {
-            transform: scale(0.98);
-        }
+/* ---------- Secciones ---------- */
+.seccion{padding-block:clamp(3.75rem,8vw,7rem);scroll-margin-top:var(--nav-alto)}
+.seccion--blanca{background:#fff}
+.seccion__cab{display:grid;gap:1.1rem;margin-bottom:clamp(2.25rem,4.5vw,3.75rem)}
+.seccion__cab h2{font-size:clamp(2.4rem,5.4vw,4.15rem);letter-spacing:-.02em}
+.seccion__cab p{max-width:34rem;color:var(--apagado);font-size:1.06rem;line-height:1.6;text-wrap:pretty}
+@media (min-width:860px){
+  .seccion__cab{grid-template-columns:minmax(0,1fr) minmax(0,26rem);align-items:end;gap:3rem}
+}
 
-        .main-content h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 2.8rem;
-            color: #1a5276;
-            letter-spacing: 2px;
-            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
-            white-space: nowrap;
-        }
+/* ---------- Equipo ---------- */
+.direccion{
+  display:grid;gap:2rem;
+  padding:clamp(1.25rem,3vw,2.5rem);
+  border-radius:var(--radio-l);
+  background:linear-gradient(160deg,var(--tinte) 0%,#F5F3FF 100%);
+  border:1px solid rgba(79,70,229,.08);
+}
+@media (min-width:720px){
+  .direccion{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem;align-items:center}
+}
+@media (min-width:1000px){
+  .direccion{gap:3.5rem}
+}
+.persona{display:block;width:100%;padding:0;border:0;background:none;text-align:left}
+.foto{display:block;overflow:hidden;background:var(--linea);position:relative}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:50% 32%}
+.foto.sin-foto img{display:none}
+.foto.sin-foto::after{
+  content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;
+  background:linear-gradient(160deg,var(--marca-clara),var(--marca));color:var(--acento);
+  font-family:var(--fuente-display);font-stretch:75%;font-weight:800;
+  font-size:2rem;letter-spacing:.02em;
+}
+.persona__nombre{display:block}
+.persona__cargo{display:block;color:var(--marca);font-weight:600;letter-spacing:.01em}
 
-        .main-content h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: #1a5276;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            white-space: nowrap;
-            margin-top: 0;
-        }
+.persona--defensor{max-width:340px}
+.persona--defensor .foto{aspect-ratio:4/5;border-radius:var(--arco)}
+.persona--defensor .persona__cargo{margin-top:1.1rem;font-size:.98rem;text-transform:uppercase;letter-spacing:.08em}
+.persona--defensor .persona__nombre{margin-top:.35rem;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1}
 
-        /* === TEXTO DE INGRESO (fuera del contenedor) === */
-        .click-msg {
-            font-weight: bold;
-            color: #006400;      /* verde oscuro */
-            text-align: center;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            margin: 0;
-            width: 100%;
-        }
+.secretarios{display:grid}
+.secretarios li + li{border-top:1px solid rgba(15,23,42,.1)}
+.persona--sec{
+  display:grid;grid-template-columns:96px minmax(0,1fr);gap:1.25rem;align-items:center;
+  padding:1rem .5rem;border-radius:var(--radio-m);
+  transition:background .18s ease;
+}
+.persona--sec:hover{background:rgba(255,255,255,.85)}
+.persona--sec .foto{width:96px;height:96px;border-radius:26px}
+.persona--sec .persona__nombre{font-size:clamp(1.35rem,2.4vw,1.7rem);line-height:1.05}
+.persona--sec .persona__cargo{margin-top:.35rem;font-size:.92rem}
 
-        /* === MODAL INFERIOR DERECHO === */
-        .modal-footer {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #0a2f5a;
-            padding: 6px 14px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: white;
-            z-index: 100;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            opacity: 1;
-            transition: opacity 1s ease;
-            white-space: nowrap;
-        }
+.personal__titulo{margin:clamp(3rem,6vw,4.5rem) 0 1.75rem;font-size:clamp(1.8rem,3.4vw,2.5rem)}
+.personal{--cols:3;--sep:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.75rem var(--sep)}
+.personal li{width:calc((100% - (var(--cols) - 1) * var(--sep)) / var(--cols))}
+@media (min-width:640px){.personal{--cols:5}}
+@media (min-width:1000px){.personal{--cols:7}}
+.persona--per{text-align:center}
+.persona--per .foto{
+  width:100%;max-width:136px;aspect-ratio:1;margin-inline:auto;border-radius:50%;
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+.persona--per:hover .foto{
+  box-shadow:0 0 0 3px var(--tinte),0 0 0 6px var(--marca);
+  transform:translateY(-2px);
+}
+.persona--per .persona__nombre{
+  margin-top:.8rem;font-size:.95rem;font-weight:600;line-height:1.3;
+  letter-spacing:-.005em;
+}
 
-        .modal-footer.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+/* ---------- Aplicativos ---------- */
+.apps{border-top:1px solid var(--linea)}
+.app{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem 1.5rem;align-items:start;
+  padding:2rem .25rem;border-bottom:1px solid var(--linea);
+}
+.app__icono{
+  display:grid;place-items:center;width:60px;height:60px;border-radius:18px;
+  background:linear-gradient(135deg,var(--marca-clara) 0%,var(--marca) 100%);
+  color:#fff;
+  box-shadow:0 10px 22px -12px rgba(79,70,229,.75);
+}
+.app__icono svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.app h3{font-size:clamp(1.7rem,2.8vw,2.2rem);line-height:1.05}
+.app p{max-width:44ch;margin-top:.5rem;color:var(--apagado);font-size:1.02rem}
+.app__accesos{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:.5rem}
+.acceso{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.62rem 1.1rem;border:1.5px solid var(--marca);border-radius:999px;
+  background:#fff;color:var(--marca);
+  font-size:.96rem;font-weight:600;line-height:1.2;letter-spacing:.005em;
+  text-decoration:none;
+  transition:background .18s,color .18s,transform .18s,box-shadow .18s;
+}
+.acceso:hover{
+  background:var(--marca);color:#fff;transform:translateY(-1px);
+  box-shadow:0 10px 20px -12px rgba(79,70,229,.75);
+}
+.acceso svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media (min-width:900px){
+  .app{grid-template-columns:auto minmax(0,1fr) fit-content(34rem);align-items:center;padding-inline:1rem}
+  .app__accesos{grid-column:auto;justify-content:flex-end}
+}
 
-        /* === RESPONSIVE === */
-        @media (max-width: 1000px) {
-            .main-content h1 { font-size: 2.4rem; }
-            .main-content h2 { font-size: 1.2rem; }
-            .main-content { padding: 30px 35px; }
-            .central-wrapper { gap: 16px; }
-        }
+/* ---------- Fotos y eventos ---------- */
+.mosaico{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px;gap:.6rem}
+.m{overflow:hidden;border-radius:var(--radio-s);background:var(--linea)}
+.m button{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.m img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.m:hover img{transform:scale(1.04)}
+.m--3{grid-column:span 2;grid-row:span 2}
+.m--2{grid-column:span 2}
+.m--4{grid-row:span 2}
+@media (min-width:700px){
+  .mosaico{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(140px,17vw,220px);gap:.75rem}
+  .m--1{grid-column:4;grid-row:2}
+  .m--2{grid-column:3 / 5;grid-row:1}
+  .m--3{grid-column:1 / 3;grid-row:1 / 3}
+  .m--4{grid-column:3;grid-row:2 / 4}
+  .m--5{grid-column:1;grid-row:3}
+  .m--6{grid-column:4;grid-row:3}
+  .m--7{grid-column:2;grid-row:3}
+}
 
-        @media (max-width: 780px) {
-            .main-content {
-                flex-direction: column;
-                gap: 4px;
-                padding: 25px 20px;
-            }
-            .main-content h1 {
-                font-size: 2.0rem;
-                white-space: normal;
-            }
-            .main-content h2 {
-                font-size: 1.0rem;
-                white-space: normal;
-            }
-            .click-msg {
-                font-size: 0.9rem;
-            }
-            .left-squares { width: 150px; }
-            .square { border-width: 3px; }
-            .s1 { width: 60px; height: 60px; margin-left: 5px; }
-            .s2 { width: 100px; height: 100px; margin-left: 25px; }
-            .s3 { width: 45px; height: 45px; margin-left: 0; }
-            .s4 { width: 85px; height: 85px; margin-left: 20px; }
-            .s5 { width: 55px; height: 55px; margin-left: 10px; }
-            .s6 { width: 110px; height: 110px; margin-left: 35px; }
-            .s7 { width: 70px; height: 70px; margin-left: 5px; }
-            .s8 { width: 95px; height: 95px; margin-left: 15px; }
-            .s9 { width: 50px; height: 50px; margin-left: 10px; }
-            .s10 { width: 80px; height: 80px; margin-left: 25px; }
-            .modal-footer {
-                font-size: 0.65rem;
-                padding: 4px 12px;
-                bottom: 15px;
-                right: 15px;
-            }
-        }
+.cumples{margin-top:clamp(3.75rem,7vw,5.75rem)}
+.cumples h3{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.cumples__nota{max-width:38rem;margin:.7rem 0 1.75rem;color:var(--apagado);font-size:1.02rem}
+.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1.75rem;border-top:2px solid var(--tinta)}
+@media (min-width:700px){.cal{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.cal{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mes{padding:1.15rem 0 1.5rem;border-bottom:1px solid var(--linea)}
+.mes h4{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:1.45rem;line-height:1.1}
+.mes__tag{
+  padding:.15rem .65rem;border-radius:999px;
+  background:var(--marca);color:#fff;
+  font-family:var(--fuente-texto);font-size:.75rem;font-weight:600;
+  letter-spacing:.02em;text-transform:uppercase;
+}
+.mes ul{display:grid;gap:.15rem;margin-top:.7rem}
+.mes li{
+  display:flex;align-items:baseline;gap:.75rem;
+  padding:.2rem .5rem;margin-inline:-.5rem;border-radius:8px;
+  font-size:1rem;
+}
+.dia{
+  min-width:1.7rem;color:var(--marca);font-weight:700;
+  font-variant-numeric:tabular-nums;letter-spacing:.01em;
+}
+.vacio{margin-top:.7rem;color:var(--apagado);font-size:.95rem;font-style:italic}
+.mes li.es-hoy{background:var(--acento);font-weight:700}
+.mes li.es-hoy .dia{color:var(--tinta)}
 
-        @media (max-width: 480px) {
-            .main-content h1 { font-size: 1.6rem; }
-            .main-content h2 { font-size: 0.9rem; }
-            .click-msg { font-size: 0.8rem; }
-            .left-squares { width: 120px; }
-            .modal-footer {
-                font-size: 0.6rem;
-                padding: 3px 10px;
-                bottom: 10px;
-                right: 10px;
-            }
-        }
-    </style>
+/* ---------- Pie ---------- */
+.pie{padding-block:3.25rem 2rem;background:var(--tinta);color:#fff}
+.pie :focus-visible{outline-color:var(--acento)}
+.pie__in{display:grid;gap:2rem}
+.pie .marca__sello{background:var(--acento);color:var(--tinta);box-shadow:none}
+.pie__lema{max-width:30rem;margin-top:1rem;color:rgba(255,255,255,.72);font-size:1.02rem}
+.pie__enlaces{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
+.pie__enlaces a{
+  padding:.35rem 0;color:rgba(255,255,255,.85);font-size:.98rem;font-weight:500;
+  text-decoration:none;transition:color .15s;
+}
+.pie__enlaces a:hover{color:var(--acento);text-decoration:underline;text-underline-offset:4px}
+.pie__legal{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:.4rem 1.5rem;
+  margin-top:2.5rem;padding-top:1.25rem;
+  border-top:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.55);font-size:.88rem;letter-spacing:.01em;
+}
+.pie__credito{color:rgba(255,255,255,.55)}
+.pie__credito strong{color:#fff;font-weight:700}
+@media (min-width:800px){
+  .pie__in{grid-template-columns:1fr auto;align-items:start}
+  .pie__enlaces{justify-content:flex-end}
+}
+
+/* ---------- Diálogos ---------- */
+dialog{max-width:100vw;max-height:100dvh;padding:0;border:0;background:transparent;color:var(--tinta);overflow:visible}
+dialog::backdrop{background:rgba(15,23,42,.85);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+dialog[open]{animation:entrar .22s ease-out}
+@keyframes entrar{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.icono-btn{
+  display:grid;place-items:center;flex:none;width:44px;height:44px;
+  border:1.5px solid var(--linea);border-radius:50%;background:#fff;color:var(--tinta);
+  transition:background .15s,border-color .15s;
+}
+.icono-btn:hover{background:var(--tinte)}
+.icono-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.dlg{
+  position:relative;display:grid;justify-items:center;gap:.9rem;
+  width:min(92vw,420px);max-height:calc(100dvh - 1.5rem);overflow:auto;
+  padding:1.25rem 1.25rem 1.5rem;border-radius:var(--radio-l);
+  background:#fff;text-align:center;
+  box-shadow:0 30px 80px -30px rgba(30,27,75,.75);
+}
+.dlg__cerrar{position:absolute;top:.75rem;right:.75rem;z-index:2}
+.dlg__foto{
+  width:min(100%,300px,calc((100dvh - 21rem) * .8));min-width:150px;aspect-ratio:4/5;
+  overflow:hidden;border-radius:var(--arco);background:var(--linea);margin-top:1.75rem;
+}
+.dlg__foto img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.dlg__cargo{
+  color:var(--marca);font-weight:600;font-size:.92rem;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.dlg__nombre{font-size:clamp(1.8rem,7vw,2.3rem);line-height:1.05}
+.dlg__cumple{color:var(--apagado);font-size:.98rem;margin-top:.25rem}
+.dlg__nav{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:.35rem}
+.dlg__cont{color:var(--apagado);font-size:.92rem;font-variant-numeric:tabular-nums}
+
+.visor{display:grid;justify-items:center;gap:.9rem;width:min(96vw,1180px)}
+.visor__img{
+  width:auto;max-width:100%;height:auto;max-height:78dvh;
+  border-radius:var(--radio-s);background:var(--tinta);object-fit:contain;
+}
+.visor__barra{
+  display:flex;align-items:center;justify-content:center;gap:.9rem;
+  color:#fff;font-variant-numeric:tabular-nums;font-size:.95rem;
+}
+.visor .icono-btn{border-color:transparent;background:rgba(255,255,255,.14);color:#fff}
+.visor .icono-btn:hover{background:rgba(255,255,255,.24)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  dialog[open]{animation:none}
+  .m img{transition:none}
+}
+</style>
 </head>
 <body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <!-- Cuadrados en el borde izquierdo (originales) -->
-    <div class="left-squares">
-        <div class="square s1 glow-blue"></div>
-        <div class="square s2 glow-pink"></div>
-        <div class="square s3"></div>
-        <div class="square s4 glow-gold"></div>
-        <div class="square s5 glow-purple"></div>
-        <div class="square s6"></div>
-        <div class="square s7 glow-pink"></div>
-        <div class="square s8 glow-blue"></div>
-        <div class="square s9"></div>
-        <div class="square s10 glow-gold"></div>
-    </div>
+<header class="nav" id="inicio">
+  <div class="contenedor nav__in">
+    <a class="marca" href="#inicio" aria-label="Defensoría Oficial 6, ir al inicio">
+      <span class="marca__sello" aria-hidden="true">6</span>
+      <span>Defensoría Oficial 6</span>
+    </a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="sr">Abrir menú</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav__menu" id="menu" aria-label="Principal">
+      <a href="#equipo">Equipo</a>
+      <a href="#aplicativos">Aplicativos</a>
+      <a href="#fotos">Fotos y eventos</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- Wrapper que agrupa el contenedor central y el texto debajo -->
-    <div class="central-wrapper">
-        <!-- Contenedor central (destacado y clickeable) -->
-        <div class="main-content" id="mainContent">
-            <h1>Defensoría Oficial 6</h1>
-            <h2>Ministerio Público de Misiones</h2>
+<main id="contenido">
+
+  <section class="hero" aria-labelledby="titulo-principal">
+    <div class="contenedor hero__grid">
+      <div class="hero__texto">
+        <h1 class="display" id="titulo-principal">Defendemos derechos, transformamos vidas.</h1>
+        <p class="hero__bajada">El equipo, los sistemas de trabajo y las fotos de la Defensoría Oficial 6, reunidos en un solo lugar.</p>
+        <div class="hero__acciones">
+          <a class="btn btn--acento" href="#aplicativos">Ver aplicativos</a>
+          <a class="btn btn--borde" href="#equipo">Conocer al equipo</a>
         </div>
-
-        <!-- Texto fuera del contenedor, justo debajo -->
-        <p class="click-msg">Pulsa en el texto para ingresar</p>
+      </div>
+      <figure class="hero__foto">
+        <img src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" alt="El equipo de la Defensoría Oficial 6 reunido en la oficina" width="1280" height="963" fetchpriority="high" decoding="async">
+      </figure>
     </div>
+  </section>
 
-    <!-- Modal inferior derecho -->
-    <div id="modalCredit" class="modal-footer">Diseño Rómulo Fioravante</div>
+  <section class="hoy" aria-label="Hoy en la Defensoría">
+    <div class="contenedor hoy__in">
+      <p><strong>Hola, Defensoría Oficial 6.</strong> <span id="hoy-fecha"></span></p>
+      <p id="hoy-cumple"></p>
+    </div>
+  </section>
 
-    <script>
-        window.addEventListener('load', function() {
-            // Oculta el modal después de 3 segundos
-            setTimeout(function() {
-                const modal = document.getElementById('modalCredit');
-                if (modal) modal.classList.add('hidden');
-            }, 3000);
+  <section class="seccion" id="equipo" aria-labelledby="t-equipo">
+    <div class="contenedor">
+      <header class="seccion__cab">
+        <h2 class="display" id="t-equipo">Equipo de la Defensoría</h2>
+        <p>Un defensor, tres secretarios y trece integrantes del personal. Selecciona una foto para verla en grande.</p>
+      </header>
 
-            // Redirige al hacer clic en el contenedor central
-            const mainContent = document.getElementById('mainContent');
-            if (mainContent) {
-                mainContent.addEventListener('click', function() {
-                    window.location.href = 'https://defensoria6.github.io/web/1';
-                });
-            }
-        });
-    </script>
+      <div class="direccion">
+        <button class="persona persona--defensor" type="button" data-p="0" data-nombre="Dr. Marcelo Gustavo Ramos" data-cargo="Defensor Oficial" data-cumple="2-3" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Ramos.png?raw=true"><span class="foto foto--arco" data-ini="MG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ramos.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__cargo">Defensor Oficial</span><span class="persona__nombre">Dr. Marcelo Gustavo Ramos</span></button>
+        <ul class="secretarios">
+<li><button class="persona persona--sec" type="button" data-p="1" data-nombre="Dra. Alicia Mariela Corrales" data-cargo="Secretaria" data-cumple="2-14" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/corrales.png?raw=true"><span class="foto foto--cuadrado" data-ini="AM"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/corrales.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Alicia Mariela Corrales</span><span class="persona__cargo">Secretaria</span></span></button></li>
+<li><button class="persona persona--sec" type="button" data-p="2" data-nombre="Dra. Patricia Soledad Riveros" data-cargo="Secretaria" data-cumple="11-3" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Riveros.png?raw=true"><span class="foto foto--cuadrado" data-ini="PS"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Riveros.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Patricia Soledad Riveros</span><span class="persona__cargo">Secretaria</span></span></button></li>
+<li><button class="persona persona--sec" type="button" data-p="3" data-nombre="Dr. Enzo Luciano Magnani" data-cargo="Secretario" data-cumple="2-26" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Magnani.png?raw=true"><span class="foto foto--cuadrado" data-ini="EL"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Magnani.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dr. Enzo Luciano Magnani</span><span class="persona__cargo">Secretario</span></span></button></li>
+        </ul>
+      </div>
+
+      <h3 class="personal__titulo display">Personal de la Defensoría</h3>
+      <ul class="personal">
+<li><button class="persona persona--per" type="button" data-p="4" data-nombre="Nadia Romina Bazante" data-cargo="Personal" data-cumple="2-19" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Bazante.png?raw=true"><span class="foto foto--circulo" data-ini="NR"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Bazante.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Nadia Romina Bazante</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="5" data-nombre="Cesar Enrique Boillat" data-cargo="Personal" data-cumple="4-30" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Boillat.png?raw=true"><span class="foto foto--circulo" data-ini="CE"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Boillat.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Cesar Enrique Boillat</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="6" data-nombre="Maria Raquel Cardozo" data-cargo="Personal" data-cumple="4-9" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/cardozo.png?raw=true"><span class="foto foto--circulo" data-ini="MR"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cardozo.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Maria Raquel Cardozo</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="7" data-nombre="Noelia Aurora Cedron" data-cargo="Personal" data-cumple="12-29" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/cedron.png?raw=true"><span class="foto foto--circulo" data-ini="NA"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cedron.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Noelia Aurora Cedron</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="8" data-nombre="Monica Graciela Escobar" data-cargo="Personal" data-cumple="10-8" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Escobar.png?raw=true"><span class="foto foto--circulo" data-ini="MG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Escobar.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Monica Graciela Escobar</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="9" data-nombre="Rómulo Fioravante" data-cargo="Personal" data-cumple="8-2" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Fioravante.png?raw=true"><span class="foto foto--circulo" data-ini="RF"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Fioravante.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Rómulo Fioravante</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="10" data-nombre="Alberto Misael Gonzalez" data-cargo="Personal" data-cumple="6-21" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/AMisaelG.png?raw=true"><span class="foto foto--circulo" data-ini="AM"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/AMisaelG.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Alberto Misael Gonzalez</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="11" data-nombre="Juan Jose Gonzalez" data-cargo="Personal" data-cumple="1-8" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/JuanJoseG.png?raw=true"><span class="foto foto--circulo" data-ini="JJ"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/JuanJoseG.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Juan Jose Gonzalez</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="12" data-nombre="Natalia Esther Gudiño" data-cargo="Personal" data-cumple="7-20" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/gudino.png?raw=true"><span class="foto foto--circulo" data-ini="NE"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/gudino.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Natalia Esther Gudiño</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="13" data-nombre="Lucia Noemi Ortega" data-cargo="Personal" data-cumple="7-27" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Ortega.png?raw=true"><span class="foto foto--circulo" data-ini="LN"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ortega.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Lucia Noemi Ortega</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="14" data-nombre="Patricia Tamara Pablos" data-cargo="Personal" data-cumple="1-26" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Pablos.png?raw=true"><span class="foto foto--circulo" data-ini="PT"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Pablos.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Patricia Tamara Pablos</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="15" data-nombre="Ana Gabriela Palacios" data-cargo="Personal" data-cumple="1-22" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true"><span class="foto foto--circulo" data-ini="AG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Ana Gabriela Palacios</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="16" data-nombre="Rita Cecilia Sosa" data-cargo="Personal" data-cumple="1-9" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Sosa.png?raw=true"><span class="foto foto--circulo" data-ini="RC"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Sosa.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Rita Cecilia Sosa</span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--blanca" id="aplicativos" aria-labelledby="t-apps">
+    <div class="contenedor">
+      <header class="seccion__cab">
+        <h2 class="display" id="t-apps">Aplicativos digitales</h2>
+        <p>Los sistemas con los que el equipo registra, controla y da seguimiento a su trabajo diario.</p>
+      </header>
+      <ul class="apps">
+<li class="app"><span class="app__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><div class="app__cuerpo"><h3>Sistema Digital</h3><p>Aplicación de registro, control y seguimiento de todos los expedientes donde interviene la Defensoría Oficial.</p></div><div class="app__accesos" role="group" aria-label="Accesos a Sistema Digital"><a class="acceso" href="https://sistemadigital.github.io/defensor-secretarios/" target="_blank" rel="noopener noreferrer">Defensor / Secretarios<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a><a class="acceso" href="https://sistemadigital.github.io/empleados/" target="_blank" rel="noopener noreferrer">Empleados<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></li>
+<li class="app"><span class="app__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h14"/><path d="M14 4l4 4-4 4"/><path d="M20 16H6"/><path d="M10 12l-4 4 4 4"/></svg></span><div class="app__cuerpo"><h3>Sistema de Pase</h3><p>Aplicación para administrar los pases de causas, control, auditoría y calificación de trabajo.</p></div><div class="app__accesos" role="group" aria-label="Accesos a Sistema de Pase"><a class="acceso" href="https://defensoria6.github.io/pase-digital/" target="_blank" rel="noopener noreferrer">Acceder al sistema<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></li>
+<li class="app"><span class="app__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><path d="M12 14l-1.6 2.4L12 20l1.6-3.6z"/></svg></span><div class="app__cuerpo"><h3>Sistema Secretarios</h3><p>Aplicación para el control y seguimiento de tareas de los secretarios.</p></div><div class="app__accesos" role="group" aria-label="Accesos a Sistema Secretarios"><a class="acceso" href="https://sistema-secretarios.github.io/dra-riveros/" target="_blank" rel="noopener noreferrer">Dra. Riveros<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a><a class="acceso" href="https://sistema-secretarios.github.io/dra-corrales/" target="_blank" rel="noopener noreferrer">Dra. Corrales<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a><a class="acceso" href="https://sistema-secretarios.github.io/dr-magnani/" target="_blank" rel="noopener noreferrer">Dr. Magnani<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></li>
+<li class="app"><span class="app__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 5.5C6 4 9 4.3 12 6.5c3-2.2 6-2.5 9.5-1V19c-3.5-1.5-6.5-1.2-9.5 1-3-2.2-6-2.5-9.5-1z"/><path d="M12 6.5V20"/></svg></span><div class="app__cuerpo"><h3>Protocolo de Actuación</h3><p>Manual interactivo para conocer las pautas de trabajo en la Defensoría Oficial.</p></div><div class="app__accesos" role="group" aria-label="Accesos a Protocolo de Actuación"><a class="acceso" href="https://defensorialocal-seis.github.io/protocolo/" target="_blank" rel="noopener noreferrer">Ver protocolo<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--blanca" id="fotos" aria-labelledby="t-fotos">
+    <div class="contenedor">
+      <header class="seccion__cab">
+        <h2 class="display" id="t-fotos">Fotos y eventos</h2>
+        <p>Momentos compartidos por el equipo en la oficina. Selecciona una foto para ampliarla.</p>
+      </header>
+
+      <ul class="mosaico">
+<li class="m m--3"><button type="button" data-f="3" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" aria-label="Ampliar foto 3 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" alt="Foto 3: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--2"><button type="button" data-f="2" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/2-d.jpg?raw=true" aria-label="Ampliar foto 2 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/2-d.jpg?raw=true" alt="Foto 2: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--4"><button type="button" data-f="4" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/4-d.jpg?raw=true" aria-label="Ampliar foto 4 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/4-d.jpg?raw=true" alt="Foto 4: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--1"><button type="button" data-f="1" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/1-d.jpg?raw=true" aria-label="Ampliar foto 1 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/1-d.jpg?raw=true" alt="Foto 1: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--5"><button type="button" data-f="5" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/5-d.jpg?raw=true" aria-label="Ampliar foto 5 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/5-d.jpg?raw=true" alt="Foto 5: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--7"><button type="button" data-f="7" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/7-d.jpg?raw=true" aria-label="Ampliar foto 7 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/7-d.jpg?raw=true" alt="Foto 7: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--6"><button type="button" data-f="6" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/6-d.jpg?raw=true" aria-label="Ampliar foto 6 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/6-d.jpg?raw=true" alt="Foto 6: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+      </ul>
+
+      <div class="cumples">
+        <h3 class="display">Cumpleaños del año</h3>
+        <p class="cumples__nota">Las fechas de cumpleaños de todo el equipo. El mes actual y el cumpleaños de hoy aparecen resaltados.</p>
+        <div class="cal">
+<div class="mes" data-mes="1"><h4>Enero</h4><ul><li data-mes="1" data-dia="8" data-nombre="Juan Jo"><span class="dia">8</span><span class="nom">Juan Jo</span></li><li data-mes="1" data-dia="9" data-nombre="Rita"><span class="dia">9</span><span class="nom">Rita</span></li><li data-mes="1" data-dia="22" data-nombre="Ana"><span class="dia">22</span><span class="nom">Ana</span></li><li data-mes="1" data-dia="26" data-nombre="Pato"><span class="dia">26</span><span class="nom">Pato</span></li></ul></div>
+<div class="mes" data-mes="2"><h4>Febrero</h4><ul><li data-mes="2" data-dia="3" data-nombre="Dr Ramos"><span class="dia">3</span><span class="nom">Dr Ramos</span></li><li data-mes="2" data-dia="14" data-nombre="Dra Mariela"><span class="dia">14</span><span class="nom">Dra Mariela</span></li><li data-mes="2" data-dia="19" data-nombre="Romina"><span class="dia">19</span><span class="nom">Romina</span></li><li data-mes="2" data-dia="26" data-nombre="Enzo"><span class="dia">26</span><span class="nom">Enzo</span></li></ul></div>
+<div class="mes" data-mes="3"><h4>Marzo</h4><p class="vacio">Sin cumpleaños</p></div>
+<div class="mes" data-mes="4"><h4>Abril</h4><ul><li data-mes="4" data-dia="9" data-nombre="Raquel"><span class="dia">9</span><span class="nom">Raquel</span></li><li data-mes="4" data-dia="30" data-nombre="Enrique"><span class="dia">30</span><span class="nom">Enrique</span></li></ul></div>
+<div class="mes" data-mes="5"><h4>Mayo</h4><p class="vacio">Sin cumpleaños</p></div>
+<div class="mes" data-mes="6"><h4>Junio</h4><ul><li data-mes="6" data-dia="21" data-nombre="Misael"><span class="dia">21</span><span class="nom">Misael</span></li></ul></div>
+<div class="mes" data-mes="7"><h4>Julio</h4><ul><li data-mes="7" data-dia="20" data-nombre="Natalia"><span class="dia">20</span><span class="nom">Natalia</span></li><li data-mes="7" data-dia="27" data-nombre="Lucia"><span class="dia">27</span><span class="nom">Lucia</span></li></ul></div>
+<div class="mes" data-mes="8"><h4>Agosto</h4><ul><li data-mes="8" data-dia="2" data-nombre="Romulo"><span class="dia">2</span><span class="nom">Romulo</span></li></ul></div>
+<div class="mes" data-mes="9"><h4>Septiembre</h4><p class="vacio">Sin cumpleaños</p></div>
+<div class="mes" data-mes="10"><h4>Octubre</h4><ul><li data-mes="10" data-dia="8" data-nombre="Monica"><span class="dia">8</span><span class="nom">Monica</span></li></ul></div>
+<div class="mes" data-mes="11"><h4>Noviembre</h4><ul><li data-mes="11" data-dia="3" data-nombre="Dra Patricia"><span class="dia">3</span><span class="nom">Dra Patricia</span></li></ul></div>
+<div class="mes" data-mes="12"><h4>Diciembre</h4><ul><li data-mes="12" data-dia="29" data-nombre="Noelia"><span class="dia">29</span><span class="nom">Noelia</span></li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__in">
+      <div>
+        <a class="marca" href="#inicio" aria-label="Defensoría Oficial 6, volver al inicio">
+          <span class="marca__sello" aria-hidden="true">6</span>
+          <span>Defensoría Oficial 6</span>
+        </a>
+        <p class="pie__lema">Defendemos derechos, transformamos vidas.</p>
+      </div>
+      <nav class="pie__enlaces" aria-label="Secciones del sitio">
+        <a href="#equipo">Equipo</a>
+        <a href="#aplicativos">Aplicativos</a>
+        <a href="#fotos">Fotos y eventos</a>
+      </nav>
+    </div>
+    <p class="pie__legal">
+      <span>© <span id="anio">2026</span> Defensoría Oficial 6</span>
+      <span class="pie__credito">Diseño Web: <strong>Rómulo Fioravante</strong></span>
+    </p>
+  </div>
+</footer>
+
+<dialog id="dlg-persona" aria-labelledby="dp-nombre">
+  <div class="dlg">
+    <button class="icono-btn dlg__cerrar" id="dp-cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="dlg__foto"><img id="dp-img" src="" alt=""></div>
+    <div>
+      <p class="dlg__cargo" id="dp-cargo"></p>
+      <h3 class="dlg__nombre" id="dp-nombre"></h3>
+      <p class="dlg__cumple" id="dp-cumple"></p>
+    </div>
+    <div class="dlg__nav">
+      <button class="icono-btn" id="dp-prev" type="button" aria-label="Persona anterior"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="dlg__cont" id="dp-cont" aria-live="polite"></span>
+      <button class="icono-btn" id="dp-next" type="button" aria-label="Persona siguiente"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="dlg-visor" aria-label="Visor de fotos">
+  <div class="visor">
+    <img class="visor__img" id="dv-img" src="" alt="">
+    <div class="visor__barra">
+      <button class="icono-btn" id="dv-prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span id="dv-cont" aria-live="polite"></span>
+      <button class="icono-btn" id="dv-next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button class="icono-btn" id="dv-cerrar" type="button" aria-label="Cerrar visor"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* Año del pie */
+  $('#anio').textContent = new Date().getFullYear();
+
+  /* Menú en móvil */
+  const toggle = $('.nav__toggle'), menu = $('#menu');
+  const cerrarMenu = () => { menu.classList.remove('abierto'); toggle.setAttribute('aria-expanded', 'false'); };
+  toggle.addEventListener('click', () => {
+    const abierto = menu.classList.toggle('abierto');
+    toggle.setAttribute('aria-expanded', String(abierto));
+  });
+  menu.addEventListener('click', e => { if (e.target.closest('a')) cerrarMenu(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('abierto')) { cerrarMenu(); toggle.focus(); }
+  });
+
+  /* Sección activa en la navegación */
+  const enlaces = $$('.nav__menu a');
+  const limpiar = () => enlaces.forEach(a => a.removeAttribute('aria-current'));
+  const io = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (!en.isIntersecting) return;
+      limpiar();
+      const a = enlaces.find(x => x.getAttribute('href') === '#' + en.target.id);
+      if (a) a.setAttribute('aria-current', 'location');
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  enlaces.forEach(a => { const s = $(a.getAttribute('href')); if (s) io.observe(s); });
+  const ioInicio = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) limpiar(); }, { rootMargin: '-45% 0px -50% 0px' });
+  ioInicio.observe($('.hero'));
+
+  /* Foto que no carga: se muestran las iniciales */
+  $$('.foto img').forEach(img => {
+    const fallo = () => img.closest('.foto').classList.add('sin-foto');
+    img.addEventListener('error', fallo);
+    if (img.complete && img.naturalWidth === 0 && img.currentSrc) fallo();
+  });
+
+  /* Cumpleaños: franja de hoy y calendario */
+  const hoy = new Date();
+  const h0 = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  $('#hoy-fecha').textContent = `Hoy es ${DIAS[hoy.getDay()]} ${hoy.getDate()} de ${MESES[hoy.getMonth()]}.`;
+
+  const cumples = $$('.cal li').map(li => ({ el: li, mes: +li.dataset.mes, dia: +li.dataset.dia, nombre: li.dataset.nombre }));
+  const diasHasta = c => {
+    let f = new Date(h0.getFullYear(), c.mes - 1, c.dia);
+    if (f < h0) f = new Date(h0.getFullYear() + 1, c.mes - 1, c.dia);
+    return Math.round((f - h0) / 864e5);
+  };
+  cumples.forEach(c => { c.faltan = diasHasta(c); });
+  const unir = n => n.length > 1 ? n.slice(0, -1).join(', ') + ' y ' + n[n.length - 1] : n[0];
+  const deHoy = cumples.filter(c => c.faltan === 0);
+  const salida = $('#hoy-cumple');
+
+  if (deHoy.length) {
+    salida.classList.add('hoy__cumple--hoy');
+    salida.textContent = `Hoy ${deHoy.length > 1 ? 'cumplen años' : 'cumple años'} ${unir(deHoy.map(c => c.nombre))}. ¡Felicidades!`;
+    deHoy.forEach(c => c.el.classList.add('es-hoy'));
+  } else {
+    const min = Math.min(...cumples.map(c => c.faltan));
+    const prox = cumples.filter(c => c.faltan === min);
+    const cuando = min === 1 ? 'mañana' : `en ${min} días`;
+    salida.textContent = `Hoy no hay cumpleaños. Próximo: ${unir(prox.map(c => c.nombre))}, el ${prox[0].dia} de ${MESES[prox[0].mes - 1]} (${cuando}).`;
+  }
+  const mesActual = $(`.mes[data-mes="${hoy.getMonth() + 1}"]`);
+  if (mesActual) {
+    const tag = document.createElement('span');
+    tag.className = 'mes__tag';
+    tag.textContent = 'Este mes';
+    $('h4', mesActual).appendChild(tag);
+  }
+
+  /* Cierre al hacer clic fuera de la tarjeta */
+  const cierraAfuera = d => d.addEventListener('click', e => { if (e.target === d) d.close(); });
+
+  /* Ficha de persona */
+  const dp = $('#dlg-persona');
+  const personas = $$('.persona').sort((a, b) => a.dataset.p - b.dataset.p);
+  let ip = 0;
+  const verPersona = i => {
+    ip = (i + personas.length) % personas.length;
+    const b = personas[ip];
+    const img = $('#dp-img');
+    img.src = b.dataset.foto;
+    img.alt = b.dataset.nombre;
+    $('#dp-nombre').textContent = b.dataset.nombre;
+    $('#dp-cargo').textContent = b.dataset.cargo;
+    const [m, d] = b.dataset.cumple.split('-');
+    $('#dp-cumple').textContent = `Cumpleaños: ${d} de ${MESES[m - 1]}`;
+    $('#dp-cont').textContent = `${ip + 1} de ${personas.length}`;
+  };
+  personas.forEach((b, i) => b.addEventListener('click', () => { verPersona(i); dp.showModal(); }));
+  $('#dp-prev').addEventListener('click', () => verPersona(ip - 1));
+  $('#dp-next').addEventListener('click', () => verPersona(ip + 1));
+  $('#dp-cerrar').addEventListener('click', () => dp.close());
+  dp.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') verPersona(ip - 1);
+    if (e.key === 'ArrowRight') verPersona(ip + 1);
+  });
+  cierraAfuera(dp);
+
+  /* Visor de fotos */
+  const dv = $('#dlg-visor');
+  const fotos = $$('.m button').sort((a, b) => a.dataset.f - b.dataset.f);
+  let iv = 0;
+  const verFoto = i => {
+    iv = (i + fotos.length) % fotos.length;
+    const img = $('#dv-img');
+    img.src = fotos[iv].dataset.src;
+    img.alt = $('img', fotos[iv]).alt;
+    $('#dv-cont').textContent = `${iv + 1} de ${fotos.length}`;
+  };
+  fotos.forEach((b, i) => b.addEventListener('click', () => { verFoto(i); dv.showModal(); }));
+  $('#dv-prev').addEventListener('click', () => verFoto(iv - 1));
+  $('#dv-next').addEventListener('click', () => verFoto(iv + 1));
+  $('#dv-cerrar').addEventListener('click', () => dv.close());
+  dv.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') verFoto(iv - 1);
+    if (e.key === 'ArrowRight') verFoto(iv + 1);
+  });
+  cierraAfuera(dv);
+})();
+</script>
 </body>
 </html>
