@@ -5,435 +5,225 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Defensoría Oficial 6</title>
 <meta name="description" content="Defendemos derechos, transformamos vidas. Portal de la Defensoría Oficial 6: equipo, aplicativos digitales y fotos y eventos.">
-<meta name="theme-color" content="#4F46E5">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%234F46E5'/%3E%3Ctext x='32' y='47' font-size='42' font-weight='800' text-anchor='middle' fill='%23F59E0B' font-family='Arial,sans-serif'%3E6%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#F6FAFC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230A8F85'/%3E%3Ctext x='32' y='47' font-size='42' font-weight='800' text-anchor='middle' fill='%23FFFFFF' font-family='Arial,sans-serif'%3E6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wdth,wght@75..100,200..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* ---------- Marca (indigo) ---------- */
-  --marca:#4F46E5;
-  --marca-oscura:#312E81;
-  --marca-clara:#6366F1;
-  --marca-profunda:#1E1B4B;
-
-  /* ---------- Acento (ámbar) ---------- */
-  --acento:#F59E0B;
-  --acento-claro:#FCD34D;
-
-  /* ---------- Neutros ---------- */
-  --tinta:#0F172A;
-  --tinta-suave:#1E293B;
-  --apagado:#64748B;
-  --linea:#E2E8F0;
-  --papel:#F8FAFC;
-  --tinte:#EEF2FF;
-  --blanco:#FFFFFF;
-
-  /* ---------- Estructura ---------- */
-  --gutter:clamp(1rem,4vw,2.5rem);
-  --nav-alto:68px;
-  --radio-s:14px;
-  --radio-m:24px;
-  --radio-l:36px;
-  --arco:50% 50% 28px 28px / 40% 40% 28px 28px;
-  --fuente-display:'Bricolage Grotesque','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --fuente-texto:'Inter','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-
-  /* ---------- Sombras ---------- */
-  --sombra-suave:0 1px 2px rgba(15,23,42,.04),0 4px 12px -6px rgba(15,23,42,.08);
-  --sombra-media:0 2px 4px rgba(15,23,42,.04),0 12px 28px -12px rgba(15,23,42,.16);
-  --sombra-fuerte:0 30px 60px -30px rgba(30,27,75,.75);
+  --tinta:#0F1B33;--apagado:#56627A;--linea:#E3EAF2;--papel:#F6FAFC;--blanco:#fff;
+  --prim:#0A8F85;--prim-c:#14B8A6;--cielo:#38BDF8;--coral:#FF8A5B;
+  --menta-t:#E4F7F4;--cielo-t:#E6F3FF;--durazno:#FFE6D8;
+  --grad:linear-gradient(135deg,#14B8A6,#38BDF8);
+  --gutter:clamp(1rem,4vw,2.5rem);--nav-alto:64px;--r-s:16px;--r-m:24px;--r-l:36px;
+  --arco:50% 50% 24px 24px / 36% 36% 24px 24px;
+  --f-display:'Outfit','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+  --f-texto:'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+  --sombra:0 1px 2px rgba(15,27,51,.04),0 14px 34px -18px rgba(15,27,51,.2);
+  --ease:cubic-bezier(.22,.8,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  font-family:var(--fuente-texto);
-  font-size:1.0625rem;
-  line-height:1.65;
-  color:var(--tinta);
-  background:var(--papel);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  font-feature-settings:"kern" 1,"liga" 1,"calt" 1,"ss01" 1;
-}
+body{margin:0;counter-reset:sec;font-family:var(--f-texto);font-size:1.0625rem;line-height:1.65;color:var(--tinta);background:var(--papel);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;cursor:pointer}
 a{color:inherit}
 h1,h2,h3,h4,p,ul,figure{margin:0}
 ul{padding:0;list-style:none}
-:focus-visible{outline:3px solid var(--marca);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:3px solid var(--prim);outline-offset:3px;border-radius:10px}
+::selection{background:var(--durazno)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .saltar{position:absolute;left:1rem;top:-4rem;z-index:100;padding:.7rem 1.1rem;border-radius:999px;background:var(--tinta);color:#fff;font-weight:600;text-decoration:none}
 .saltar:focus{top:.75rem}
-.contenedor{width:min(100% - 2 * var(--gutter),1200px);margin-inline:auto}
+.contenedor{width:min(100% - 2*var(--gutter),1200px);margin-inline:auto}
+.display,.hero h1,.seccion__cab h2,.app h3,.cumples h3,.mes h4,.persona--defensor .persona__nombre,.persona--sec .persona__nombre,.dlg__nombre,.personal__titulo{
+  font-family:var(--f-display);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
 
-/* Tipografía de titulares */
-.display,
-.hero h1,
-.seccion__cab h2,
-.app h3,
-.cumples h3,
-.mes h4,
-.persona--defensor .persona__nombre,
-.persona--sec .persona__nombre,
-.dlg__nombre,
-.personal__titulo{
-  font-family:var(--fuente-display);
-  font-stretch:75%;
-  font-weight:800;
-  letter-spacing:-.015em;
-  line-height:.98;
-  text-wrap:balance;
-}
-.display{line-height:.96}
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.95rem 1.6rem;border:1.5px solid transparent;border-radius:999px;font-size:.98rem;font-weight:600;line-height:1.2;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .25s var(--ease),box-shadow .25s}
+.btn--acento{background:var(--tinta);color:#fff;box-shadow:0 12px 26px -14px rgba(15,27,51,.7)}
+.btn--acento:hover{background:#1d2f57;transform:translateY(-2px)}
+.btn--borde{background:#fff;border-color:var(--linea);color:var(--tinta)}
+.btn--borde:hover{border-color:var(--prim);color:var(--prim);transform:translateY(-2px)}
 
-/* ---------- Botones ---------- */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.9rem 1.35rem;border:2px solid transparent;border-radius:999px;
-  font-family:var(--fuente-texto);
-  font-size:.98rem;font-weight:600;letter-spacing:.005em;line-height:1.2;
-  text-decoration:none;
-  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease;
-}
-.btn--acento{
-  background:var(--acento);color:var(--tinta);
-  box-shadow:0 6px 18px -8px rgba(245,158,11,.55);
-}
-.btn--acento:hover{background:var(--acento-claro);transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(245,158,11,.7)}
-.btn--borde{border-color:rgba(255,255,255,.78);color:#fff}
-.btn--borde:hover{background:rgba(255,255,255,.14);border-color:#fff}
-.btn--marca{background:var(--marca);color:#fff;box-shadow:0 6px 18px -8px rgba(79,70,229,.6)}
-.btn--marca:hover{background:var(--marca-oscura);transform:translateY(-1px)}
-
-/* ---------- Navegación ---------- */
-.nav{position:sticky;top:0;z-index:50;background:rgba(248,250,252,.85);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+/* Navegación */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--linea)}
 .nav__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:var(--nav-alto)}
-.marca{
-  display:inline-flex;align-items:center;gap:.7rem;
-  font-family:var(--fuente-display);font-stretch:80%;font-weight:700;
-  font-size:1.15rem;letter-spacing:-.02em;
-  text-decoration:none;
-}
-.marca__sello{
-  display:grid;place-items:center;width:38px;height:38px;border-radius:50%;
-  background:var(--marca);color:var(--acento);
-  font-family:var(--fuente-display);font-stretch:75%;font-weight:800;
-  font-size:1.4rem;line-height:1;
-  box-shadow:0 4px 14px -6px rgba(79,70,229,.55);
-}
-.nav__menu{display:flex;gap:.25rem}
-.nav__menu a{
-  padding:.55rem 1rem;border-radius:999px;color:var(--apagado);
-  font-size:.97rem;font-weight:500;letter-spacing:.005em;text-decoration:none;
-  transition:background .15s,color .15s;
-}
-.nav__menu a:hover{background:var(--tinte);color:var(--tinta)}
-.nav__menu a[aria-current="location"]{background:var(--marca);color:#fff;font-weight:600}
-.nav__toggle{display:none;place-items:center;width:44px;height:44px;border:1.5px solid var(--linea);border-radius:50%;background:#fff}
+.marca{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--f-display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none}
+.marca__sello{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--grad);color:#fff;font-family:var(--f-display);font-weight:800;font-size:1.3rem;line-height:1;box-shadow:0 8px 18px -8px rgba(20,184,166,.8)}
+.nav__menu{display:flex;gap:.2rem}
+.nav__menu a{padding:.6rem 1.1rem;border-radius:999px;color:var(--apagado);font-size:.95rem;font-weight:600;text-decoration:none;transition:background .2s,color .2s}
+.nav__menu a:hover{background:var(--menta-t);color:var(--tinta)}
+.nav__menu a[aria-current="location"]{background:var(--tinta);color:#fff}
+.nav__toggle{display:none;place-items:center;width:46px;height:46px;border:1.5px solid var(--linea);border-radius:50%;background:#fff}
 .nav__toggle svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
 @media (max-width:760px){
   .nav__toggle{display:grid}
-  .nav__menu{
-    display:none;position:absolute;top:100%;left:0;right:0;
-    flex-direction:column;gap:.25rem;
-    padding:.75rem var(--gutter) 1.25rem;
-    background:var(--papel);border-bottom:1px solid var(--linea);
-    box-shadow:0 20px 30px -22px rgba(15,23,42,.25);
-  }
+  .nav__menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:.6rem var(--gutter) 1rem;background:#fff;border-bottom:1px solid var(--linea);box-shadow:0 24px 30px -22px rgba(15,27,51,.3)}
   .nav__menu.abierto{display:flex}
-  .nav__menu a{padding:.8rem 1rem;font-size:1.08rem;color:var(--tinta)}
+  .nav__menu a{padding:.9rem 1rem;font-size:1.05rem;color:var(--tinta)}
 }
 
-/* ---------- Hero ---------- */
-.hero{
-  position:relative;
-  background:
-    radial-gradient(ellipse 90% 70% at 88% 8%, rgba(99,102,241,.9) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 6% 95%, rgba(124,58,237,.55) 0%, transparent 50%),
-    linear-gradient(160deg, #1E1B4B 0%, #312E81 100%);
-  color:#fff;
-  padding-block:clamp(2.75rem,6vw,5.25rem) clamp(3.25rem,7vw,6.25rem);
-  overflow:hidden;
-}
-.hero :focus-visible{outline-color:var(--acento)}
-.hero__grid{display:grid;gap:3rem;align-items:center}
-.hero h1{
-  font-size:clamp(3rem,8vw,6.4rem);
-  line-height:.94;
-  letter-spacing:-.02em;
-}
-.hero__bajada{
-  max-width:32rem;text-wrap:pretty;
-  margin-top:1.75rem;font-size:1.2rem;line-height:1.55;
-  color:rgba(255,255,255,.86);
-}
-.hero__acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.1rem}
-.hero__foto{width:min(100%,440px);justify-self:center}
-.hero__foto img{
-  width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%;
-  border-radius:var(--arco);
-  background:var(--marca-profunda);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.09),
-    0 30px 70px -30px rgba(15,10,60,.85),
-    0 12px 30px -20px rgba(15,10,60,.6);
-}
-@media (min-width:900px){
-  .hero__grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:4rem}
-}
+/* Portada (texto y fotos en columnas separadas, sin superposición) */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(2.5rem,6vw,5rem) clamp(2.5rem,5vw,4rem);
+  background:radial-gradient(45% 55% at 92% 0,#CFE9FF 0,transparent 70%),radial-gradient(40% 50% at 0 100%,#D5F5EE 0,transparent 70%),radial-gradient(30% 40% at 58% 100%,#FFE6D6 0,transparent 70%),#fff}
+.hero__grid{display:grid;gap:2.5rem;align-items:center}
+.hero__texto{position:relative;z-index:2}
+.hero h1{font-size:clamp(2.6rem,6.8vw,5.2rem);line-height:1;letter-spacing:-.045em;font-weight:800}
+.realce{background:linear-gradient(100deg,#0A8F85,#2F7CF6);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero__bajada{max-width:32rem;margin-top:1.5rem;font-size:1.18rem;line-height:1.65;color:var(--apagado);text-wrap:pretty}
+.hero__acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.hero__foto{width:100%;max-width:600px;justify-self:center}
+.hero__slides{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--r-l);background:var(--cielo-t);border:6px solid #fff;box-shadow:var(--sombra)}
+.hero__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:0;animation:carrusel 25s linear infinite}
+.hero__slide:nth-child(1){animation-delay:-1s}.hero__slide:nth-child(2){animation-delay:4s}.hero__slide:nth-child(3){animation-delay:9s}.hero__slide:nth-child(4){animation-delay:14s}.hero__slide:nth-child(5){animation-delay:19s}
+@keyframes carrusel{0%{opacity:0;transform:scale(1.07)}4%{opacity:1}20%{opacity:1}24%,100%{opacity:0;transform:scale(1)}}
+@keyframes fundido{0%{opacity:0}4%{opacity:1}20%{opacity:1}24%,100%{opacity:0}}
+.hero__puntos{display:flex;gap:.45rem;margin-top:1.1rem}
+.hero__puntos span{position:relative;flex:1;height:5px;overflow:hidden;border-radius:5px;background:var(--linea)}
+.hero__puntos span::after{content:"";position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--grad);animation:barra 25s linear infinite}
+.hero__puntos span:nth-child(1)::after{animation-delay:-1s}.hero__puntos span:nth-child(2)::after{animation-delay:4s}.hero__puntos span:nth-child(3)::after{animation-delay:9s}.hero__puntos span:nth-child(4)::after{animation-delay:14s}.hero__puntos span:nth-child(5)::after{animation-delay:19s}
+@keyframes barra{0%{transform:scaleX(0);opacity:1}20%{transform:scaleX(1);opacity:1}24%,100%{transform:scaleX(1);opacity:0}}
+@media (min-width:900px){.hero__grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:4rem}}
 
-/* ---------- Franja de hoy ---------- */
-.hoy{
-  background:linear-gradient(90deg,var(--acento) 0%,var(--acento-claro) 100%);
-  color:var(--tinta);
-}
-.hoy__in{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
-  gap:.5rem 2rem;padding-block:1rem;
-  font-size:1rem;font-weight:500;
-}
+/* Franja de hoy */
+.hoy{padding-block:1.25rem 0}
+.hoy__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 2rem;padding:1rem 1.4rem;border-radius:var(--r-m);background:#fff;border:1px solid var(--linea);box-shadow:var(--sombra);font-size:1rem;font-weight:500}
 .hoy strong{font-weight:700}
-.hoy__cumple--hoy{
-  padding:.35rem 1rem;border-radius:999px;
-  background:var(--tinta);color:#fff;font-weight:600;
-}
+.hoy p:first-child::before{content:"";display:inline-block;width:10px;height:10px;margin-right:.65rem;border-radius:50%;background:var(--prim-c);animation:pulso 2s infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 10px rgba(20,184,166,0)}0%{box-shadow:0 0 0 0 rgba(20,184,166,.55)}100%{box-shadow:0 0 0 0 rgba(20,184,166,0)}}
+.hoy__cumple--hoy{padding:.4rem 1.05rem;border-radius:999px;background:var(--durazno);color:var(--tinta);font-weight:700}
 
-/* ---------- Secciones ---------- */
-.seccion{padding-block:clamp(3.75rem,8vw,7rem);scroll-margin-top:var(--nav-alto)}
+/* Secciones */
+.seccion{padding-block:clamp(3.5rem,8vw,6.5rem);scroll-margin-top:var(--nav-alto)}
 .seccion--blanca{background:#fff}
-.seccion__cab{display:grid;gap:1.1rem;margin-bottom:clamp(2.25rem,4.5vw,3.75rem)}
-.seccion__cab h2{font-size:clamp(2.4rem,5.4vw,4.15rem);letter-spacing:-.02em}
-.seccion__cab p{max-width:34rem;color:var(--apagado);font-size:1.06rem;line-height:1.6;text-wrap:pretty}
-@media (min-width:860px){
-  .seccion__cab{grid-template-columns:minmax(0,1fr) minmax(0,26rem);align-items:end;gap:3rem}
-}
+.seccion__cab{display:grid;gap:1rem;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
+.seccion__cab h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800}
+.seccion__cab h2::before{counter-increment:sec;content:"0" counter(sec);display:block;width:fit-content;margin-bottom:1rem;padding:.3rem .8rem;border-radius:999px;background:var(--menta-t);color:var(--prim);font-family:var(--f-texto);font-size:.8rem;font-weight:700;letter-spacing:.12em}
+.seccion__cab p{max-width:34rem;color:var(--apagado);font-size:1.06rem;text-wrap:pretty}
+@media (min-width:860px){.seccion__cab{grid-template-columns:minmax(0,1fr) minmax(0,26rem);align-items:end;gap:3rem}}
 
-/* ---------- Equipo ---------- */
-.direccion{
-  display:grid;gap:2rem;
-  padding:clamp(1.25rem,3vw,2.5rem);
-  border-radius:var(--radio-l);
-  background:linear-gradient(160deg,var(--tinte) 0%,#F5F3FF 100%);
-  border:1px solid rgba(79,70,229,.08);
-}
-@media (min-width:720px){
-  .direccion{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem;align-items:center}
-}
-@media (min-width:1000px){
-  .direccion{gap:3.5rem}
-}
+/* Equipo */
+.direccion{display:grid;gap:2rem;padding:clamp(1.25rem,3vw,2.25rem);border-radius:var(--r-l);background:linear-gradient(150deg,var(--cielo-t),var(--menta-t));border:1px solid var(--linea)}
+@media (min-width:720px){.direccion{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem;align-items:center}}
 .persona{display:block;width:100%;padding:0;border:0;background:none;text-align:left}
 .foto{display:block;overflow:hidden;background:var(--linea);position:relative}
-.foto img{width:100%;height:100%;object-fit:cover;object-position:50% 32%}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;transition:transform .6s var(--ease)}
+.persona:hover .foto img{transform:scale(1.05)}
 .foto.sin-foto img{display:none}
-.foto.sin-foto::after{
-  content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;
-  background:linear-gradient(160deg,var(--marca-clara),var(--marca));color:var(--acento);
-  font-family:var(--fuente-display);font-stretch:75%;font-weight:800;
-  font-size:2rem;letter-spacing:.02em;
-}
+.foto.sin-foto::after{content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;background:var(--grad);color:#fff;font-family:var(--f-display);font-weight:800;font-size:2rem}
 .persona__nombre{display:block}
-.persona__cargo{display:block;color:var(--marca);font-weight:600;letter-spacing:.01em}
+.persona__cargo{display:block;color:var(--prim);font-weight:600}
+.persona--defensor{max-width:320px}
+.persona--defensor .foto{aspect-ratio:4/5;border-radius:var(--arco);border:5px solid #fff;box-shadow:var(--sombra)}
+.persona--defensor .persona__cargo{margin-top:1.2rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.14em}
+.persona--defensor .persona__nombre{margin-top:.4rem;font-size:clamp(1.9rem,3.2vw,2.5rem)}
+.secretarios{display:grid;gap:.75rem}
+.persona--sec{display:grid;grid-template-columns:88px minmax(0,1fr);gap:1.2rem;align-items:center;padding:.75rem;border-radius:var(--r-m);background:#fff;border:1px solid var(--linea);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.persona--sec:hover{transform:translateX(5px);border-color:var(--prim-c);box-shadow:var(--sombra)}
+.persona--sec .foto{width:88px;height:88px;border-radius:20px}
+.persona--sec .persona__nombre{font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.12}
+.persona--sec .persona__cargo{margin-top:.3rem;font-size:.9rem}
+.personal__titulo{display:flex;align-items:center;gap:1.25rem;margin:clamp(2.75rem,6vw,4rem) 0 1.5rem;font-size:clamp(1.6rem,3vw,2.2rem)}
+.personal__titulo::after{content:"";flex:1;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--linea),transparent)}
+.personal{--cols:2;--sep:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem var(--sep)}
+.personal li{width:calc((100% - (var(--cols) - 1)*var(--sep))/var(--cols))}
+@media (min-width:480px){.personal{--cols:3}}
+@media (min-width:700px){.personal{--cols:5}}
+@media (min-width:1100px){.personal{--cols:7}}
+.persona--per{text-align:center;padding:.55rem .55rem 1rem;border-radius:var(--r-m);background:#fff;border:1px solid var(--linea);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.persona--per:hover{transform:translateY(-5px);border-color:var(--prim-c);box-shadow:0 22px 36px -22px rgba(20,184,166,.55)}
+.persona--per .foto{width:100%;aspect-ratio:1;border-radius:calc(var(--r-m) - 6px)}
+.persona--per .persona__nombre{margin-top:.75rem;padding-inline:.2rem;font-size:.92rem;font-weight:600;line-height:1.3}
 
-.persona--defensor{max-width:340px}
-.persona--defensor .foto{aspect-ratio:4/5;border-radius:var(--arco)}
-.persona--defensor .persona__cargo{margin-top:1.1rem;font-size:.98rem;text-transform:uppercase;letter-spacing:.08em}
-.persona--defensor .persona__nombre{margin-top:.35rem;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1}
-
-.secretarios{display:grid}
-.secretarios li + li{border-top:1px solid rgba(15,23,42,.1)}
-.persona--sec{
-  display:grid;grid-template-columns:96px minmax(0,1fr);gap:1.25rem;align-items:center;
-  padding:1rem .5rem;border-radius:var(--radio-m);
-  transition:background .18s ease;
-}
-.persona--sec:hover{background:rgba(255,255,255,.85)}
-.persona--sec .foto{width:96px;height:96px;border-radius:26px}
-.persona--sec .persona__nombre{font-size:clamp(1.35rem,2.4vw,1.7rem);line-height:1.05}
-.persona--sec .persona__cargo{margin-top:.35rem;font-size:.92rem}
-
-.personal__titulo{margin:clamp(3rem,6vw,4.5rem) 0 1.75rem;font-size:clamp(1.8rem,3.4vw,2.5rem)}
-.personal{--cols:3;--sep:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.75rem var(--sep)}
-.personal li{width:calc((100% - (var(--cols) - 1) * var(--sep)) / var(--cols))}
-@media (min-width:640px){.personal{--cols:5}}
-@media (min-width:1000px){.personal{--cols:7}}
-.persona--per{text-align:center}
-.persona--per .foto{
-  width:100%;max-width:136px;aspect-ratio:1;margin-inline:auto;border-radius:50%;
-  transition:box-shadow .2s ease,transform .2s ease;
-}
-.persona--per:hover .foto{
-  box-shadow:0 0 0 3px var(--tinte),0 0 0 6px var(--marca);
-  transform:translateY(-2px);
-}
-.persona--per .persona__nombre{
-  margin-top:.8rem;font-size:.95rem;font-weight:600;line-height:1.3;
-  letter-spacing:-.005em;
-}
-
-/* ---------- Aplicativos ---------- */
-.apps{border-top:1px solid var(--linea)}
-.app{
-  display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem 1.5rem;align-items:start;
-  padding:2rem .25rem;border-bottom:1px solid var(--linea);
-}
-.app__icono{
-  display:grid;place-items:center;width:60px;height:60px;border-radius:18px;
-  background:linear-gradient(135deg,var(--marca-clara) 0%,var(--marca) 100%);
-  color:#fff;
-  box-shadow:0 10px 22px -12px rgba(79,70,229,.75);
-}
-.app__icono svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.app h3{font-size:clamp(1.7rem,2.8vw,2.2rem);line-height:1.05}
-.app p{max-width:44ch;margin-top:.5rem;color:var(--apagado);font-size:1.02rem}
-.app__accesos{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:.5rem}
-.acceso{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.62rem 1.1rem;border:1.5px solid var(--marca);border-radius:999px;
-  background:#fff;color:var(--marca);
-  font-size:.96rem;font-weight:600;line-height:1.2;letter-spacing:.005em;
-  text-decoration:none;
-  transition:background .18s,color .18s,transform .18s,box-shadow .18s;
-}
-.acceso:hover{
-  background:var(--marca);color:#fff;transform:translateY(-1px);
-  box-shadow:0 10px 20px -12px rgba(79,70,229,.75);
-}
+/* Aplicativos */
+.apps{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr);counter-reset:app}
+@media (min-width:720px){.apps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.app{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:1.6rem;border-radius:var(--r-m);background:var(--papel);border:1px solid var(--linea);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s,background .3s}
+.app:hover{transform:translateY(-4px);background:#fff;border-color:var(--prim-c);box-shadow:var(--sombra)}
+.app__icono{display:grid;place-items:center;width:56px;height:56px;border-radius:18px;color:#fff;background:var(--grad);box-shadow:0 12px 22px -12px rgba(20,184,166,.9)}
+.app__icono svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.app h3{font-size:clamp(1.5rem,2.4vw,1.95rem)}
+.app h3::before{counter-increment:app;content:"0" counter(app);display:block;margin-bottom:.35rem;color:var(--prim);font-family:var(--f-texto);font-size:.78rem;font-weight:700;letter-spacing:.14em}
+.app p{margin-top:.5rem;color:var(--apagado);font-size:1rem}
+.app__accesos{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:auto;padding-top:.4rem}
+.acceso{display:inline-flex;align-items:center;gap:.55rem;padding:.62rem 1.1rem;border:1.5px solid var(--linea);border-radius:999px;background:#fff;color:var(--tinta);font-size:.93rem;font-weight:600;line-height:1.2;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .25s var(--ease)}
+.acceso:hover{background:var(--tinta);border-color:var(--tinta);color:#fff;transform:translateY(-2px)}
 .acceso svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-@media (min-width:900px){
-  .app{grid-template-columns:auto minmax(0,1fr) fit-content(34rem);align-items:center;padding-inline:1rem}
-  .app__accesos{grid-column:auto;justify-content:flex-end}
-}
 
-/* ---------- Fotos y eventos ---------- */
+/* Fotos y eventos */
 .mosaico{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px;gap:.6rem}
-.m{overflow:hidden;border-radius:var(--radio-s);background:var(--linea)}
+.m{overflow:hidden;border-radius:var(--r-s);background:var(--linea);box-shadow:var(--sombra)}
 .m button{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
-.m img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.m:hover img{transform:scale(1.04)}
-.m--3{grid-column:span 2;grid-row:span 2}
-.m--2{grid-column:span 2}
-.m--4{grid-row:span 2}
+.m img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.m:hover img{transform:scale(1.06)}
+.m--3{grid-column:span 2;grid-row:span 2}.m--2{grid-column:span 2}.m--4{grid-row:span 2}
 @media (min-width:700px){
-  .mosaico{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(140px,17vw,220px);gap:.75rem}
-  .m--1{grid-column:4;grid-row:2}
-  .m--2{grid-column:3 / 5;grid-row:1}
-  .m--3{grid-column:1 / 3;grid-row:1 / 3}
-  .m--4{grid-column:3;grid-row:2 / 4}
-  .m--5{grid-column:1;grid-row:3}
-  .m--6{grid-column:4;grid-row:3}
-  .m--7{grid-column:2;grid-row:3}
+  .mosaico{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(140px,17vw,220px);gap:.85rem}
+  .m{border-radius:var(--r-m)}
+  .m--1{grid-column:4;grid-row:2}.m--2{grid-column:3/5;grid-row:1}.m--3{grid-column:1/3;grid-row:1/3}
+  .m--4{grid-column:3;grid-row:2/4}.m--5{grid-column:1;grid-row:3}.m--6{grid-column:4;grid-row:3}.m--7{grid-column:2;grid-row:3}
 }
-
-.cumples{margin-top:clamp(3.75rem,7vw,5.75rem)}
+.cumples{margin-top:clamp(3.5rem,7vw,5.5rem)}
 .cumples h3{font-size:clamp(1.9rem,3.6vw,2.7rem)}
 .cumples__nota{max-width:38rem;margin:.7rem 0 1.75rem;color:var(--apagado);font-size:1.02rem}
-.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1.75rem;border-top:2px solid var(--tinta)}
+.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
 @media (min-width:700px){.cal{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (min-width:1000px){.cal{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.mes{padding:1.15rem 0 1.5rem;border-bottom:1px solid var(--linea)}
-.mes h4{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:1.45rem;line-height:1.1}
-.mes__tag{
-  padding:.15rem .65rem;border-radius:999px;
-  background:var(--marca);color:#fff;
-  font-family:var(--fuente-texto);font-size:.75rem;font-weight:600;
-  letter-spacing:.02em;text-transform:uppercase;
-}
+.mes{padding:1.1rem 1.2rem 1.3rem;border-radius:var(--r-s);background:var(--papel);border:1px solid var(--linea);transition:transform .3s var(--ease),box-shadow .3s}
+.mes:hover{transform:translateY(-3px);box-shadow:var(--sombra)}
+.mes:has(.mes__tag){background:var(--menta-t);border-color:var(--prim-c)}
+.mes h4{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:1.3rem}
+.mes__tag{padding:.15rem .65rem;border-radius:999px;background:var(--prim);color:#fff;font-family:var(--f-texto);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .mes ul{display:grid;gap:.15rem;margin-top:.7rem}
-.mes li{
-  display:flex;align-items:baseline;gap:.75rem;
-  padding:.2rem .5rem;margin-inline:-.5rem;border-radius:8px;
-  font-size:1rem;
-}
-.dia{
-  min-width:1.7rem;color:var(--marca);font-weight:700;
-  font-variant-numeric:tabular-nums;letter-spacing:.01em;
-}
+.mes li{display:flex;align-items:baseline;gap:.75rem;padding:.25rem .5rem;margin-inline:-.5rem;border-radius:10px;font-size:1rem}
+.dia{min-width:1.7rem;color:var(--prim);font-weight:700;font-variant-numeric:tabular-nums}
 .vacio{margin-top:.7rem;color:var(--apagado);font-size:.95rem;font-style:italic}
-.mes li.es-hoy{background:var(--acento);font-weight:700}
+.mes li.es-hoy{background:var(--durazno);font-weight:700}
 .mes li.es-hoy .dia{color:var(--tinta)}
 
-/* ---------- Pie ---------- */
-.pie{padding-block:3.25rem 2rem;background:var(--tinta);color:#fff}
-.pie :focus-visible{outline-color:var(--acento)}
+/* Pie */
+.pie{padding:3rem 0 2rem;background:linear-gradient(160deg,var(--cielo-t),var(--menta-t));border-top:1px solid var(--linea)}
 .pie__in{display:grid;gap:2rem}
-.pie .marca__sello{background:var(--acento);color:var(--tinta);box-shadow:none}
-.pie__lema{max-width:30rem;margin-top:1rem;color:rgba(255,255,255,.72);font-size:1.02rem}
+.pie__lema{max-width:30rem;margin-top:1rem;color:var(--apagado)}
 .pie__enlaces{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
-.pie__enlaces a{
-  padding:.35rem 0;color:rgba(255,255,255,.85);font-size:.98rem;font-weight:500;
-  text-decoration:none;transition:color .15s;
-}
-.pie__enlaces a:hover{color:var(--acento);text-decoration:underline;text-underline-offset:4px}
-.pie__legal{
-  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
-  gap:.4rem 1.5rem;
-  margin-top:2.5rem;padding-top:1.25rem;
-  border-top:1px solid rgba(255,255,255,.18);
-  color:rgba(255,255,255,.55);font-size:.88rem;letter-spacing:.01em;
-}
-.pie__credito{color:rgba(255,255,255,.55)}
-.pie__credito strong{color:#fff;font-weight:700}
-@media (min-width:800px){
-  .pie__in{grid-template-columns:1fr auto;align-items:start}
-  .pie__enlaces{justify-content:flex-end}
-}
+.pie__enlaces a{padding:.35rem 0;color:var(--tinta);font-weight:600;text-decoration:none;transition:color .15s}
+.pie__enlaces a:hover{color:var(--prim);text-decoration:underline;text-underline-offset:4px}
+.pie__legal{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem 1.5rem;margin-top:2.25rem;padding-top:1.25rem;border-top:1px solid rgba(15,27,51,.12);color:var(--apagado);font-size:.88rem}
+.pie__credito strong{color:var(--tinta)}
+@media (min-width:800px){.pie__in{grid-template-columns:1fr auto;align-items:start}.pie__enlaces{justify-content:flex-end}}
 
-/* ---------- Diálogos ---------- */
+/* Diálogos (la foto y el texto van en filas distintas) */
 dialog{max-width:100vw;max-height:100dvh;padding:0;border:0;background:transparent;color:var(--tinta);overflow:visible}
-dialog::backdrop{background:rgba(15,23,42,.85);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-dialog[open]{animation:entrar .22s ease-out}
-@keyframes entrar{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-.icono-btn{
-  display:grid;place-items:center;flex:none;width:44px;height:44px;
-  border:1.5px solid var(--linea);border-radius:50%;background:#fff;color:var(--tinta);
-  transition:background .15s,border-color .15s;
-}
-.icono-btn:hover{background:var(--tinte)}
+dialog::backdrop{background:rgba(15,27,51,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+dialog[open]{animation:entrar .3s var(--ease)}
+@keyframes entrar{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.icono-btn{display:grid;place-items:center;flex:none;width:46px;height:46px;border:1.5px solid var(--linea);border-radius:50%;background:#fff;color:var(--tinta);transition:background .15s,transform .2s}
+.icono-btn:hover{background:var(--menta-t);transform:scale(1.06)}
 .icono-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-.dlg{
-  position:relative;display:grid;justify-items:center;gap:.9rem;
-  width:min(92vw,420px);max-height:calc(100dvh - 1.5rem);overflow:auto;
-  padding:1.25rem 1.25rem 1.5rem;border-radius:var(--radio-l);
-  background:#fff;text-align:center;
-  box-shadow:0 30px 80px -30px rgba(30,27,75,.75);
-}
-.dlg__cerrar{position:absolute;top:.75rem;right:.75rem;z-index:2}
-.dlg__foto{
-  width:min(100%,300px,calc((100dvh - 21rem) * .8));min-width:150px;aspect-ratio:4/5;
-  overflow:hidden;border-radius:var(--arco);background:var(--linea);margin-top:1.75rem;
-}
+.dlg{position:relative;display:grid;justify-items:center;gap:.8rem;width:min(92vw,400px);max-height:calc(100dvh - 1.5rem);overflow:auto;padding:1.25rem 1.25rem 1.5rem;border-radius:var(--r-l);background:#fff;text-align:center;box-shadow:0 40px 90px -30px rgba(15,27,51,.6)}
+.dlg__cerrar{position:absolute;top:.75rem;right:.75rem;z-index:3}
+.dlg__foto{position:relative;width:min(100%,280px,calc((100dvh - 22rem)*.8));min-width:140px;aspect-ratio:4/5;overflow:hidden;border-radius:var(--arco);background:var(--linea);margin-top:2.75rem}
+.dlg__foto.sin-foto img{display:none}
+.dlg__foto.sin-foto::after{content:attr(data-ini);position:absolute;inset:0;display:grid;place-items:center;background:var(--grad);color:#fff;font-family:var(--f-display);font-weight:800;font-size:3rem}
 .dlg__foto img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
-.dlg__cargo{
-  color:var(--marca);font-weight:600;font-size:.92rem;
-  text-transform:uppercase;letter-spacing:.08em;
-}
-.dlg__nombre{font-size:clamp(1.8rem,7vw,2.3rem);line-height:1.05}
-.dlg__cumple{color:var(--apagado);font-size:.98rem;margin-top:.25rem}
-.dlg__nav{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:.35rem}
+.dlg__cargo{color:var(--prim);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;margin-top:.3rem}
+.dlg__nombre{font-size:clamp(1.7rem,7vw,2.2rem)}
+.dlg__cumple{color:var(--apagado);font-size:.98rem}
+.dlg__nav{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:.3rem}
 .dlg__cont{color:var(--apagado);font-size:.92rem;font-variant-numeric:tabular-nums}
-
 .visor{display:grid;justify-items:center;gap:.9rem;width:min(96vw,1180px)}
-.visor__img{
-  width:auto;max-width:100%;height:auto;max-height:78dvh;
-  border-radius:var(--radio-s);background:var(--tinta);object-fit:contain;
-}
-.visor__barra{
-  display:flex;align-items:center;justify-content:center;gap:.9rem;
-  color:#fff;font-variant-numeric:tabular-nums;font-size:.95rem;
-}
-.visor .icono-btn{border-color:transparent;background:rgba(255,255,255,.14);color:#fff}
-.visor .icono-btn:hover{background:rgba(255,255,255,.24)}
+.visor__img{width:auto;max-width:100%;height:auto;max-height:78dvh;border-radius:var(--r-s);background:var(--tinta);object-fit:contain}
+.visor__barra{display:flex;align-items:center;justify-content:center;gap:.9rem;color:#fff;font-variant-numeric:tabular-nums;font-size:.95rem}
+.visor .icono-btn{border-color:transparent;background:rgba(255,255,255,.16);color:#fff}
+.visor .icono-btn:hover{background:#fff;color:var(--tinta)}
 
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visto{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  dialog[open]{animation:none}
-  .m img{transition:none}
+  html{scroll-behavior:auto}dialog[open]{animation:none}.hoy p:first-child::before{animation:none}
+  .hero__slide{animation-name:fundido}.m img,.foto img,.reveal{transition:none}.reveal{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -462,15 +252,22 @@ dialog[open]{animation:entrar .22s ease-out}
   <section class="hero" aria-labelledby="titulo-principal">
     <div class="contenedor hero__grid">
       <div class="hero__texto">
-        <h1 class="display" id="titulo-principal">Defendemos derechos, transformamos vidas.</h1>
+        <h1 class="display" id="titulo-principal">Defendemos derechos, <span class="realce">transformamos vidas.</span></h1>
         <p class="hero__bajada">El equipo, los sistemas de trabajo y las fotos de la Defensoría Oficial 6, reunidos en un solo lugar.</p>
         <div class="hero__acciones">
           <a class="btn btn--acento" href="#aplicativos">Ver aplicativos</a>
           <a class="btn btn--borde" href="#equipo">Conocer al equipo</a>
         </div>
       </div>
-      <figure class="hero__foto">
-        <img src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" alt="El equipo de la Defensoría Oficial 6 reunido en la oficina" width="1280" height="963" fetchpriority="high" decoding="async">
+      <figure class="hero__foto" aria-label="Fotos del equipo en reproducción continua">
+        <div class="hero__slides">
+          <img class="hero__slide" src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/3-d.jpg" alt="El equipo de la Defensoría Oficial 6 reunido en la oficina" width="1280" height="963" decoding="async">
+          <img class="hero__slide" src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/1-d.jpg" alt="Foto 1: el equipo de la Defensoría en la oficina" width="1280" height="963" decoding="async">
+          <img class="hero__slide" src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/2-d.jpg" alt="Foto 2: el equipo de la Defensoría en la oficina" width="1280" height="963" decoding="async">
+          <img class="hero__slide" src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/4-d.jpg" alt="Foto 4: el equipo de la Defensoría en la oficina" width="1280" height="963" decoding="async">
+          <img class="hero__slide" src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/5-d.jpg" alt="Foto 5: el equipo de la Defensoría en la oficina" width="1280" height="963" decoding="async">
+        </div>
+        <div class="hero__puntos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
       </figure>
     </div>
   </section>
@@ -490,29 +287,30 @@ dialog[open]{animation:entrar .22s ease-out}
       </header>
 
       <div class="direccion">
-        <button class="persona persona--defensor" type="button" data-p="0" data-nombre="Dr. Marcelo Gustavo Ramos" data-cargo="Defensor Oficial" data-cumple="2-3" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Ramos.png?raw=true"><span class="foto foto--arco" data-ini="MG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ramos.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__cargo">Defensor Oficial</span><span class="persona__nombre">Dr. Marcelo Gustavo Ramos</span></button>
+        <button class="persona persona--defensor" type="button" data-p="0" data-nombre="Dr. Marcelo Gustavo Ramos" data-cargo="Defensor Oficial" data-cumple="2-3" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Ramos.png"><span class="foto foto--arco" data-ini="MG"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Ramos.png" alt="" decoding="async"></span><span class="persona__cargo">Defensor Oficial</span><span class="persona__nombre">Dr. Marcelo Gustavo Ramos</span></button>
         <ul class="secretarios">
-<li><button class="persona persona--sec" type="button" data-p="1" data-nombre="Dra. Alicia Mariela Corrales" data-cargo="Secretaria" data-cumple="2-14" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/corrales.png?raw=true"><span class="foto foto--cuadrado" data-ini="AM"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/corrales.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Alicia Mariela Corrales</span><span class="persona__cargo">Secretaria</span></span></button></li>
-<li><button class="persona persona--sec" type="button" data-p="2" data-nombre="Dra. Patricia Soledad Riveros" data-cargo="Secretaria" data-cumple="11-3" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Riveros.png?raw=true"><span class="foto foto--cuadrado" data-ini="PS"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Riveros.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Patricia Soledad Riveros</span><span class="persona__cargo">Secretaria</span></span></button></li>
-<li><button class="persona persona--sec" type="button" data-p="3" data-nombre="Dr. Enzo Luciano Magnani" data-cargo="Secretario" data-cumple="2-26" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Magnani.png?raw=true"><span class="foto foto--cuadrado" data-ini="EL"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Magnani.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dr. Enzo Luciano Magnani</span><span class="persona__cargo">Secretario</span></span></button></li>
+<li><button class="persona persona--sec" type="button" data-p="1" data-nombre="Dra. Alicia Mariela Corrales" data-cargo="Secretaria" data-cumple="2-14" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/corrales.png"><span class="foto foto--cuadrado" data-ini="AM"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/corrales.png" alt="" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Alicia Mariela Corrales</span><span class="persona__cargo">Secretaria</span></span></button></li>
+<li><button class="persona persona--sec" type="button" data-p="2" data-nombre="Dra. Patricia Soledad Riveros" data-cargo="Secretaria" data-cumple="11-3" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Riveros.png"><span class="foto foto--cuadrado" data-ini="PS"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Riveros.png" alt="" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dra. Patricia Soledad Riveros</span><span class="persona__cargo">Secretaria</span></span></button></li>
+<li><button class="persona persona--sec" type="button" data-p="3" data-nombre="Dr. Enzo Luciano Magnani" data-cargo="Secretario" data-cumple="2-26" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Magnani.png"><span class="foto foto--cuadrado" data-ini="EL"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Magnani.png" alt="" decoding="async"></span><span class="persona__txt"><span class="persona__nombre">Dr. Enzo Luciano Magnani</span><span class="persona__cargo">Secretario</span></span></button></li>
         </ul>
       </div>
 
       <h3 class="personal__titulo display">Personal de la Defensoría</h3>
       <ul class="personal">
-<li><button class="persona persona--per" type="button" data-p="4" data-nombre="Nadia Romina Bazante" data-cargo="Personal" data-cumple="2-19" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Bazante.png?raw=true"><span class="foto foto--circulo" data-ini="NR"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Bazante.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Nadia Romina Bazante</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="5" data-nombre="Cesar Enrique Boillat" data-cargo="Personal" data-cumple="4-30" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Boillat.png?raw=true"><span class="foto foto--circulo" data-ini="CE"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Boillat.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Cesar Enrique Boillat</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="6" data-nombre="Maria Raquel Cardozo" data-cargo="Personal" data-cumple="4-9" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/cardozo.png?raw=true"><span class="foto foto--circulo" data-ini="MR"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cardozo.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Maria Raquel Cardozo</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="7" data-nombre="Noelia Aurora Cedron" data-cargo="Personal" data-cumple="12-29" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/cedron.png?raw=true"><span class="foto foto--circulo" data-ini="NA"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/cedron.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Noelia Aurora Cedron</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="8" data-nombre="Monica Graciela Escobar" data-cargo="Personal" data-cumple="10-8" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Escobar.png?raw=true"><span class="foto foto--circulo" data-ini="MG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Escobar.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Monica Graciela Escobar</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="9" data-nombre="Rómulo Fioravante" data-cargo="Personal" data-cumple="8-2" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Fioravante.png?raw=true"><span class="foto foto--circulo" data-ini="RF"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Fioravante.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Rómulo Fioravante</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="10" data-nombre="Alberto Misael Gonzalez" data-cargo="Personal" data-cumple="6-21" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/AMisaelG.png?raw=true"><span class="foto foto--circulo" data-ini="AM"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/AMisaelG.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Alberto Misael Gonzalez</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="11" data-nombre="Juan Jose Gonzalez" data-cargo="Personal" data-cumple="1-8" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/JuanJoseG.png?raw=true"><span class="foto foto--circulo" data-ini="JJ"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/JuanJoseG.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Juan Jose Gonzalez</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="12" data-nombre="Natalia Esther Gudiño" data-cargo="Personal" data-cumple="7-20" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/gudino.png?raw=true"><span class="foto foto--circulo" data-ini="NE"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/gudino.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Natalia Esther Gudiño</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="13" data-nombre="Lucia Noemi Ortega" data-cargo="Personal" data-cumple="7-27" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Ortega.png?raw=true"><span class="foto foto--circulo" data-ini="LN"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Ortega.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Lucia Noemi Ortega</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="14" data-nombre="Patricia Tamara Pablos" data-cargo="Personal" data-cumple="1-26" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Pablos.png?raw=true"><span class="foto foto--circulo" data-ini="PT"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Pablos.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Patricia Tamara Pablos</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="15" data-nombre="Ana Gabriela Palacios" data-cargo="Personal" data-cumple="1-22" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true"><span class="foto foto--circulo" data-ini="AG"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Palacios.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Ana Gabriela Palacios</span></button></li>
-<li><button class="persona persona--per" type="button" data-p="16" data-nombre="Rita Cecilia Sosa" data-cargo="Personal" data-cumple="1-9" data-foto="https://github.com/sistema-secretarios/Fotos/blob/main/Sosa.png?raw=true"><span class="foto foto--circulo" data-ini="RC"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/Sosa.png?raw=true" alt="" loading="lazy" decoding="async"></span><span class="persona__nombre">Rita Cecilia Sosa</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="4" data-nombre="Nadia Romina Bazante" data-cargo="Personal" data-cumple="2-19" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Bazante.png"><span class="foto foto--circulo" data-ini="NR"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Bazante.png" alt="" decoding="async"></span><span class="persona__nombre">Nadia Romina Bazante</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="5" data-nombre="Cesar Enrique Boillat" data-cargo="Personal" data-cumple="4-30" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Boillat.png"><span class="foto foto--circulo" data-ini="CE"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Boillat.png" alt="" decoding="async"></span><span class="persona__nombre">Cesar Enrique Boillat</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="6" data-nombre="Maria Raquel Cardozo" data-cargo="Personal" data-cumple="4-9" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/cardozo.png"><span class="foto foto--circulo" data-ini="MR"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/cardozo.png" alt="" decoding="async"></span><span class="persona__nombre">Maria Raquel Cardozo</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="7" data-nombre="Noelia Aurora Cedron" data-cargo="Personal" data-cumple="12-29" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/cedron.png"><span class="foto foto--circulo" data-ini="NA"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/cedron.png" alt="" decoding="async"></span><span class="persona__nombre">Noelia Aurora Cedron</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="8" data-nombre="Rómulo Fioravante" data-cargo="Personal" data-cumple="8-2" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Fioravante.png"><span class="foto foto--circulo" data-ini="RF"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Fioravante.png" alt="" decoding="async"></span><span class="persona__nombre">Rómulo Fioravante</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="9" data-nombre="Alberto Misael Gonzalez" data-cargo="Personal" data-cumple="6-21" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/AMisaelG.png"><span class="foto foto--circulo" data-ini="AM"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/AMisaelG.png" alt="" decoding="async"></span><span class="persona__nombre">Alberto Misael Gonzalez</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="10" data-nombre="Juan Jose Gonzalez" data-cargo="Personal" data-cumple="1-8" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/JuanJoseG.png"><span class="foto foto--circulo" data-ini="JJ"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/JuanJoseG.png" alt="" decoding="async"></span><span class="persona__nombre">Juan Jose Gonzalez</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="11" data-nombre="Natalia Esther Gudiño" data-cargo="Personal" data-cumple="7-20" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/gudino.png"><span class="foto foto--circulo" data-ini="NE"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/gudino.png" alt="" decoding="async"></span><span class="persona__nombre">Natalia Esther Gudiño</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="12" data-nombre="Carlos Esteban Martinis" data-cargo="Personal" data-cumple="10-16" data-foto="https://sistema-secretarios.github.io/Fotos/Martinis.jpg"><span class="foto foto--circulo" data-ini="CE"><img src="https://sistema-secretarios.github.io/Fotos/Martinis.jpg" alt="" decoding="async"></span><span class="persona__nombre">Carlos Esteban Martinis</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="13" data-nombre="Lucia Noemi Ortega" data-cargo="Personal" data-cumple="7-27" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Ortega.png"><span class="foto foto--circulo" data-ini="LN"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Ortega.png" alt="" decoding="async"></span><span class="persona__nombre">Lucia Noemi Ortega</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="14" data-nombre="Patricia Tamara Pablos" data-cargo="Personal" data-cumple="1-26" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Pablos.png"><span class="foto foto--circulo" data-ini="PT"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Pablos.png" alt="" decoding="async"></span><span class="persona__nombre">Patricia Tamara Pablos</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="15" data-nombre="Ana Gabriela Palacios" data-cargo="Personal" data-cumple="1-22" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Palacios.png"><span class="foto foto--circulo" data-ini="AG"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Palacios.png" alt="" decoding="async"></span><span class="persona__nombre">Ana Gabriela Palacios</span></button></li>
+<li><button class="persona persona--per" type="button" data-p="16" data-nombre="Rita Cecilia Sosa" data-cargo="Personal" data-cumple="1-9" data-foto="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Sosa.png"><span class="foto foto--circulo" data-ini="RC"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/Sosa.png" alt="" decoding="async"></span><span class="persona__nombre">Rita Cecilia Sosa</span></button></li>
+
       </ul>
     </div>
   </section>
@@ -540,13 +338,13 @@ dialog[open]{animation:entrar .22s ease-out}
       </header>
 
       <ul class="mosaico">
-<li class="m m--3"><button type="button" data-f="3" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" aria-label="Ampliar foto 3 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/3-d.jpg?raw=true" alt="Foto 3: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--2"><button type="button" data-f="2" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/2-d.jpg?raw=true" aria-label="Ampliar foto 2 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/2-d.jpg?raw=true" alt="Foto 2: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--4"><button type="button" data-f="4" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/4-d.jpg?raw=true" aria-label="Ampliar foto 4 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/4-d.jpg?raw=true" alt="Foto 4: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--1"><button type="button" data-f="1" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/1-d.jpg?raw=true" aria-label="Ampliar foto 1 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/1-d.jpg?raw=true" alt="Foto 1: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--5"><button type="button" data-f="5" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/5-d.jpg?raw=true" aria-label="Ampliar foto 5 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/5-d.jpg?raw=true" alt="Foto 5: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--7"><button type="button" data-f="7" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/7-d.jpg?raw=true" aria-label="Ampliar foto 7 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/7-d.jpg?raw=true" alt="Foto 7: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
-<li class="m m--6"><button type="button" data-f="6" data-src="https://github.com/sistema-secretarios/Fotos/blob/main/6-d.jpg?raw=true" aria-label="Ampliar foto 6 de 7"><img src="https://github.com/sistema-secretarios/Fotos/blob/main/6-d.jpg?raw=true" alt="Foto 6: el equipo de la Defensoría en la oficina" loading="lazy" decoding="async"></button></li>
+<li class="m m--3"><button type="button" data-f="3" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/3-d.jpg" aria-label="Ampliar foto 3 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/3-d.jpg" alt="Foto 3: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--2"><button type="button" data-f="2" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/2-d.jpg" aria-label="Ampliar foto 2 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/2-d.jpg" alt="Foto 2: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--4"><button type="button" data-f="4" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/4-d.jpg" aria-label="Ampliar foto 4 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/4-d.jpg" alt="Foto 4: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--1"><button type="button" data-f="1" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/1-d.jpg" aria-label="Ampliar foto 1 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/1-d.jpg" alt="Foto 1: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--5"><button type="button" data-f="5" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/5-d.jpg" aria-label="Ampliar foto 5 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/5-d.jpg" alt="Foto 5: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--7"><button type="button" data-f="7" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/7-d.jpg" aria-label="Ampliar foto 7 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/7-d.jpg" alt="Foto 7: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
+<li class="m m--6"><button type="button" data-f="6" data-src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/6-d.jpg" aria-label="Ampliar foto 6 de 7"><img src="https://raw.githubusercontent.com/sistema-secretarios/Fotos/main/6-d.jpg" alt="Foto 6: el equipo de la Defensoría en la oficina" decoding="async"></button></li>
       </ul>
 
       <div class="cumples">
@@ -562,7 +360,7 @@ dialog[open]{animation:entrar .22s ease-out}
 <div class="mes" data-mes="7"><h4>Julio</h4><ul><li data-mes="7" data-dia="20" data-nombre="Natalia"><span class="dia">20</span><span class="nom">Natalia</span></li><li data-mes="7" data-dia="27" data-nombre="Lucia"><span class="dia">27</span><span class="nom">Lucia</span></li></ul></div>
 <div class="mes" data-mes="8"><h4>Agosto</h4><ul><li data-mes="8" data-dia="2" data-nombre="Romulo"><span class="dia">2</span><span class="nom">Romulo</span></li></ul></div>
 <div class="mes" data-mes="9"><h4>Septiembre</h4><p class="vacio">Sin cumpleaños</p></div>
-<div class="mes" data-mes="10"><h4>Octubre</h4><ul><li data-mes="10" data-dia="8" data-nombre="Monica"><span class="dia">8</span><span class="nom">Monica</span></li></ul></div>
+<div class="mes" data-mes="10"><h4>Octubre</h4><ul><li data-mes="10" data-dia="16" data-nombre="Carlos"><span class="dia">16</span><span class="nom">Carlos</span></li></ul></div>
 <div class="mes" data-mes="11"><h4>Noviembre</h4><ul><li data-mes="11" data-dia="3" data-nombre="Dra Patricia"><span class="dia">3</span><span class="nom">Dra Patricia</span></li></ul></div>
 <div class="mes" data-mes="12"><h4>Diciembre</h4><ul><li data-mes="12" data-dia="29" data-nombre="Noelia"><span class="dia">29</span><span class="nom">Noelia</span></li></ul></div>
         </div>
@@ -661,12 +459,88 @@ dialog[open]{animation:entrar .22s ease-out}
   const ioInicio = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) limpiar(); }, { rootMargin: '-45% 0px -50% 0px' });
   ioInicio.observe($('.hero'));
 
-  /* Foto que no carga: se muestran las iniciales */
-  $$('.foto img').forEach(img => {
-    const fallo = () => img.closest('.foto').classList.add('sin-foto');
-    img.addEventListener('error', fallo);
-    if (img.complete && img.naturalWidth === 0 && img.currentSrc) fallo();
+  /* Carga robusta de fotos: cola con pocas descargas simultáneas, reintentos y rutas alternativas.
+     Todas las imágenes se muestran solas al iniciar, sin recargar la página. */
+  const REPO = 'sistema-secretarios/Fotos';
+  const candidatas = u => {
+    const f = decodeURIComponent(u.split('?')[0].split('/').pop());
+    const ext = (f.match(/\.[^.]+$/) || [''])[0], base = f.slice(0, f.length - ext.length);
+    const l = [u];
+    [...new Set([ext, '.jpg', '.png', '.jpeg'])].forEach(x => {
+      const n = base + x;
+      l.push(`https://raw.githubusercontent.com/${REPO}/main/${n}`,
+             `https://sistema-secretarios.github.io/Fotos/${n}`,
+             `https://github.com/${REPO}/blob/main/${n}?raw=true`);
+    });
+    return [...new Set(l)];
+  };
+
+  /* Semáforo: evita saturar el servidor (causa de que algunas fotos no cargaran) */
+  const MAX = 6; let activos = 0; const espera = [];
+  const turno = () => new Promise(res => { const go = () => { activos++; res(); }; activos < MAX ? go() : espera.push(go); });
+  const liberar = () => { activos--; const n = espera.shift(); if (n) n(); };
+
+  const ok = new Map();      // url original -> url que funcionó
+  const enCurso = new Map(); // url original -> promesa en curso (evita duplicar pedidos)
+  const probar = src => new Promise(res => {
+    const i = new Image(); let fin = false;
+    const t = setTimeout(() => cerrar(false), 15000);
+    const cerrar = v => { if (fin) return; fin = true; clearTimeout(t); i.onload = i.onerror = null; res(v); };
+    i.onload = () => cerrar(i.naturalWidth > 0);
+    i.onerror = () => cerrar(false);
+    i.src = src;
   });
+  const resolver = (u, intentos = 4) => {
+    if (ok.has(u)) return Promise.resolve(ok.get(u));
+    if (enCurso.has(u)) return enCurso.get(u);
+    const p = (async () => {
+      for (let t = 0; t < intentos; t++) {
+        for (const c of candidatas(u)) {
+          await turno();
+          const url = t ? c + (c.includes('?') ? '&' : '?') + 'r=' + Date.now() : c;  // evita respuestas fallidas en caché
+          const bueno = await probar(url).finally(liberar);
+          if (bueno) { ok.set(u, url); return url; }
+        }
+        await new Promise(r => setTimeout(r, 800 * (t + 1)));
+      }
+      return null;
+    })().finally(() => enCurso.delete(u));
+    enCurso.set(u, p);
+    return p;
+  };
+
+  const sano = img => img.complete && img.naturalWidth > 0;
+  const aplicar = (img, url) => {
+    img.removeAttribute('src');   // fuerza la recarga aunque la URL sea la misma
+    img.src = url;
+  };
+  const recuperar = async img => {
+    const cont = img.closest('.foto');
+    const u = img.dataset.orig || (img.dataset.orig = img.getAttribute('src'));
+    const r = await resolver(u);
+    if (r) { if (cont) cont.classList.remove('sin-foto'); if (!sano(img) || img.getAttribute('src') !== r) aplicar(img, r); }
+    else if (cont) cont.classList.add('sin-foto');
+  };
+
+  const imagenes = $$('.foto img, .m img, .hero__foto img');
+  imagenes.forEach(img => {
+    img.loading = 'eager';
+    img.dataset.orig = img.getAttribute('src');
+    let fallos = 0;
+    img.addEventListener('error', () => {
+      if (++fallos > 4) { const c = img.closest('.foto'); if (c) c.classList.add('sin-foto'); return; }
+      recuperar(img);
+    });
+    if (img.complete && img.naturalWidth === 0) recuperar(img);   // ya falló antes de que corriera el script
+  });
+
+  /* Red de seguridad: revisa las que sigan sin cargar y las recupera */
+  const revisar = () => imagenes.forEach(img => { if (!sano(img) && img.complete) recuperar(img); });
+  setTimeout(revisar, 4000);
+  setTimeout(revisar, 10000);
+  addEventListener('load', () => setTimeout(revisar, 1500));
+  addEventListener('online', revisar);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) revisar(); });
 
   /* Cumpleaños: franja de hoy y calendario */
   const hoy = new Date();
@@ -713,7 +587,11 @@ dialog[open]{animation:entrar .22s ease-out}
     ip = (i + personas.length) % personas.length;
     const b = personas[ip];
     const img = $('#dp-img');
-    img.src = b.dataset.foto;
+    const f = b.dataset.foto, cont = img.parentElement;
+    cont.classList.remove('sin-foto');
+    cont.dataset.ini = $('.foto', b).dataset.ini;
+    img.onerror = () => { img.onerror = null; resolver(f).then(r => { if (r) img.src = r; else cont.classList.add('sin-foto'); }); };
+    img.src = ok.get(f) || f;
     img.alt = b.dataset.nombre;
     $('#dp-nombre').textContent = b.dataset.nombre;
     $('#dp-cargo').textContent = b.dataset.cargo;
@@ -738,7 +616,9 @@ dialog[open]{animation:entrar .22s ease-out}
   const verFoto = i => {
     iv = (i + fotos.length) % fotos.length;
     const img = $('#dv-img');
-    img.src = fotos[iv].dataset.src;
+    const f = fotos[iv].dataset.src;
+    img.onerror = () => { img.onerror = null; resolver(f).then(r => { if (r) img.src = r; }); };
+    img.src = ok.get(f) || f;
     img.alt = $('img', fotos[iv]).alt;
     $('#dv-cont').textContent = `${iv + 1} de ${fotos.length}`;
   };
@@ -751,6 +631,16 @@ dialog[open]{animation:entrar .22s ease-out}
     if (e.key === 'ArrowRight') verFoto(iv + 1);
   });
   cierraAfuera(dv);
+
+  /* Aparición suave al desplazarse */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const rev = new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visto'); o.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    $$('.seccion__cab, .direccion, .personal__titulo, .personal li, .app, .mosaico li, .cumples, .mes').forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i % 7) * 40 + 'ms';
+      rev.observe(el);
+    });
+  }
 })();
 </script>
 </body>
