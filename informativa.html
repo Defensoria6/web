@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Digital 6 | Defensoría Oficial Civil y Comercial 6</title>
+<meta name="description" content="Sistema Digital 6 · Defensoría Oficial Civil y Comercial 6 · Ministerio Público de Misiones. 19 módulos integrados para la gestión de causas, protección de personas, documentación institucional y control de personal.">
+
+<meta name="theme-color" content="#0b1530">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK (compat) para indicadores en vivo -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+/* ============ Tokens ============ */
+:root{
+  --ink:#0b1530;--navy:#14214f;--navy-deep:#0b1530;--navy-soft:#22357a;
+  --blue:#3a5bff;--blue-2:#5673ff;--blue-3:#7f9bff;--blue-4:#aebfff;--blue-5:#d5ddff;
+  --sky-1:#f5f7fd;--sky-2:#eaeffc;--sky-3:#dde5fb;--sky-4:#cdd8f7;--sky-soft:#f0f3fc;
+  --muted:#55648a;--muted-2:#6a789c;--paper:#fff;--line:#dfe5f4;--line-2:#ebeff9;
+  --green:#0b7f61;--green-soft:#dcf5ec;--rose:#b4324a;--rose-soft:#fde8ec;
+  --shadow-sm:0 1px 2px rgba(11,21,48,.05),0 4px 12px -4px rgba(11,21,48,.06);
+  --shadow-md:0 2px 4px rgba(11,21,48,.04),0 18px 36px -14px rgba(11,21,48,.16);
+  --shadow-lg:0 4px 8px rgba(11,21,48,.04),0 32px 64px -20px rgba(11,21,48,.24);
+  --shadow-xl:0 50px 100px -30px rgba(11,21,48,.45);
+  --radius:18px;--radius-lg:32px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --text:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--text);font-size:16px;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:0;background:none}
+.container{width:min(1180px,calc(100% - 44px));margin:auto}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;letter-spacing:-.02em}
+:focus-visible{outline:3px solid rgba(58,91,255,.55);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-64px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;transition:top .2s}
+.skip:focus{top:12px}
+
+/* ============ Progreso de lectura + header ============ */
+.topline{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:linear-gradient(90deg,var(--blue),var(--blue-3));transform-origin:0 50%;transform:scaleX(var(--p,0))}
+header{position:sticky;top:0;z-index:60;padding:12px 0}
+.navbar{height:64px;padding:0 10px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border:1px solid rgba(223,229,244,.95);transition:box-shadow .3s,background .3s}
+header.scrolled .navbar{background:rgba(255,255,255,.9);box-shadow:0 14px 34px -14px rgba(11,21,48,.28)}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.seal{width:38px;height:38px;border-radius:50%;position:relative;flex:none;background:linear-gradient(145deg,var(--blue-2),var(--navy));box-shadow:0 6px 14px -4px rgba(58,91,255,.6);transition:transform .4s var(--ease)}
+.seal:after{content:"";position:absolute;inset:7px;border:1.5px solid rgba(255,255,255,.6);border-radius:50%}
+.brand:hover .seal{transform:rotate(-12deg) scale(1.06)}
+.brand-text strong{display:block;font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.15}
+.brand-text span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+nav{display:flex;gap:4px;align-items:center;font-size:14.5px;font-weight:500;color:var(--muted)}
+nav a.lnk{padding:9px 14px;border-radius:999px;transition:background .2s,color .2s}
+nav a.lnk:hover{background:var(--sky-2);color:var(--ink)}
+.nav-cta{margin-left:8px;padding:11px 18px;background:var(--ink);color:#fff!important;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .25s,transform .25s var(--ease)}
+.nav-cta:hover{background:var(--blue)}
+.nav-cta:active{transform:scale(.97)}
+.nav-cta svg{width:15px;height:15px;transition:transform .25s var(--ease)}
+.nav-cta:hover svg{transform:translateX(3px)}
+
+/* ============ Hero ============ */
+.hero{position:relative;overflow:hidden;margin-top:-76px;padding-top:76px;background:radial-gradient(60% 70% at 85% 0%,rgba(127,155,255,.32),transparent 70%),radial-gradient(45% 55% at 0% 100%,rgba(58,91,255,.12),transparent 70%),linear-gradient(180deg,#f7f9ff,#eef2fd)}
+.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(20,33,79,.14) 1px,transparent 1.4px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%);pointer-events:none}
+.hero-wrap{position:relative;min-height:660px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:64px 0 88px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;background:rgba(58,91,255,.09);color:var(--blue);font-size:13.5px;font-weight:600}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--blue);flex:none;box-shadow:0 0 0 3px rgba(58,91,255,.2)}
+h1{font-size:clamp(46px,7.4vw,92px);line-height:.96;letter-spacing:-.045em;font-weight:700;margin:22px 0 0;color:var(--ink);text-wrap:balance}
+h1 .num{display:inline-grid;place-items:center;min-width:.84em;height:.84em;padding:0 .06em;margin-left:.08em;border-radius:.24em;background:linear-gradient(145deg,var(--blue-2),var(--blue));color:#fff;line-height:1;box-shadow:0 .14em .4em -.1em rgba(58,91,255,.6),inset 0 1px 0 rgba(255,255,255,.35);vertical-align:-.04em}
+.subtitle{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.3vw,26px);line-height:1.3;color:var(--navy-soft);margin:18px 0 0;letter-spacing:-.01em}
+.hero p.lead{font-size:17.5px;line-height:1.7;color:var(--muted);max-width:56ch;margin:22px 0 0}
+.hero .highlight{color:var(--ink);font-weight:600;background:linear-gradient(transparent 64%,rgba(58,91,255,.2) 0)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.button{padding:15px 24px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:10px;transition:transform .25s var(--ease),background .25s,border-color .25s,box-shadow .25s}
+.button svg{width:17px;height:17px;transition:transform .25s var(--ease)}
+.button:active{transform:scale(.97)}
+.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 14px 28px -10px rgba(58,91,255,.7)}
+.button.primary:hover{background:var(--blue-2);transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 20px 36px -10px rgba(58,91,255,.75)}
+.button.primary:hover svg{transform:translateX(4px)}
+.button.secondary{background:rgba(255,255,255,.8);color:var(--ink);backdrop-filter:blur(8px)}
+.button.secondary:hover{background:#fff;border-color:var(--blue-3);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.button.secondary:hover svg{transform:rotate(90deg)}
+
+/* Entrada del hero (única secuencia de carga) */
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes settle{from{opacity:0;transform:translateY(28px) rotate(var(--r,0deg))}to{opacity:1;transform:rotate(var(--r,0deg))}}
+.hero-wrap>div:first-child>*{animation:rise .8s var(--ease) both}
+.hero-wrap>div:first-child>:nth-child(2){animation-delay:.08s}
+.hero-wrap>div:first-child>:nth-child(3){animation-delay:.16s}
+.hero-wrap>div:first-child>:nth-child(4){animation-delay:.24s}
+.hero-wrap>div:first-child>:nth-child(5){animation-delay:.32s}
+
+/* ---- Atlas de módulos (hero) ---- */
+.g0{--g:#3a5bff;--gs:#e4e9ff}.g1{--g:#0b7f61;--gs:#dcf5ec}.g2{--g:#b4324a;--gs:#fde8ec}.g3{--g:#a8620a;--gs:#fcefd4}.g4{--g:#6a3fd1;--gs:#ece4fb}
+@keyframes pop{from{opacity:0;transform:scale(.55) translateY(12px)}}
+.atlas{display:grid;gap:16px;animation:rise .8s var(--ease) .15s both}
+.atlas-head{min-height:122px;padding:20px 24px;border-radius:24px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #fff;box-shadow:var(--shadow-md)}
+.atlas-head em{display:block;font-style:normal;font-size:13px;font-weight:600;color:var(--g);margin-bottom:5px;transition:color .3s}
+.atlas-head b{display:block;font-family:var(--display);font-size:24px;line-height:1.15;letter-spacing:-.025em}
+.atlas-head p{margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.atlas-grid{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.cluster{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border-radius:24px;background:var(--gs);transition:opacity .35s,filter .35s}
+.cluster.big{max-width:268px}
+.cluster.dim{opacity:.3;filter:saturate(.3)}
+.tile{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:#fff;color:var(--g);box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),background .25s,color .25s;animation:pop .6s var(--ease) backwards;animation-delay:calc(var(--i)*45ms + .4s)}
+.tile svg{width:22px;height:22px}
+.tile:hover,.tile.on,.tile:focus-visible{transform:translateY(-6px) rotate(-4deg) scale(1.1);background:var(--g);color:#fff}
+.atlas-legend{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--ink);transition:background .25s,border-color .25s,transform .25s var(--ease)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--g)}
+.chip small{font-size:12px;font-weight:600;color:var(--muted)}
+.chip:hover,.chip.on{background:var(--gs);border-color:var(--g)}
+.chip:active{transform:scale(.96)}
+
+/* ---- Foco de luz que sigue al cursor ---- */
+.feature,.module,.stack-card{position:relative;overflow:hidden}
+.feature:after,.module:after,.stack-card:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(300px circle at var(--mx,50%) var(--my,0%),rgba(58,91,255,.14),transparent 70%)}
+.feature:hover:after,.module:hover:after,.stack-card:hover:after{opacity:1}
+
+/* ---- Flujo: cada paso se enciende al llegar ---- */
+.step .num{transition:background .5s,color .5s,border-color .5s,transform .5s var(--ease)}
+.js .step{opacity:.35;transform:translateX(-8px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .step.on{opacity:1;transform:none}
+.step.on .num{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.08)}
+
+/* ============ Franja de confianza ============ */
+.trust{padding:22px 0;border-bottom:1px solid var(--line);background:#fff}
+.trust-inner{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;align-items:center;font-size:14.5px;font-weight:500;color:var(--muted)}
+.trust strong{color:var(--ink);font-weight:600}
+.trust .sep{width:4px;height:4px;border-radius:50%;background:var(--blue-3)}
+
+/* ============ Secciones ============ */
+.section{padding:116px 0;position:relative}
+.section.alt{background:var(--sky-1);border-block:1px solid var(--line-2)}
+.section-head{text-align:center;max-width:780px;margin:0 auto 60px}
+.section h2{font-size:clamp(30px,4.2vw,50px);letter-spacing:-.035em;margin:16px 0 0;color:var(--ink);line-height:1.06;text-wrap:balance}
+.section-head p{color:var(--muted);line-height:1.7;margin:20px auto 0;font-size:17px;max-width:62ch}
+
+/* ============ Capacidades (bento) ============ */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feature{padding:32px;border:1px solid var(--line);border-radius:26px;background:#fff;transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
+.feature:nth-child(1),.feature:nth-child(4),.feature:nth-child(5){grid-column:span 2;background:linear-gradient(135deg,#fff 35%,var(--sky-2))}
+.feature:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--blue-4)}
+.feature-icon{width:50px;height:50px;border-radius:15px;background:var(--sky-2);display:grid;place-items:center;color:var(--blue);transition:background .3s,color .3s,transform .4s var(--ease)}
+.feature:hover .feature-icon{background:var(--blue);color:#fff;transform:rotate(-6deg) scale(1.05)}
+.feature-icon svg{width:23px;height:23px}
+.feature h3{font-size:21px;margin:24px 0 10px;color:var(--ink);letter-spacing:-.02em}
+.feature p{font-size:15px;line-height:1.65;color:var(--muted);margin:0;max-width:54ch}
+.feature .tag{display:inline-block;margin-top:20px;font-size:13px;font-weight:600;color:var(--blue);background:rgba(58,91,255,.09);padding:5px 12px;border-radius:99px}
+
+/* ============ Flujo ============ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.visual{min-height:470px;background:linear-gradient(155deg,#0b1530 0%,#1a2d6b 100%);border-radius:var(--radius-lg);padding:42px;position:relative;overflow:hidden;color:#fff;box-shadow:var(--shadow-xl)}
+.visual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 92% 100%,rgba(86,115,255,.5),transparent 55%),radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.4px) 0 0/24px 24px}
+.visual .eyebrow{background:rgba(255,255,255,.1);color:var(--blue-4);position:relative;z-index:1}
+.visual .eyebrow i{background:var(--blue-4);box-shadow:0 0 0 3px rgba(174,191,255,.25)}
+.visual h3{font-size:28px;position:relative;z-index:1;margin:18px 0 0;line-height:1.2;font-weight:600;color:#fff;letter-spacing:-.025em;text-wrap:balance}
+.timeline{position:relative;z-index:1;margin-top:38px}
+.step{display:grid;grid-template-columns:38px 1fr;gap:16px;margin:0 0 26px;position:relative}
+.step:not(:last-child):before{content:"";position:absolute;left:18px;top:42px;bottom:-16px;width:1px;background:linear-gradient(180deg,rgba(174,191,255,.6),rgba(174,191,255,.05))}
+.step .num{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(174,191,255,.5);color:var(--blue-4);display:grid;place-items:center;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.step b{font-size:16px;color:#fff;display:block;font-weight:600}
+.step p{font-size:14px;color:#b9c6ee;margin:4px 0 0;line-height:1.6}
+.checklist{display:grid;gap:24px;margin-top:34px}
+.check{display:grid;grid-template-columns:34px 1fr;gap:16px}
+.checkmark{width:32px;height:32px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center}
+.checkmark svg{width:15px;height:15px}
+.check b{font-size:16.5px;color:var(--ink);font-weight:600;display:block}
+.check p{margin:5px 0 0;font-size:14.5px;line-height:1.65;color:var(--muted)}
+
+/* ============ Módulos ============ */
+.modules-group{margin-bottom:52px}
+.modules-group:last-child{margin-bottom:0}
+.group-title{display:flex;align-items:center;gap:14px;margin:0 0 22px;font-size:22px;color:var(--ink);letter-spacing:-.025em}
+.group-title:after{content:"";flex:1;height:1px;background:var(--line)}
+.group-title .count{order:2;font-family:var(--text);font-size:13px;font-weight:600;letter-spacing:0;color:var(--blue);background:rgba(58,91,255,.1);padding:4px 11px;border-radius:99px}
+.group-title:after{order:1}
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.module{padding:24px;border-radius:var(--radius);background:#fff;border:1px solid var(--line);transition:transform .3s var(--ease),border-color .25s,box-shadow .3s;position:relative}
+.module:hover{transform:translateY(-3px);border-color:var(--blue-4);box-shadow:var(--shadow-md)}
+.module-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.module-ico{width:40px;height:40px;border-radius:12px;background:var(--sky-2);color:var(--blue);display:grid;place-items:center;flex:none;transition:background .25s,color .25s}
+.module:hover .module-ico{background:var(--blue);color:#fff}
+.module-ico svg{width:19px;height:19px}
+.module b{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.015em;line-height:1.25}
+.module p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
+.module .meta{display:inline-block;margin-top:16px;font-size:12.5px;font-weight:600;color:var(--muted);background:var(--sky-2);padding:4px 11px;border-radius:99px}
+.module .meta.hot{color:var(--blue);background:rgba(58,91,255,.1)}
+
+/* ============ Arquitectura ============ */
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stack-card{padding:32px;border-radius:26px;background:#fff;border:1px solid var(--line);transition:transform .35s var(--ease),box-shadow .35s}
+.stack-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.stack-card .ico{width:48px;height:48px;border-radius:15px;background:var(--ink);color:var(--blue-4);display:grid;place-items:center;margin-bottom:22px}
+.stack-card .ico svg{width:22px;height:22px}
+.stack-card h4{font-size:20px;color:var(--ink);margin:0 0 10px;letter-spacing:-.02em}
+.stack-card p{font-size:14.5px;line-height:1.65;color:var(--muted);margin:0}
+.stack-card ul{margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--line-2);list-style:none;display:grid;gap:8px}
+.stack-card li{font-size:14px;color:var(--ink);display:flex;align-items:center;gap:10px;line-height:1.4;font-weight:500}
+.stack-card li:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);flex:none}
+
+/* ============ Indicadores ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+.stat{padding:40px 30px 36px;border-right:1px solid var(--line);transition:background .25s}
+.stat:last-child{border:0}
+.stat:hover{background:var(--sky-1)}
+.stat strong{display:block;width:max-content;min-width:3ch;font-family:var(--display);font-size:clamp(40px,4.6vw,58px);font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat:first-child strong{color:var(--blue)}
+@keyframes shimmer{to{background-position:-200% 0}}
+.stat strong.loading-num{color:transparent;border-radius:12px;background:linear-gradient(90deg,var(--sky-2) 25%,var(--sky-3) 50%,var(--sky-2) 75%) 0 0/200% 100%;animation:shimmer 1.4s linear infinite}
+.stat span{display:block;color:var(--ink);font-size:15px;margin-top:16px;font-weight:600}
+.stat small{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
+.stat small .pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;vertical-align:middle;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(11,127,97,.45)}70%{box-shadow:0 0 0 8px rgba(11,127,97,0)}100%{box-shadow:0 0 0 0 rgba(11,127,97,0)}}
+
+/* ============ Acceso (CTA) ============ */
+.cta{background:linear-gradient(125deg,#0b1530 0%,#1a2d6b 60%,#2b45b8 100%);color:#fff;border-radius:36px;padding:72px;display:flex;justify-content:space-between;align-items:center;gap:48px;overflow:hidden;position:relative;box-shadow:var(--shadow-xl)}
+.cta:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0%,rgba(127,155,255,.45),transparent 50%),radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.4px) 0 0/24px 24px;pointer-events:none}
+.cta>*{position:relative;z-index:1}
+.cta h2{font-size:clamp(28px,3.6vw,44px);margin:0 0 14px;color:#fff;line-height:1.08;letter-spacing:-.035em}
+.cta p{color:#c4d0f2;font-size:16px;margin:0;line-height:1.7;max-width:56ch}
+.cta-actions{display:flex;flex-direction:column;gap:12px;flex-shrink:0;min-width:290px}
+.cta-btn{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 14px 14px 22px;border-radius:999px;font-weight:600;font-size:15.5px;border:1px solid transparent;white-space:nowrap;transition:transform .25s var(--ease),box-shadow .25s,background .25s,border-color .25s}
+.cta-btn:active{transform:scale(.98)}
+.cta-btn .cta-btn-label{display:inline-flex;align-items:center;gap:10px}
+.cta-btn svg{width:18px;height:18px;flex:none}
+.cta-btn .cta-btn-arrow{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;transition:transform .3s var(--ease),background .25s}
+.cta-btn .cta-btn-arrow svg{width:15px;height:15px}
+.cta-btn:hover .cta-btn-arrow{transform:translateX(3px)}
+.cta-btn.primary{background:#fff;color:var(--ink);box-shadow:0 18px 36px -12px rgba(0,0,0,.5)}
+.cta-btn.primary .cta-btn-arrow{background:var(--blue);color:#fff}
+.cta-btn.primary:hover{transform:translateY(-2px);background:var(--sky-1)}
+.cta-btn.ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.cta-btn.ghost .cta-btn-arrow{background:rgba(255,255,255,.16)}
+.cta-btn.ghost:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6);transform:translateY(-2px)}
+
+/* ============ Footer ============ */
+footer{background:var(--ink);color:#a9b6dc;padding:72px 0 0;position:relative;overflow:hidden}
+footer:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(127,155,255,.6),transparent)}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px}
+.footer-brand{color:#fff;font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.02em;margin-bottom:12px}
+footer p{font-size:14px;line-height:1.75;margin:0;color:#a9b6dc}
+footer h4{color:#fff;font-family:var(--text);font-size:14px;font-weight:600;letter-spacing:0;margin:0 0 14px}
+footer a{display:block;width:max-content;font-size:14px;margin:10px 0;transition:color .2s,transform .25s var(--ease)}
+footer a:hover{color:#fff;transform:translateX(3px)}
+.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:52px;padding:26px 0 34px;font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ============ Responsive ============ */
+@media(max-width:960px){
+  nav a.lnk{display:none}
+  .hero-wrap,.split{grid-template-columns:1fr;gap:44px}
+  .features,.modules{grid-template-columns:1fr 1fr}
+  .feature:nth-child(n){grid-column:auto}
+  .stack-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:34px}
+  .cta{flex-direction:column;align-items:flex-start;padding:52px 40px}
+  .cta-actions{width:100%;min-width:0}
+}
+@media(max-width:600px){
+  .container{width:min(100% - 30px,1180px)}
+  .brand-text span{display:none}
+  .hero-wrap{min-height:auto;padding:44px 0 72px}
+  .features,.modules,.stats{grid-template-columns:1fr}
+  .stat{border-right:0!important;border-bottom:1px solid var(--line)!important}
+  .stat:last-child{border-bottom:0!important}
+  .section{padding:76px 0}
+  .visual{padding:30px}
+  .cta{padding:44px 26px;border-radius:26px}
+  .footer-grid{grid-template-columns:1fr}
+  .copyright{display:block;line-height:2}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#top">Saltar al contenido</a>
+<div class="topline" aria-hidden="true"></div>
+
+<header id="topbar">
+  <div class="container navbar">
+    <a href="#top" class="brand">
+      <div class="seal" aria-hidden="true"></div>
+      <div class="brand-text">
+        <strong>Sistema Digital 6</strong>
+        <span>Defensoría Oficial Civil y Comercial 6 · Misiones</span>
+      </div>
+    </a>
+    <nav>
+      <a class="lnk" href="#sistema">El sistema</a>
+      <a class="lnk" href="#modulos">Módulos</a>
+      <a class="lnk" href="#arquitectura">Arquitectura</a>
+      <a class="lnk" href="#estadisticas">Indicadores</a>
+      <a href="#acceso" class="nav-cta">
+        Acceder al sistema
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-wrap">
+    <div>
+      <div class="eyebrow"><i></i> Ministerio Público de Misiones</div>
+
+      <h1>Sistema Digital <span class="num">6</span></h1>
+      <p class="subtitle">Defensoría Oficial Civil y Comercial 6</p>
+
+      <p class="lead">
+        Un único entorno que reúne <span class="highlight">19 módulos integrados</span> para la gestión
+        de causas, el seguimiento de actuaciones, la protección de personas y la organización
+        cotidiana del equipo. Información clara, trazable y disponible en el momento en que se la
+        necesita.
+      </p>
+
+      <div class="actions">
+        <a class="button primary" href="#modulos">
+          Explorar los módulos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="button secondary" href="#arquitectura">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+          Cómo funciona
+        </a>
+      </div>
+    </div>
+
+    <div class="atlas" aria-label="Mapa interactivo de los 19 módulos del sistema">
+      <div class="atlas-head g0" id="atlasHead" aria-live="polite">
+        <em id="atlasK">19 módulos en 5 áreas</em>
+        <b id="atlasT">Explorá el sistema</b>
+        <p id="atlasP">Pasá el cursor por un módulo para ver qué resuelve.</p>
+      </div>
+      <div class="atlas-grid" id="atlasGrid"></div>
+      <div class="atlas-legend" id="atlasLegend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<div class="trust">
+  <div class="container trust-inner">
+    <span>Una plataforma para</span>
+    <strong>Causas</strong><i class="sep"></i>
+    <strong>Protección</strong><i class="sep"></i>
+    <strong>Documentación</strong><i class="sep"></i>
+    <strong>Organismos</strong><i class="sep"></i>
+    <strong>Personal</strong>
+  </div>
+</div>
+
+<!-- ============ EL SISTEMA ============ -->
+<section class="section" id="sistema">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">El sistema</div>
+      <h2>Toda la información institucional, en un solo lugar</h2>
+      <p>
+        Una herramienta pensada para el trabajo diario de la Defensoría: acceso inmediato a los datos
+        de cada causa, control de la actividad, protección de personas y trazabilidad de cada
+        actuación. Seis grandes capacidades articulan los diecinueve módulos del sistema.
+      </p>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <h3>Gestión integral de causas</h3>
+        <p>Registro, ficha y consulta de expedientes con número, carátula, tipo de proceso, juzgado, prioridad, estado e intervención del defensor. Doble base de datos: activa e histórica.</p>
+        <span class="tag">Expedientes · Partes</span>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        </div>
+        <h3>Agenda procesal unificada</h3>
+        <p>Audiencias, vencimientos, recursos y diligencias ordenados en tabla y calendario mensual, con indicadores por día y navegación por trimestre y año.</p>
+        <span class="tag">Eventos · Calendario</span>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6M8 14h8M8 18h5"/></svg>
+        </div>
+        <h3>Documentación institucional</h3>
+        <p>Modelos, documentos digitales, libros de registro, escritos, actas, oficios y dictámenes con numeración automática por año y estadísticas trimestrales.</p>
+        <span class="tag">8 módulos documentales</span>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-10a7 7 0 0 1 14 0c0 5.7-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+        </div>
+        <h3>Protección de personas</h3>
+        <p>Casos de adultos mayores, capacidad, restricción e internación involuntaria; y de niños, niñas y adolescentes con formularios normativos y validaciones automáticas.</p>
+        <span class="tag">Adultos · NNyA</span>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V8l6-5 6 5v13M10 21v-6h4v6"/></svg>
+        </div>
+        <h3>Organismos y mapas judiciales</h3>
+        <p>Directorio institucional categorizado, mapa interactivo de zonas de influencia en Posadas y Garupá, y mapa provincial con las cinco circunscripciones judiciales.</p>
+        <span class="tag">Directorio · Cartografía</span>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M15 20c0-2.5 1.4-4.5 3.5-5.3"/></svg>
+        </div>
+        <h3>Gestión interna y personal</h3>
+        <p>Diligenciadores por provincia con guía del BUS Federal, control de feria judicial (julio y diciembre-enero) y registro de días concedidos con validación de solapamientos.</p>
+        <span class="tag">Feria · Licencias</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÓDULOS ============ -->
+<section class="section alt" id="modulos">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Los 19 módulos</div>
+      <h2>Un sistema que acompaña toda la actividad</h2>
+      <p>
+        Cada módulo resuelve un aspecto concreto del trabajo institucional y se articula con los
+        demás: los expedientes alimentan los eventos, los eventos nutren el calendario, los organismos
+        se vinculan con los casos de protección.
+      </p>
+    </div>
+
+    <!-- Bloque 1 -->
+    <div class="modules-group">
+      <h3 class="group-title">Gestión de causas y agenda <span class="count">3 módulos</span></h3>
+      <div class="modules">
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <b>Expedientes</b>
+          </div>
+          <p>Número con verificación de duplicados, carátula, tipo de proceso, juzgado, prioridad, audiencias, cámara Gesell, vencimientos, diligencias, recursos, costas y observaciones.</p>
+          <span class="meta hot">Base activa + histórica</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M15 20c0-2.5 1.4-4.5 3.5-5.3"/></svg></div>
+            <b>Partes</b>
+          </div>
+          <p>Personas involucradas con datos personales, judiciales y adicionales. Detección de duplicados en tiempo real: si el DNI se repite, el formulario se bloquea.</p>
+          <span class="meta">Validación inteligente</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+            <b>Eventos y Calendario</b>
+          </div>
+          <p>Doble vista: tabla con filtros por texto, fecha, tipo y trimestre; y calendario mensual con modal de eventos por día, incluyendo tipo, expediente, juzgado y hora.</p>
+          <span class="meta">Integrado con expedientes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 2 -->
+    <div class="modules-group">
+      <h3 class="group-title">Documentación y registros <span class="count">8 módulos</span></h3>
+      <div class="modules">
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></div>
+            <b>Modelos de Documentos</b>
+          </div>
+          <p>Galería de plantillas prediseñadas para oficios, escritos y actas. Estructura y campos típicos listos para completar con los datos específicos.</p>
+          <span class="meta">Plantillas listas</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></div>
+            <b>Documentos Digitales</b>
+          </div>
+          <p>Archivo general con nombre, fecha y tamaño. Subida, búsqueda, descarga, edición y eliminación, con almacenamiento en la nube vía Cloudinary.</p>
+          <span class="meta hot">Cloudinary</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6"/></svg></div>
+            <b>Libros Digitales</b>
+          </div>
+          <p>Acceso directo a los cuatro libros principales: Escritos, Dictámenes, Oficios y Actas, con vista de pantalla completa de cada aplicación embebida.</p>
+          <span class="meta">4 libros de registro</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.6 7.6"/></svg></div>
+            <b>Escritos Judiciales</b>
+          </div>
+          <p>Numeración automática por año, distribución trimestral, gráfico mensual y filtros por tipo de escrito y tipo de proceso. Exportación a PDF del listado filtrado.</p>
+          <span class="meta">Exportación a PDF</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M7 13h10M7 17h4"/></svg></div>
+            <b>Actas</b>
+          </div>
+          <p>Asunto, fecha, temática, firma del defensor (con opción de subrogante), secretario/a, expediente y contenido con contador de palabras y paginación.</p>
+          <span class="meta">Contador de palabras</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+            <b>Oficios</b>
+          </div>
+          <p>Destinatario, fecha de remisión y de respuesta, temática, firma, secretario/a y expediente. Estadísticas trimestrales y búsqueda en todos los campos.</p>
+          <span class="meta">Gestión de envíos</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 7h12M8 7l-4 7h8zM16 7l-4 7h8z"/></svg></div>
+            <b>Dictámenes</b>
+          </div>
+          <p>Asunto, fecha, temática, firma del defensor (con subrogante), expediente y contenido con contador de palabras. Numeración automática y filtros potentes.</p>
+          <span class="meta">Opiniones legales</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-2 9-2 9h16s-2-2-2-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></div>
+            <b>Notificaciones Electrónicas</b>
+          </div>
+          <p>Fecha, expediente, carátula, juzgado, responsable, tipo (providencia, resolución, sentencia) y prioridad (baja, media, alta, urgente). Listado paginado y sincronización en tiempo real.</p>
+          <span class="meta hot">Tiempo real</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 3 -->
+    <div class="modules-group">
+      <h3 class="group-title">Protección de personas <span class="count">2 módulos</span></h3>
+      <div class="modules">
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><path d="M19 8v6M16 11h6"/></svg></div>
+            <b>Protección de Adultos</b>
+          </div>
+          <p>Cuatro tipos de caso: protección de adulto mayor, determinación de capacidad, restricción de capacidad e internación involuntaria (Art. 42 Ley de Salud Mental).</p>
+          <span class="meta">4 tipos de caso</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg></div>
+            <b>Protección de NNyA</b>
+          </div>
+          <p>Formulario con 9 pestañas: datos personales, medida y acogimiento, información familiar, medidas de protección, garantías procesales, requisitos RUFAAFA, inhabilidades, expediente y seguimiento.</p>
+          <span class="meta hot">9 pestañas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 4 -->
+    <div class="modules-group">
+      <h3 class="group-title">Organismos y cartografía <span class="count">3 módulos</span></h3>
+      <div class="modules">
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V8l6-5 6 5v13M10 21v-6h4v6"/></svg></div>
+            <b>Directorio de Organismos</b>
+          </div>
+          <p>Catálogo categorizado de hospitales, ministerios, centros asistenciales, juzgados, municipalidades y fundaciones, con datos de contacto y notas. Se integra con los módulos de protección.</p>
+          <span class="meta">Agenda institucional</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-7-10a7 7 0 0 1 14 0c0 5.7-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+            <b>Mapa Judicial Posadas y Garupá</b>
+          </div>
+          <p>Polígonos por zona (Palacio de Justicia, Villa Cabello, Itaembé Miní, Itaembé Guazú, Garupá) con datos de cada defensoría y buscador por dirección y altura.</p>
+          <span class="meta">Zonas de influencia</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l6 2 6-2v14l-6 2-6-2-6 2V6z"/><path d="M9 4v14M15 6v14"/></svg></div>
+            <b>Mapa de Circunscripciones</b>
+          </div>
+          <p>Mapa provincial con departamentos agrupados en las cinco circunscripciones judiciales, con popup de cabecera y búsqueda por ciudad o departamento.</p>
+          <span class="meta">5 circunscripciones</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 5 -->
+    <div class="modules-group">
+      <h3 class="group-title">Gestión interna <span class="count">3 módulos</span></h3>
+      <div class="modules">
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V7a1 1 0 0 1 1-1h11v11H4a1 1 0 0 1-1-1z"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+            <b>Gestión de Diligenciadores</b>
+          </div>
+          <p>Tarjetas por provincia con cantidad de diligenciadores. Modal con pestaña de requisitos del BUS Federal (límite de hojas, firma digital, QR) y CRUD completo con filtros.</p>
+          <span class="meta hot">BUS Federal</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M8 14l3 3 5-5"/></svg></div>
+            <b>Feria Judicial</b>
+          </div>
+          <p>Asignación de personal en julio y diciembre-enero. Cálculo automático de días, control de cumplimiento e inasistencias, con gráficos por empleado y funcionario.</p>
+          <span class="meta">Julio · Dic-Ene</span>
+        </div>
+
+        <div class="module">
+          <div class="module-head">
+            <div class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-3-6 3z"/><path d="M9 7h6M9 11h6"/></svg></div>
+            <b>Días Concedidos (Licencias)</b>
+          </div>
+          <p>Registro por artículo del reglamento interno con calendario mensual coloreado. Validación de duplicados y solapamientos, más estadísticas por usuario con gráficos y filtros.</p>
+          <span class="meta">Calendario visual</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARQUITECTURA / FLUJO ============ -->
+<section class="section" id="arquitectura">
+  <div class="container split">
+    <div class="visual">
+      <div class="eyebrow"><i></i> Flujo de gestión</div>
+      <h3>De la información dispersa a una visión integral y trazable.</h3>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="num">01</div>
+          <div><b>Registro unificado</b><p>Ingreso de la causa y vinculación con partes, eventos y documentos asociados.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <div><b>Asignación y prioridad</b><p>Empleado responsable, juzgado interviniente, estado procesal y nivel de prioridad.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <div><b>Seguimiento continuo</b><p>Audiencias, cámara Gesell, vencimientos, diligencias y recursos con trazabilidad completa.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <div><b>Información institucional</b><p>Indicadores, reportes y estadísticas para conocer y evaluar la actividad de la dependencia.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Una mirada completa</div>
+      <h2>Herramientas para ordenar el trabajo diario.</h2>
+      <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-top:16px">
+        El sistema centraliza los datos necesarios para consultar en segundos la situación de una
+        causa y, al mismo tiempo, permite observar la actividad general de la Defensoría con
+        información confiable y consistente.
+      </p>
+
+      <div class="checklist">
+        <div class="check">
+          <div class="checkmark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div><b>Doble base de datos</b><p>Base activa para el trámite y base histórica para causas finalizadas o archivadas, con eventos unificados en el calendario.</p></div>
+        </div>
+        <div class="check">
+          <div class="checkmark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div><b>Validaciones automáticas</b><p>Detección de duplicados, verificación de requisitos legales y alertas por solapamiento de licencias.</p></div>
+        </div>
+        <div class="check">
+          <div class="checkmark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div><b>Numeración por año</b><p>Escritos, actas, oficios y dictámenes se numeran automáticamente y se agrupan por trimestre y mes.</p></div>
+        </div>
+        <div class="check">
+          <div class="checkmark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div><b>Impresión y exportación</b><p>Cada módulo permite imprimir listados o fichas individuales, y varios exportan a PDF para compartir.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK TÉCNICO ============ -->
+<section class="section alt" id="stack">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Arquitectura</div>
+      <h2>Información disponible, segura y sincronizada</h2>
+      <p>
+        Los datos se almacenan en servicios en la nube con sincronización en tiempo real, y el
+        acceso está restringido al dominio institucional.
+      </p>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1-8.9A6 6 0 1 0 5 15.7"/><path d="M12 12v8M8 16l4-4 4 4"/></svg>
+        </div>
+        <h4>Firebase en la nube</h4>
+        <p>Base de datos gestionada y sincronización en tiempo real: cada cambio se refleja de inmediato en todos los módulos conectados.</p>
+        <ul>
+          <li>Sincronización en tiempo real</li>
+          <li>Persistencia gestionada</li>
+          <li>Multi-módulo consistente</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l4-5 3 3 4-6 5 8"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+        </div>
+        <h4>Cloudinary para archivos</h4>
+        <p>Los documentos digitales se alojan en la nube, lo que permite subir, buscar, descargar, editar y eliminar archivos sin depender de servidores locales.</p>
+        <ul>
+          <li>Almacenamiento externo</li>
+          <li>Gestión completa de archivos</li>
+          <li>Acceso desde cualquier equipo</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4>Acceso institucional</h4>
+        <p>El ingreso al sistema está restringido al dominio <strong style="color:var(--navy-deep)">@mpmisiones.gob.ar</strong>, garantizando que solo el personal autorizado acceda a la información.</p>
+        <ul>
+          <li>Dominio institucional</li>
+          <li>Datos demostrativos en esta vista</li>
+          <li>Uso interno del Ministerio Público</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDICADORES (datos en vivo desde las dos bases) ============ -->
+<section class="section" id="estadisticas">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Gestión basada en información</div>
+      <h2>Indicadores para conocer la actividad</h2>
+      <p>
+        El módulo <strong>Total de Expedientes</strong> consolida la línea de tiempo de las dos bases
+        del sistema —histórica y activa— y transforma los registros cotidianos en información útil
+        para la planificación, el control y la evaluación de la gestión institucional. Los valores
+        se actualizan en vivo desde Firestore.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="kpiTotal" class="loading-num">—</strong>
+        <span>Total de expedientes</span>
+        <small>Base activa + histórica</small>
+      </div>
+      <div class="stat">
+        <strong id="kpiHistoricos" class="loading-num">—</strong>
+        <span>Expedientes históricos</span>
+        <small>Causas finalizadas o archivadas</small>
+      </div>
+      <div class="stat">
+        <strong id="kpiActivos" class="loading-num">—</strong>
+        <span>Expedientes activos</span>
+        <small>En trámite actualmente</small>
+      </div>
+      <div class="stat">
+        <strong id="kpiAnios" class="loading-num">—</strong>
+        <span>Años con registros</span>
+        <small><span class="pulse"></span>Línea de tiempo institucional</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" id="acceso">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2>Una gestión más ordenada, accesible y trazable.</h2>
+        <p>El Sistema Digital 6 reúne las herramientas necesarias para acompañar la actividad institucional de la Defensoría con información confiable y siempre disponible para el equipo. Elegí el entorno con el que querés ingresar.</p>
+      </div>
+
+      <div class="cta-actions">
+        <a class="cta-btn primary"
+           href="https://sistemadigital.github.io/defensor-secretarios/"
+           target="_blank" rel="noopener">
+          <span class="cta-btn-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+            Defensor-Secretarios
+          </span>
+          <span class="cta-btn-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="cta-btn ghost"
+           href="https://sistemadigital.github.io/empleados"
+           target="_blank" rel="noopener">
+          <span class="cta-btn-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>
+            Empleados
+          </span>
+          <span class="cta-btn-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Sistema Digital 6</div>
+        <p>Defensoría Oficial Civil y Comercial 6<br>Ministerio Público de Misiones<br>Gestión institucional digital · 19 módulos integrados.</p>
+      </div>
+      <div>
+        <h4>El sistema</h4>
+        <a href="#sistema">Capacidades</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#arquitectura">Flujo de gestión</a>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+        <a href="#modulos">Causas y agenda</a>
+        <a href="#modulos">Documentación</a>
+        <a href="#modulos">Protección de personas</a>
+      </div>
+      <div>
+        <h4>Institucional</h4>
+        <a href="#stack">Arquitectura</a>
+        <a href="#estadisticas">Indicadores</a>
+        <a href="#acceso">Acceso</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© 2026 Ministerio Público de Misiones · Defensoría Oficial Civil y Comercial 6</span>
+      <span>Diseño y programación: <strong style="color:#fff;font-weight:700">Rómulo Fioravante</strong>. Septiembre 2025</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  //  HEADER · sombra al hacer scroll
+  // ============================================================
+  const topbar = document.getElementById('topbar');
+  const progreso = document.querySelector('.topline');
+  const onScroll = () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progreso.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max) : 0);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ============================================================
+  //  INDICADORES · carga en vivo desde las dos bases Firestore
+  // ============================================================
+  (function initIndicadores() {
+    const firebaseConfigNueva = {
+      apiKey: "AIzaSyBevCwkh4iOWVqhp3gG2ae1eCUMkFpnr6I",
+      authDomain: "causas-2defensoria.firebaseapp.com",
+      projectId: "causas-2defensoria",
+      storageBucket: "causas-2defensoria.firebasestorage.app",
+      messagingSenderId: "663905632804",
+      appId: "1:663905632804:web:4f686a88004dc642ad0eb1"
+    };
+
+    const firebaseConfigHistorica = {
+      apiKey: "AIzaSyBt6X0u0BpiNPcV2SNPrN-spCmjl2AhZaA",
+      authDomain: "causas-defensoria.firebaseapp.com",
+      projectId: "causas-defensoria",
+      storageBucket: "causas-defensoria.appspot.com",
+      messagingSenderId: "186064671470",
+      appId: "1:186064671470:web:b58bae5eadbe6e469f19ff"
+    };
+
+    let appNueva, appHistorica;
+    try {
+      appNueva     = firebase.apps.find(a => a.name === 'nueva')
+                     || firebase.initializeApp(firebaseConfigNueva, 'nueva');
+      appHistorica = firebase.apps.find(a => a.name === 'historica')
+                     || firebase.initializeApp(firebaseConfigHistorica, 'historica');
+    } catch (e) {
+      console.error('Firebase init:', e);
+      return;
+    }
+
+    const dbNueva     = appNueva.firestore();
+    const dbHistorica = appHistorica.firestore();
+
+    const elTotal = document.getElementById('kpiTotal');
+    const elHist  = document.getElementById('kpiHistoricos');
+    const elAct   = document.getElementById('kpiActivos');
+    const elAnios = document.getElementById('kpiAnios');
+
+    function animarNumero(el, destino, duracion = 900) {
+      const t0 = performance.now();
+      el.classList.remove('loading-num');
+      const paso = (t) => {
+        const p = Math.min(1, (t - t0) / duracion);
+        const suave = 1 - Math.pow(1 - p, 3);
+        const valor = Math.round(destino * suave);
+        el.textContent = valor.toLocaleString('es-AR');
+        if (p < 1) requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    }
+
+    function extraerAnio(ts) {
+      if (!ts) return null;
+      let date;
+      if (typeof ts.toDate === 'function') date = ts.toDate();
+      else if (typeof ts.seconds === 'number') date = new Date(ts.seconds * 1000);
+      else return null;
+      if (isNaN(date.getTime())) return null;
+      return date.getFullYear();
+    }
+
+    function resumirSnapshot(snap) {
+      let total = 0;
+      const anios = new Set();
+      snap.forEach(doc => {
+        total++;
+        const a = extraerAnio(doc.data() && doc.data().fechaRegistro);
+        if (a) anios.add(a);
+      });
+      return { total, anios };
+    }
+
+    Promise.all([
+      dbHistorica.collection('causas').get(),
+      dbNueva.collection('causas').get()
+    ])
+    .then(([snapHist, snapAct]) => {
+      const hist = resumirSnapshot(snapHist);
+      const act  = resumirSnapshot(snapAct);
+
+      const totalGlobal = hist.total + act.total;
+      const aniosUnicos = new Set([...hist.anios, ...act.anios]);
+
+      animarNumero(elTotal, totalGlobal);
+      animarNumero(elHist,  hist.total);
+      animarNumero(elAct,   act.total);
+      animarNumero(elAnios, aniosUnicos.size);
+    })
+    .catch(err => {
+      console.error('Error cargando indicadores:', err);
+      [elTotal, elHist, elAct, elAnios].forEach(el => {
+        el.classList.remove('loading-num');
+        el.textContent = '—';
+      });
+    });
+  })();
+</script>
+
+
+<script>
+  // ============================================================
+  //  ATLAS · los 19 módulos se arman leyendo la sección Módulos
+  // ============================================================
+  (function () {
+    document.documentElement.classList.add('js');
+    const grid = document.getElementById('atlasGrid');
+    const legend = document.getElementById('atlasLegend');
+    const head = document.getElementById('atlasHead');
+    const K = document.getElementById('atlasK'), T = document.getElementById('atlasT'), P = document.getElementById('atlasP');
+    const groups = [...document.querySelectorAll('.modules-group')];
+    if (!grid || !groups.length) return;
+
+    const inicio = { k: '19 módulos en 5 áreas', t: 'Explorá el sistema', p: 'Pasá el cursor por un módulo para ver qué resuelve.', g: 0 };
+    const clusters = [];
+    const mostrar = (d) => { head.className = 'atlas-head g' + d.g; K.textContent = d.k; T.textContent = d.t; P.textContent = d.p; };
+    const resaltar = (gi) => {
+      clusters.forEach((c, i) => c.classList.toggle('dim', gi !== null && i !== gi));
+      legend.querySelectorAll('.chip').forEach((c, i) => c.classList.toggle('on', i === gi));
+    };
+    const reset = () => { resaltar(null); mostrar(inicio); grid.querySelectorAll('.tile.on').forEach(t => t.classList.remove('on')); };
+
+    let n = 0;
+    groups.forEach((g, gi) => {
+      const nombre = g.querySelector('.group-title').childNodes[0].textContent.trim();
+      const mods = [...g.querySelectorAll('.module')];
+      const cl = document.createElement('div');
+      cl.className = 'cluster g' + gi + (mods.length > 4 ? ' big' : '');
+      clusters.push(cl);
+
+      mods.forEach(m => {
+        const titulo = m.querySelector('b').textContent.trim();
+        const desc = m.querySelector('p').textContent.trim().split(/(?<=\.)\s/)[0];
+        const t = document.createElement('button');
+        t.type = 'button'; t.className = 'tile'; t.style.setProperty('--i', n++);
+        t.setAttribute('aria-label', titulo + ' — ' + nombre);
+        t.innerHTML = m.querySelector('.module-ico svg').outerHTML;
+        const ver = () => { grid.querySelectorAll('.tile.on').forEach(x => x.classList.remove('on')); t.classList.add('on'); resaltar(gi); mostrar({ k: nombre, t: titulo, p: desc, g: gi }); };
+        ['mouseenter', 'focus', 'click'].forEach(ev => t.addEventListener(ev, ver));
+        cl.appendChild(t);
+      });
+      grid.appendChild(cl);
+
+      const chip = document.createElement('button');
+      chip.type = 'button'; chip.className = 'chip g' + gi;
+      chip.innerHTML = '<i></i>' + nombre + ' <small>' + mods.length + '</small>';
+      const ver = () => { resaltar(gi); mostrar({ k: nombre, t: mods.length + ' módulos', p: mods.map(m => m.querySelector('b').textContent.trim()).join(', ') + '.', g: gi }); };
+      ['mouseenter', 'focus', 'click'].forEach(ev => chip.addEventListener(ev, ver));
+      legend.appendChild(chip);
+    });
+    [grid, legend].forEach(el => { el.addEventListener('mouseleave', reset); el.addEventListener('focusout', reset); });
+
+    // Foco de luz en tarjetas
+    document.querySelectorAll('.feature,.module,.stack-card').forEach(c => {
+      c.addEventListener('pointermove', e => {
+        const r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+
+    // Pasos del flujo: se encienden al llegar
+    const pasos = document.querySelectorAll('.step');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .6, rootMargin: '0px 0px -10% 0px' });
+      pasos.forEach(p => io.observe(p));
+    } else pasos.forEach(p => p.classList.add('on'));
+  })();
+</script>
+</body>
+</html>
